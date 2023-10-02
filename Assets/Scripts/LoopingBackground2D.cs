@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class LoopingBackground2D : MonoBehaviour
 {
-    [Range(-20f, 20f)]
-    public float scrollSpeed = 8f;
+    [Range(-40f, 40f)]
+    public float scrollSpeed = 20f;
     private float moveAmount;
-    private float offset;
-    private Sprite sprite;
+    public float offset;
+    private Vector3 startPosition;
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>().sprite;
+        startPosition = transform.position;
     }
 
 
-    void LateUpdate()
+    void Update()
     {
         Movement();
     }
@@ -23,8 +23,13 @@ public class LoopingBackground2D : MonoBehaviour
     void Movement()
     {
         moveAmount = Input.GetAxis("Horizontal") * (Time.deltaTime * scrollSpeed) / 10f;
-        offset = offset + moveAmount;
-        // sprite.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+        offset = offset + moveAmount; ;
         transform.position = new Vector3(-offset, transform.position.y);
+        if (transform.position.x < -23.05f)
+        {
+            transform.position = startPosition;
+            offset = 0f;
+        }
+       
     }
 }
