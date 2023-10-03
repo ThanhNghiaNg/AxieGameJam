@@ -8,6 +8,7 @@ public class MovePlayerOnMap : MonoBehaviour
     private float moveAmount;
     public float currentMove = 0;
     public int wholeCurrentMove;
+    
     public float x;
     private float firstX;
     // GameManager gameManager;
@@ -20,11 +21,11 @@ public class MovePlayerOnMap : MonoBehaviour
     void Update()
     {
         float inputAxis = Input.GetAxis("Horizontal");
-        moveAmount = inputAxis*moveSpeed;
+        moveAmount = inputAxis * moveSpeed;
         int direction = inputAxis > 0 ? 1 : -1;
         currentMove += moveAmount;
         wholeCurrentMove = (int)currentMove;
-        x = wholeCurrentMove / 200;
+        x = wholeCurrentMove / 500;
         if ((GameManager.Instance.playerStep == 0 && inputAxis < 0) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
         {
             currentMove -= moveAmount;

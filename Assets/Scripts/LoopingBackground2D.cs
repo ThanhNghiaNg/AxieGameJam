@@ -10,6 +10,7 @@ public class LoopingBackground2D : MonoBehaviour
     public float height;
     public float width;
     public float offset;
+    public float totalMove = 0;
     private Vector3 startPosition;
     Camera cam;
 
@@ -34,19 +35,21 @@ public class LoopingBackground2D : MonoBehaviour
         offset = offset + moveAmount;
 
         Vector3 nextPosition = new Vector3(-offset, transform.position.y);
-        if ((GameManager.Instance.playerStep == 0 && inputAxis < 0) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
+        if ((GameManager.Instance.playerStep == 0 && inputAxis < 0 && startPosition.x < transform.position.x) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
         {
+            totalMove -= moveAmount;
             offset = offset - moveAmount;
             return;
         }
         else
         {
+            totalMove += moveAmount;
             transform.position = nextPosition;
         }
 
         transform.position = nextPosition;
 
-        if (transform.position.x < -21.8f || transform.position.x > 21.8f)
+        if (Mathf.Abs(transform.position.x) >= 26.25f)
         {
             transform.position = startPosition;
             offset = 0f;
