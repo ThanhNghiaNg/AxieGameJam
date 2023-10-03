@@ -32,11 +32,11 @@ public class LoopingBackground2D : MonoBehaviour
         moveAmount = Input.GetAxis("Horizontal") * (Time.deltaTime * scrollSpeed) / 10f;
         offset = offset + moveAmount; ;
         transform.position = new Vector3(-offset, transform.position.y);
-        if (transform.position.x < -23.05f)
+        if (transform.position.x < -21.8f || transform.position.x > 21.8f)
         {
             transform.position = startPosition;
             offset = 0f;
         }
-       
+
     }
 }
