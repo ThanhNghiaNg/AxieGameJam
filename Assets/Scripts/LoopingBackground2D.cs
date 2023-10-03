@@ -29,9 +29,23 @@ public class LoopingBackground2D : MonoBehaviour
     {
         height = 2f * cam.orthographicSize;
         width = height * cam.aspect;
-        moveAmount = Input.GetAxis("Horizontal") * (Time.deltaTime * scrollSpeed) / 10f;
-        offset = offset + moveAmount; ;
-        transform.position = new Vector3(-offset, transform.position.y);
+        float inputAxis = Input.GetAxis("Horizontal");
+        moveAmount = inputAxis * (Time.deltaTime * scrollSpeed) / 10f;
+        offset = offset + moveAmount;
+
+        Vector3 nextPosition = new Vector3(-offset, transform.position.y);
+        if ((GameManager.Instance.playerStep == 0 && inputAxis < 0) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
+        {
+            offset = offset - moveAmount;
+            return;
+        }
+        else
+        {
+            transform.position = nextPosition;
+        }
+
+        transform.position = nextPosition;
+
         if (transform.position.x < -21.8f || transform.position.x > 21.8f)
         {
             transform.position = startPosition;
