@@ -9,6 +9,8 @@ TagManager:
   - room
   - hallway
   - skybox
+  - player
+  - Door
   layers:
   - Default
   - TransparentFX
