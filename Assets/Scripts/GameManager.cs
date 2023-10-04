@@ -6,8 +6,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public int playerStep { get; private set; }
 
+    public bool playerMovable { get; private set; }
+
     private void Awake()
     {
+        playerMovable = false;
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -29,18 +32,13 @@ public class GameManager : MonoBehaviour
         playerStep = 0;
     }
 
+    public void SetPlayerMovable(bool movable){
+        playerMovable = movable;
+    }
+
     public void UpdateStep(float step)
     {
-        // Debug.Log("step: " + step.ToString());
         playerStep = (int)step;
-        // if (playerStep < 0f)
-        // {
-        //     playerStep = 0;
-        // }
-        // else if (playerStep > 9f)
-        // {
-        //     playerStep = 9;
-        // }
     }
     public void increaseStep()
     {
