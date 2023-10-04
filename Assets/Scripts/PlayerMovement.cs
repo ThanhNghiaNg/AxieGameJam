@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float padding = 2f;
     [SerializeField] float moveSpeed = 5f;
+    SkeletonAnimation skeletonAnimation;
     public float camWidth;
 
     public new Vector2 position;
     public float camHeight;
     public float direction = 1f;
     public float inputAxis;
+    public float animationTime = 3f;
     Camera cam;
     void Awake()
     {
+        skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
         cam = Camera.main;
         camHeight = 2f * cam.orthographicSize;
         camWidth = camHeight * cam.aspect;
@@ -32,11 +36,14 @@ public class PlayerMovement : MonoBehaviour
     void TurnAround()
     {
         float curDirection = inputAxis > 0f ? 1f : inputAxis < 0f ? -1 : 0;
-        if (curDirection * direction < 0f && curDirection * direction != 0)
+        if (curDirection > 0)
         {
-            transform.Rotate(0, 180, 0);
+            transform.eulerAngles = Vector3.zero;
         }
-        direction = curDirection;
+        else if (curDirection < 0)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
     }
     void goNextRoom()
     {
@@ -66,6 +73,41 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.playerMovable)
         {
+
+            if (animationTime > 0)
+            {
+                animationTime -= 1f;
+                return;
+            }
+            if (inputAxis == 0)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+                {
+                    skeletonAnimation.AnimationName = "attack/ranged/cast-tail";
+                    skeletonAnimation.loop = false;
+                    animationTime = 200f;
+                }
+                else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    skeletonAnimation.AnimationName = "attack/ranged/cast-multi";
+                    skeletonAnimation.loop = false;
+                    animationTime = 200f;
+                }
+                else
+                {
+                    skeletonAnimation.AnimationName = "action/idle/normal";
+                    animationTime = 0f;
+                    skeletonAnimation.loop = true;
+                }
+            }
+            else
+            {
+                skeletonAnimation.AnimationName = inputAxis == 0 ? "action/idle/normal" : "action/run";
+                animationTime = 0f;
+                skeletonAnimation.loop = true;
+            }
+
+
             transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
         }
     }
