@@ -8,13 +8,20 @@ public class GameManager : MonoBehaviour
     public int stepRangeStart { get; private set; }
     public int stepRangeEnd { get; private set; }
     public bool playerMovable { get; private set; }
+    public bool _playerMovable;
     public bool backgroundHallwayMovable { get; private set; }
 
     private void Awake()
     {
         stepRangeStart = 0;
         stepRangeEnd = 9;
-        playerMovable = false;
+        if (_playerMovable != null)
+        {
+            playerMovable = _playerMovable;
+        }else{
+            playerMovable = false;
+        }
+
         backgroundHallwayMovable = true;
         if (Instance != null)
         {
