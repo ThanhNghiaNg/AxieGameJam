@@ -11,6 +11,10 @@ TagManager:
   - skybox
   - player
   - Door
+  - ClickHandler
+  - RoomPos
+  - spawn
+  - portal
   layers:
   - Default
   - TransparentFX
