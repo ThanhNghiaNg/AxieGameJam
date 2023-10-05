@@ -6,7 +6,9 @@ public class EventClick : MonoBehaviour
 {
     public float speed = 5.0f;
     SkeletonAnimation skeletonAnimation;
+    private GameObject portal;
 
+    public float duration = 1.0f;
     private void Awake()
     {
         skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
@@ -59,5 +61,26 @@ public class EventClick : MonoBehaviour
         GameObject cameraPos = GameObject.FindWithTag("RoomPos");
         Camera.main.transform.position = cameraPos.transform.position;
         player.transform.position = spawnPos.transform.position;
+
+        StartCoroutine(ScalePortal());
+    }
+
+    private IEnumerator ScalePortal()
+    {
+        float elapsed = 0f;
+
+        Vector3 startScale = portal.transform.localScale;
+        Vector3 endScale = new Vector3(2.2f, 1f, 0f);
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            transform.localScale = Vector3.Lerp(startScale, endScale, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        portal.transform.localScale = endScale;
     }
 }

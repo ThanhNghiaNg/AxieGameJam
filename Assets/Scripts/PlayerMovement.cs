@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Spine.Unity;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {

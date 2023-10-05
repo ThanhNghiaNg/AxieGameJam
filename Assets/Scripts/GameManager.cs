@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +6,6 @@ public class GameManager : MonoBehaviour
     public int playerStep { get; private set; }
 
     public bool playerMovable { get; private set; }
-
     private void Awake()
     {
         playerMovable = false;
@@ -32,7 +30,8 @@ public class GameManager : MonoBehaviour
         playerStep = 0;
     }
 
-    public void SetPlayerMovable(bool movable){
+    public void SetPlayerMovable(bool movable)
+    {
         playerMovable = movable;
     }
 
