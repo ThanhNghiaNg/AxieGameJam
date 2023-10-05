@@ -16,10 +16,12 @@ public class PlayerMovementSimple : MonoBehaviour
     private void HorizontalMovement()
     {
         inputAxis = Input.GetAxis("Horizontal");
-        if (GameManager.Instance.playerMovable)
+/*        if (GameManager.Instance.playerMovable)
         {
             transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
-        }
+        }*/
+
+        transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
     }
 
     private void Update()

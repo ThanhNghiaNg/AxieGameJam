@@ -11,8 +11,11 @@ public class EventClick : MonoBehaviour
     public float duration = 1.0f;
     private void Awake()
     {
+        portal = GameObject.FindWithTag("portal");
+        portal.transform.localScale = new Vector3(1.8f, 0.8f, 0f);
         skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
     }
+
     private void OnMouseDown()
     {
         GameObject player = GameObject.FindWithTag("Player");
@@ -75,7 +78,7 @@ public class EventClick : MonoBehaviour
         while (elapsed < duration)
         {
             float t = elapsed / duration;
-            transform.localScale = Vector3.Lerp(startScale, endScale, t);
+            portal.transform.localScale = Vector3.Lerp(startScale, endScale, t);
 
             elapsed += Time.deltaTime;
             yield return null;
