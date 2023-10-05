@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     SkeletonAnimation skeletonAnimation;
     public float animationTime = 3f;
-    private new Vector2 position;
-    private new Vector2 startPosition;
+    public new Vector2 position;
+    public new Vector2 startPosition;
     private float direction = 1f;
     private float inputAxis;
 
@@ -27,15 +27,16 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         TurnAround();
         handleMovement();
+        position = transform.position;
     }
     void TurnAround()
     {
         float curDirection = inputAxis > 0f ? 1f : inputAxis < 0f ? -1 : 0;
-        if (curDirection > 0)
+        if (curDirection < 0)
         {
             transform.eulerAngles = Vector3.zero;
         }
-        else if (curDirection < 0)
+        else if (curDirection > 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
@@ -45,10 +46,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.playerMovable)
         {
-            // if (transform.position.x >= startPosition.x + 1) {
+            if (transform.position.x < startPosition.x)
+            {
+                GameManager.Instance.SetBackgroundHallwayMovable(true);
+                GameManager.Instance.SetPlayerMovable(false);
+                transform.position = new Vector2(startPosition.x, transform.position.y);
+                return;
+            };
 
-            //     return;
-            // };
             if (animationTime > 0)
             {
                 animationTime -= 1f;
@@ -82,8 +87,8 @@ public class PlayerMovement : MonoBehaviour
                 skeletonAnimation.loop = true;
             }
 
-
             transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
+
         }
     }
 }

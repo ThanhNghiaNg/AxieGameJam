@@ -31,6 +31,7 @@ public class LoopingBackground2D : MonoBehaviour
 
     void Movement()
     {
+        if (GameManager.Instance.backgroundHallwayMovable == false) return;
         height = 2f * cam.orthographicSize;
         width = height * cam.aspect;
         float inputAxis = Input.GetAxis("Horizontal");

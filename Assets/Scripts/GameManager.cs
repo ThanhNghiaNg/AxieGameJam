@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         stepRangeStart = 0;
         stepRangeEnd = 9;
         playerMovable = false;
+        backgroundHallwayMovable = true;
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -36,17 +37,23 @@ public class GameManager : MonoBehaviour
         playerStep = 0;
     }
 
-    public void SetPlayerMovable(bool movable){
+    public void SetPlayerMovable(bool movable)
+    {
         playerMovable = movable;
     }
-    public void SetBackgroundHallwayMovable(bool movable){
+    public void SetBackgroundHallwayMovable(bool movable)
+    {
         backgroundHallwayMovable = movable;
     }
 
     public void UpdateStep(float step)
     {
         playerStep = (int)step;
-        if (playerStep == stepRangeEnd) playerMovable = true;
+        if (playerStep == stepRangeEnd)
+        {
+            playerMovable = true;
+            SetBackgroundHallwayMovable(false);
+        }
     }
     public void increaseStep()
     {
