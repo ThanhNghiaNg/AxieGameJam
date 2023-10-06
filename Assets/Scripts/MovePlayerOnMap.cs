@@ -25,7 +25,7 @@ public class MovePlayerOnMap : MonoBehaviour
         int direction = inputAxis > 0 ? 1 : -1;
         currentMove += moveAmount;
         wholeCurrentMove = (int)currentMove;
-        x = wholeCurrentMove / 100;
+        x = wholeCurrentMove / 10;
         if ((GameManager.Instance.playerStep == 0 && inputAxis < 0) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
         {
             currentMove -= moveAmount;

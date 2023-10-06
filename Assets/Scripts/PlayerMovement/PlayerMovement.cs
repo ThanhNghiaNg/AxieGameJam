@@ -30,11 +30,11 @@ public class PlayerMovement : MonoBehaviour
     void TurnAround()
     {
         float curDirection = inputAxis > 0f ? 1f : inputAxis < 0f ? -1 : 0;
-        if (curDirection < 0)
+        if (curDirection > 0)
         {
             transform.eulerAngles = Vector3.zero;
         }
-        else if (curDirection > 0)
+        else if (curDirection < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
