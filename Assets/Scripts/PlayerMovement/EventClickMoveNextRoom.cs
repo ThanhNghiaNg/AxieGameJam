@@ -52,10 +52,7 @@ public class EventClickMoveNextRoom : MonoBehaviour
 
     private IEnumerator ExitArea(Transform player)
     {
-        Debug.Log("?");
-        Debug.Log(player.ToString());
         player.GetComponent<PlayerMovement>().enabled = false;
-        Debug.Log("???");
         skeletonAnimation.AnimationName = "action/run";
         yield return MoveTo(player, gameObject.transform.position);
 
@@ -80,14 +77,17 @@ public class EventClickMoveNextRoom : MonoBehaviour
     private void MoveToRoom(Transform player)
     {
         player.gameObject.SetActive(true);
-        player.GetComponent<PlayerMovementSimple>().enabled = true;
+        player.GetComponent<PlayerMovement>().enabled = true;
 
         GameObject spawnPos = GameObject.FindWithTag("spawn");
         GameObject cameraPos = GameObject.FindWithTag("RoomPos");
         Camera.main.transform.position = cameraPos.transform.position;
         player.transform.position = spawnPos.transform.position;
 
-        // StartCoroutine(ScalePortal());
+        foreach (GameObject skybox in GameObject.FindGameObjectsWithTag("skybox"))
+        {
+            skybox.GetComponent<EdgeCollider2D>().enabled = true;
+        }
     }
 
     private IEnumerator ScalePortal()
