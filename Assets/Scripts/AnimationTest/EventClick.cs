@@ -7,6 +7,7 @@ public class EventClick : MonoBehaviour
     public float speed = 5.0f;
     SkeletonAnimation skeletonAnimation;
     private GameObject portal;
+    private bool isTouching = false;
 
     public float duration = 1.0f;
     private void Awake()
@@ -16,18 +17,37 @@ public class EventClick : MonoBehaviour
         skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isTouching = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isTouching = false;
+        }
+    }
+
     private void OnMouseDown()
     {
-        GameObject player = GameObject.FindWithTag("Player");
-        if (gameObject.transform.position.x - player.transform.position.x < 0)
+        if (isTouching)
         {
-            player.transform.eulerAngles = Vector3.zero;
+            GameObject player = GameObject.FindWithTag("Player");
+            if (gameObject.transform.position.x - player.transform.position.x < 0)
+            {
+                player.transform.eulerAngles = Vector3.zero;
+            }
+            else
+            {
+                player.transform.eulerAngles = new Vector3(0, 180f, 0);
+            }
+            StartCoroutine(ExitArea(player.transform));
         }
-        else
-        {
-            player.transform.eulerAngles = new Vector3(0, 180f, 0);
-        }
-        StartCoroutine(ExitArea(player.transform));
     }
 
     private IEnumerator ExitArea(Transform player)
