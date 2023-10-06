@@ -6,11 +6,16 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Skill : ScriptableObject
 {
+    public Sprite sprite;
     public string skillName;
     public SkillDescription skillDescription;
     public SkillEffectAmount effectAmount;
     public bool isUpgrade;
     public List<Buff> buffs = new List<Buff>();
+    public enum Type {Buff, Debuff, Attack };
+    public Type type;
+    public Position posToUse;
+    public Position posTarget;
 
     public string GetSkilDescription()
     {
@@ -41,4 +46,9 @@ public struct SkillEffectAmount
 {
     public float nonUpgrade;
     public float upgrade;
+}
+[System.Serializable]
+public struct Position
+{
+    public List<bool> pos ;
 }
