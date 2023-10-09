@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         NewGame();
-        GenPlatform(Random.Range(stepRangeStart+1, stepRangeEnd-1));
+        GenPlatform(Random.Range(stepRangeStart + 1, stepRangeEnd - 1));
         Load2();
     }
 
@@ -119,10 +119,15 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < platforms.Count; i++)
         {
-            var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
-            gameObj.transform.parent = platformsParent.transform;
+            // Debug.Log("platform: " + (platformsParent.transform.position + i * spacing * transform.right).ToString());
+            // var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
+            var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity, platformsParent.transform);
+
+            // gameObj.transform.parent = platformsParent.transform;
 
         }
+        // platformsParent.GetComponent<PlatformMovement>().enabled = true;
+        // platformsParent.transform.anchoredPosition = new Vector2(-7.15f, -3.8f);
     }
 
 

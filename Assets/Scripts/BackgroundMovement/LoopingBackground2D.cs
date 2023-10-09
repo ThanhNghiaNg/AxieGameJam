@@ -6,17 +6,23 @@ public class LoopingBackground2D : MonoBehaviour
 {
     [Range(-40f, 40f)]
     public float scrollSpeed = 20f;
-    private float moveAmount;
-    private float height;
-    private float width;
-    private float offset = 0;
-    private float totalMove = 0;
+    public float loopPointX = 56.96f;
+    public bool isAbleToLoop = true;
+    private float moveAmount = 0f;
+    private float height = 0f;
+    private float width = 0f;
+    private float offset = 0f;
+    private float totalMove = 0f;
     private Vector3 startPosition;
     Camera cam;
 
-    void Start()
+    void Awake()
     {
         startPosition = transform.position;
+    }
+
+    void Start()
+    {
         cam = Camera.main;
     }
 
@@ -32,13 +38,11 @@ public class LoopingBackground2D : MonoBehaviour
         height = 2f * cam.orthographicSize;
         width = height * cam.aspect;
         float inputAxis = Input.GetAxis("Horizontal");
-        
 
         moveAmount = inputAxis * (Time.deltaTime * scrollSpeed) / 10f;
         offset = offset + moveAmount;
 
-        Vector3 nextPosition = new Vector3(-offset, transform.position.y);
-        
+        Vector3 nextPosition = new Vector3(-offset, transform.position.y, transform.position.z);
         if ((GameManager.Instance.playerStep == 0 && inputAxis < 0 && startPosition.x < transform.position.x) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
         {
             totalMove -= moveAmount;
@@ -53,7 +57,7 @@ public class LoopingBackground2D : MonoBehaviour
 
         transform.position = nextPosition;
 
-        if (Mathf.Abs(transform.position.x) >= 56.96f)
+        if (Mathf.Abs(transform.position.x) >= loopPointX && isAbleToLoop)
         {
             transform.position = startPosition;
             offset = 0f;
