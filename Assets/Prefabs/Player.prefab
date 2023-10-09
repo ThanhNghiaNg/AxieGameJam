@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1913988009221996554}
   m_Layer: 0
   m_Name: player
-  m_TagString: player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2020434860061418090
 MonoBehaviour:
@@ -148,11 +148,12 @@ GameObject:
   - component: {fileID: 7456906661318576542}
   - component: {fileID: 5561784434491926617}
   - component: {fileID: 4197849835873436480}
+  - component: {fileID: 7976756367936406479}
   - component: {fileID: 709850656354432747}
   - component: {fileID: 248149384404351137}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,14 +166,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6850460926486020388}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.55, y: -3, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -7.46, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3568887017544122228}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &5561784434491926617
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -239,12 +240,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   padding: 1
   moveSpeed: 5
-  camWidth: 0
-  position: {x: 0, y: 0}
-  camHeight: 0
-  direction: 1
-  inputAxis: 0
   animationTime: 3
+--- !u!114 &7976756367936406479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850460926486020388}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2382fc99044e7d4e8942f59e5a00793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camWidth: 0
+  camHeight: 0
 --- !u!58 &709850656354432747
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -277,9 +287,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.62
 --- !u!50 &248149384404351137
 Rigidbody2D:
   serializedVersion: 4
@@ -295,7 +305,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

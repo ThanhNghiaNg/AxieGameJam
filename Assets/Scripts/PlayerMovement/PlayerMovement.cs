@@ -6,10 +6,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] float padding = 2f;
     [SerializeField] float moveSpeed = 5f;
-    SkeletonAnimation skeletonAnimation;
     public float animationTime = 3f;
-    public new Vector2 position;
-    public new Vector2 startPosition;
+    private SkeletonAnimation skeletonAnimation;
+    private new Vector2 position;
+    private new Vector2 startPosition;
     private float direction = 1f;
     private float inputAxis;
 
