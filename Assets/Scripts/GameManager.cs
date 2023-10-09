@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject nextPlatform;
 
-    float spacing = 5f;
+    public float spacing = 5f;
     #endregion
     private void Awake()
     {
@@ -121,9 +121,10 @@ public class GameManager : MonoBehaviour
         {
             // Debug.Log("platform: " + (platformsParent.transform.position + i * spacing * transform.right).ToString());
             // var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
-            var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity, platformsParent.transform);
-
-            // gameObj.transform.parent = platformsParent.transform;
+            var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
+            gameObj.tag = "platform";
+            gameObj.AddComponent<PlatformVisible>();
+            gameObj.transform.parent = platformsParent.transform;
 
         }
         // platformsParent.GetComponent<PlatformMovement>().enabled = true;

@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     public float animationTime = 3f;
     private SkeletonAnimation skeletonAnimation;
-    private new Vector2 position;
-    private new Vector2 startPosition;
+    private Vector2 position;
+    private Vector2 startPosition;
     private float direction = 1f;
     private float inputAxis;
 

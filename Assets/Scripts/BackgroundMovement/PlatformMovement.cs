@@ -11,11 +11,11 @@ public class PlatformMovement : MonoBehaviour
     private float width = 0f;
     private float offset = 0f;
     private float totalMove = 0f;
-    // private Vector3 startPosition;
+    private Vector3 startPosition;
 
     void Awake()
     {
-        // startPosition = transform.position;
+        startPosition = transform.position;
     }
 
 
@@ -26,28 +26,27 @@ public class PlatformMovement : MonoBehaviour
 
     void Movement()
     {
-        // if (GameManager.Instance.backgroundHallwayMovable == false) return;
-        // height = 2f * cam.orthographicSize;
-        // width = height * cam.aspect;
-        // float inputAxis = Input.GetAxis("Horizontal");
+        Debug.Log("Moveable: " + GameManager.Instance.backgroundHallwayMovable.ToString());
+        if (GameManager.Instance.backgroundHallwayMovable == false) return;
+        float inputAxis = Input.GetAxis("Horizontal");
 
-        // moveAmount = inputAxis * (Time.deltaTime * scrollSpeed) / 10f;
+        moveAmount = inputAxis * (Time.deltaTime * scrollSpeed) / 10f;
         // offset = offset + moveAmount;
 
-        // Vector3 nextPosition = new Vector3(-offset, transform.position.y, transform.position.z);
-        // if ((GameManager.Instance.playerStep == 0 && inputAxis < 0 && startPosition.x < transform.position.x) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
-        // {
-        //     totalMove -= moveAmount;
-        //     offset = offset - moveAmount;
-        //     return;
-        // }
-        // else
-        // {
-        //     totalMove += moveAmount;
-        //     transform.position = nextPosition;
-        // }
+        Vector3 nextPosition = new Vector3(transform.position.x - moveAmount, transform.position.y, transform.position.z);
+        if ((GameManager.Instance.playerStep == 0 && inputAxis < 0 && startPosition.x < transform.position.x) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
+        {
+            totalMove -= moveAmount;
+            // offset = offset - moveAmount;
+            return;
+        }
+        else
+        {
+            totalMove += moveAmount;
+            transform.position = nextPosition;
+        }
 
-        // transform.position = nextPosition;
+        transform.position = nextPosition;
 
     }
 }
