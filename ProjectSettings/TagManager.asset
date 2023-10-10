@@ -15,6 +15,7 @@ TagManager:
   - RoomPos
   - spawn
   - portal
+  - platform
   layers:
   - Default
   - TransparentFX

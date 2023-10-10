@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoopingBackground2D : MonoBehaviour
 {
-    [Range(-40f, 40f)]
+    // [Range(-40f, 40f)]
     public float scrollSpeed = 20f;
     public float loopPointX = 56.96f;
     public bool isAbleToLoop = true;
