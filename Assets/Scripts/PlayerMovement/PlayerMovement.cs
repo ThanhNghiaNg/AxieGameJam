@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-  
+
     void Update()
     {
         inputAxis = Input.GetAxis("Horizontal");
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                 skeletonAnimation.loop = true;
             }
 
-            transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position = new Vector3(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 
         }
     }

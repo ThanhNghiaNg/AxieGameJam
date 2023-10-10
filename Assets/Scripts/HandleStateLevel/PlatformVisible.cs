@@ -7,7 +7,7 @@ public class PlatformVisible : MonoBehaviour
     void OnBecameVisible()
     {
 
-        if (transform.localPosition.x / GameManager.Instance.spacing == GameManager.Instance.stepRangeEnd)
+        if (transform.localPosition.x / GameManager.Instance.spacing >= GameManager.Instance.stepRangeEnd + 1)
         {
             Debug.Log("localPosition: " + transform.localPosition.ToString());
             GameManager.Instance.SetBackgroundHallwayMovable(false);
@@ -17,7 +17,7 @@ public class PlatformVisible : MonoBehaviour
     }
     void OnBecameInvisible()
     {
-        if (transform.localPosition.x / GameManager.Instance.spacing == GameManager.Instance.stepRangeEnd)
+        if (transform.localPosition.x / GameManager.Instance.spacing >= GameManager.Instance.stepRangeEnd + 1)
         {
             Debug.Log("localPosition: " + transform.localPosition.ToString());
             Debug.Log("Disappear");

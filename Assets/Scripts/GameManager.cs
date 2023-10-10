@@ -104,12 +104,11 @@ public class GameManager : MonoBehaviour
 
     void GenPlatform(int door)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = stepRangeStart; i <= stepRangeEnd+1; i++)
         {
-            if (i == door || i == 9)
+            if (i == door || i == stepRangeEnd)
             {
                 platforms.Add(doorPlatform);
-                Debug.Log("I have no ideal?");
             }
             else platforms.Add(platform);
         }
@@ -119,16 +118,12 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < platforms.Count; i++)
         {
-            // Debug.Log("platform: " + (platformsParent.transform.position + i * spacing * transform.right).ToString());
-            // var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
             var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
             gameObj.tag = "platform";
             gameObj.AddComponent<PlatformVisible>();
             gameObj.transform.parent = platformsParent.transform;
 
         }
-        // platformsParent.GetComponent<PlatformMovement>().enabled = true;
-        // platformsParent.transform.anchoredPosition = new Vector2(-7.15f, -3.8f);
     }
 
 

@@ -26,7 +26,7 @@ public class PlatformMovement : MonoBehaviour
 
     void Movement()
     {
-        Debug.Log("Moveable: " + GameManager.Instance.backgroundHallwayMovable.ToString());
+        // Debug.Log("Moveable: " + GameManager.Instance.backgroundHallwayMovable.ToString());
         if (GameManager.Instance.backgroundHallwayMovable == false) return;
         float inputAxis = Input.GetAxis("Horizontal");
 

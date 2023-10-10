@@ -148,6 +148,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 248149384404351137, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 709850656354432747, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6182824298431783533, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -158,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7456906661318576542, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.46
+      value: -10.49
       objectReference: {fileID: 0}
     - target: {fileID: 7456906661318576542, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -741,7 +749,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676302817151762063, guid: c5e905a59a8caab48bc434eb6dcbf484, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -7.15
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7676302817151762063, guid: c5e905a59a8caab48bc434eb6dcbf484, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -788,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9da09c51eab2994b92d3332a2065386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 10
+  scrollSpeed: 40
 --- !u!1001 &215313736031739811
 PrefabInstance:
   m_ObjectHideFlags: 0
