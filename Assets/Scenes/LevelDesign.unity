@@ -348,11 +348,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2058353199862885482, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2058353199862885482, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2058353199862885482, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
       propertyPath: m_LocalPosition.z
@@ -389,8 +389,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 856595748352828390, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7134241004329090896}
   m_SourcePrefab: {fileID: 100100000, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
+--- !u!1 &7134241004329090892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 856595748352828390, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
+  m_PrefabInstance: {fileID: 7134241004329090891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &7134241004329090895 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 8540738902572822754, guid: 5d005d4031e05b54fa5961d20c9d8575, type: 3}
+  m_PrefabInstance: {fileID: 7134241004329090891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7134241004329090896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7134241004329090892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c517428b57b3f84caddc05051a5ea21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemapToSave: {fileID: 7134241004329090895}
 --- !u!1001 &8478647431375884248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,11 +431,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5645770521956423356, guid: 188b1b77339b04b4483a14c4ece43c0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5645770521956423356, guid: 188b1b77339b04b4483a14c4ece43c0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5645770521956423356, guid: 188b1b77339b04b4483a14c4ece43c0e, type: 3}
       propertyPath: m_LocalPosition.z
