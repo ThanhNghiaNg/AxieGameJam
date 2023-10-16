@@ -173,23 +173,54 @@ public class LoadTilemapFromJson : MonoBehaviour
         // dfs
         List<List<int[]>> segment = new List<List<int[]>>();
         List<int[]> paths = new List<int[]>();
+        // Debug.Log($"map: {JsonConvert.SerializeObject(map)}");
         map[startPos[0]][startPos[1]] = -1;
         paths.Add(startPos);
         List<int[]> pathsResult = new List<int[]>();
-
+        bool isBFS = false;
         while (paths.Count > 0)
         {
-            // int[] node = paths[paths.Count - 1];
-            // paths.RemoveAt(paths.Count - 1);
-            int[] node = paths[0];
-            paths.RemoveAt(0);
-            pathsResult.Add(node);
-
-            if (node[0] == m - 1 && node[1] == n - 1)
+            int[] node;
+            if (isBFS)
             {
-                return;
-                // return node[2]
+                node = paths[0];
+                paths.RemoveAt(0);
             }
+            else
+            {
+                node = paths[paths.Count - 1];
+                paths.RemoveAt(paths.Count - 1);
+            }
+
+            // if (map[node[0]][node[1]] == 5)
+            // {
+            //     isBFS = true;
+            // };
+            isBFS = false;
+
+            pathsResult.Add(node);
+            if (map[node[0]][node[1]] == 4 || map[node[0]][node[1]] == 5)
+            {
+                // pathsResult.Add(nextPos);
+                if (paths.Count >= 1) isBFS = true;
+                List<int[]> clonedList = new List<int[]>(pathsResult.Count);
+                foreach (int[] array in pathsResult)
+                {
+                    int[] clonedArray = new int[array.Length];
+                    Array.Copy(array, clonedArray, array.Length);
+                    clonedList.Add(clonedArray);
+                }
+                segment.Add(clonedList);
+                pathsResult.Clear();
+            };
+
+            map[node[0]][node[1]] = -1;
+
+            // if (node[0] == m - 1 && node[1] == n - 1)
+            // {
+            //     return;
+            //     // return node[2]
+            // }
 
             for (int i = 0; i < 4; i++)
             {
@@ -201,27 +232,24 @@ public class LoadTilemapFromJson : MonoBehaviour
                     nextPos[1] < 0 ||
                     map[nextPos[0]][nextPos[1]] == -1) continue;
 
-                if (map[nextPos[0]][nextPos[1]] == 4 || map[nextPos[0]][nextPos[1]] == 5)
+                if (paths.FirstOrDefault(node => node[0] == nextPos[0] && node[1] == nextPos[1]) == null)
                 {
-                    pathsResult.Add(nextPos);
-                    List<int[]> clonedList = new List<int[]>(pathsResult.Count);
-                    foreach (int[] array in pathsResult)
-                    {
-                        int[] clonedArray = new int[array.Length];
-                        Array.Copy(array, clonedArray, array.Length);
-                        clonedList.Add(clonedArray);
-                    }      
-                    segment.Add(clonedList);                                                                         
-                    pathsResult.Clear();
-                };
-
-                map[nextPos[0]][nextPos[1]] = -1;
-                paths.Add(nextPos);
-
+                    paths.Add(nextPos);
+                }
             }
             Debug.Log($"paths: {JsonConvert.SerializeObject(paths)}");
             Debug.Log("\n");
         }
+
+        // List<int[]> clonedListAfter = new List<int[]>(pathsResult.Count);
+        // foreach (int[] array in pathsResult)
+        // {
+        //     int[] clonedArray = new int[array.Length];
+        //     Array.Copy(array, clonedArray, array.Length);
+        //     clonedListAfter.Add(clonedArray);
+        // }
+        // segment.Add(clonedListAfter);
+
         Debug.Log($"segment: {JsonConvert.SerializeObject(segment)}");
         Debug.Log($"pathsResult: {JsonConvert.SerializeObject(pathsResult)}");
         Debug.Log("startPos: " + JsonConvert.SerializeObject(startPos));
