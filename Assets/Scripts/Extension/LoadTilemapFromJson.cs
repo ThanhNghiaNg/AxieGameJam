@@ -31,25 +31,13 @@ public class LoadTilemapFromJson : MonoBehaviour
             string json = File.ReadAllText(filePath);
             TilemapData tilemapData = JsonConvert.DeserializeObject<TilemapData>(json);
 
-            foreach (var tileData in tilemapData.tiles)
-            {
-                Vector3Int tilePosition = new Vector3Int(tileData.x, tileData.y, 0);
-                Tile tile = Array.Find(tilePrefabs, t => t.name == tileData.tileName);
-                if (tile != null)
-                {
-                    tilemap.SetTile(tilePosition, tile);
-                }
-            }
             List<TileData> sortedTiles = tilemapData.tiles.OrderBy(tile => tile.x).ThenBy(tile => tile.y).ToList();
             sortedTiles = FlipHorizotalTilemap(sortedTiles);
             List<List<int>> map = TilemapToMap(sortedTiles);
-            Debug.Log("sortedTiles: " + JsonConvert.SerializeObject(sortedTiles));
+
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
             int[] pos = null; //{ 2, 2 };
-            findCurrentHallway(map, pos);           
-
-            // Debug.Log("tilemapData: \n"+JsonConvert.SerializeObject(sortedTiles));
-            // Debug.Log("tilemapData.tiles: \n"+JsonConvert.SerializeObject(tilemapData.tiles));
+            findCurrentHallway(map, pos);
         }
         else
         {
@@ -64,8 +52,9 @@ public class LoadTilemapFromJson : MonoBehaviour
             TileData tileData = tilemap[i];
             if (tileData.y < minY) minY = tileData.y;
         }
-        for (int i = 0; i < tilemap.Count; i++) {
-            tilemap[i].y -= 2*Math.Abs(tilemap[i].y - minY);
+        for (int i = 0; i < tilemap.Count; i++)
+        {
+            tilemap[i].y -= 2 * Math.Abs(tilemap[i].y - minY);
         };
         return tilemap;
     }
@@ -101,9 +90,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             List<int> row = new List<int>();
             for (int j = 0; j < n; j++)
             {
-                // TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
                 TileData result = tilemap.FirstOrDefault(tile => tile.x == j && tile.y == i);
-                // Debug.Log($"result: {JsonConvert.SerializeObject(result)}");
                 if (result != null)
                 {
                     switch (result.tileName)
