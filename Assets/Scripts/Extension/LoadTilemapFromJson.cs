@@ -43,6 +43,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             List<TileData> sortedTiles = tilemapData.tiles.OrderBy(tile => tile.x).ThenBy(tile => tile.y).ToList();
             sortedTiles = FlipHorizotalTilemap(sortedTiles);
             List<List<int>> map = TilemapToMap(sortedTiles);
+            Debug.Log("sortedTiles: " + JsonConvert.SerializeObject(sortedTiles));
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
             int[] pos = null; //{ 2, 2 };
             findCurrentHallway(map, pos);           
@@ -95,12 +96,14 @@ public class LoadTilemapFromJson : MonoBehaviour
 
         // generate map
         List<List<int>> map = new List<List<int>>();
-        for (int i = 0; i <= m; i++)
+        for (int i = 0; i < m; i++)
         {
             List<int> row = new List<int>();
-            for (int j = 0; j <= n; j++)
+            for (int j = 0; j < n; j++)
             {
-                TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
+                // TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
+                TileData result = tilemap.FirstOrDefault(tile => tile.x == j && tile.y == i);
+                // Debug.Log($"result: {JsonConvert.SerializeObject(result)}");
                 if (result != null)
                 {
                     switch (result.tileName)
