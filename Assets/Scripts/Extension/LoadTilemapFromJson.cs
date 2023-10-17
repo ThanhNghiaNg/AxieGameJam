@@ -9,12 +9,18 @@ using System.Linq;
 
 public class LoadTilemapFromJson : MonoBehaviour
 {
-    private Tilemap tilemap;
+    public static LoadTilemapFromJson Instance { get; set; }
+    public Tilemap tilemap;
     public Tile[] tilePrefabs;
+    public TileBase tileEmpty;
+    public TileBase tileRoom;
+    public TileBase tileBoss;
+    public TileBase tileStart;
+    public List<List<int>> map = new List<List<int>>();
     private int normalizeDistance = 0;
     void Awake()
     {
-        createTilemap();
+        // createTilemap();
         LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + tilemap.name.ToLower() + ".json");
         // LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + "level2" + ".json");
     }
@@ -32,16 +38,36 @@ public class LoadTilemapFromJson : MonoBehaviour
             TilemapData tilemapData = JsonConvert.DeserializeObject<TilemapData>(json);
 
             List<TileData> sortedTiles = tilemapData.tiles.OrderBy(tile => tile.x).ThenBy(tile => tile.y).ToList();
-            sortedTiles = FlipHorizotalTilemap(sortedTiles);
-            List<List<int>> map = TilemapToMap(sortedTiles);
-
+            // sortedTiles = FlipHorizotalTilemap(sortedTiles);
+            // sortedTiles = FlipHorizotalTilemap(sortedTiles);
+            map = TilemapToMap(sortedTiles);
+            DrawTilemap();
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
             int[] pos = null; //{ 2, 2 };
-            findCurrentHallway(map, pos);
+            // findCurrentHallway(map, pos);
         }
         else
         {
             Debug.LogError("JSON file not found.");
+        }
+    }
+    public void DrawTilemap()
+    {
+        Dictionary<int, TileBase> mapToTile = new Dictionary<int, TileBase>();
+        mapToTile[-1] = tileEmpty;
+        mapToTile[0] = tileEmpty;
+        mapToTile[1] = tileStart;
+        mapToTile[4] = tileRoom;
+        mapToTile[5] = tileBoss;
+
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                Vector3Int tilePosition = new Vector3Int(i, j, 0);
+                TileBase tile = mapToTile[map[i][j]];
+                tilemap.SetTile(tilePosition, tile);
+            }
         }
     }
     public List<TileData> FlipHorizotalTilemap(List<TileData> tilemap)
@@ -90,7 +116,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             List<int> row = new List<int>();
             for (int j = 0; j < n; j++)
             {
-                TileData result = tilemap.FirstOrDefault(tile => tile.x == j && tile.y == i);
+                TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
                 if (result != null)
                 {
                     switch (result.tileName)
@@ -124,6 +150,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             }
             map.Add(row);
         }
+
         return map;
     }
     public void findCurrentHallway(List<List<int>> map, int[]? startPosition)

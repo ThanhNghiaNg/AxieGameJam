@@ -1114,7 +1114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6815614086509144269, guid: 0031998887f32344294f53c976f64fdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.11
+      value: 10.11
       objectReference: {fileID: 0}
     - target: {fileID: 6815614086509144269, guid: 0031998887f32344294f53c976f64fdd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1178,7 +1178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ed6ef7a34a2246b67c747684564d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
   tilePrefabs: []
+  tileEmpty: {fileID: 0}
+  tileRoom: {fileID: 0}
+  tileBoss: {fileID: 0}
+  tileStart: {fileID: 0}
 --- !u!1 &1856517142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,8 +1513,9 @@ GameObject:
   - component: {fileID: 2067839462}
   - component: {fileID: 2067839461}
   - component: {fileID: 2067839460}
+  - component: {fileID: 2067839463}
   m_Layer: 0
-  m_Name: tilemap
+  m_Name: level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1525,7 +1531,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 961955421}
@@ -1631,6 +1637,24 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2067839463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067839458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4ed6ef7a34a2246b67c747684564d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 2067839462}
+  tilePrefabs: []
+  tileEmpty: {fileID: 11400000, guid: 76c5693c1098cd14db28ee6d1fa63e95, type: 2}
+  tileRoom: {fileID: 11400000, guid: b63d116e8598ebb49a91c538fff0b7e6, type: 2}
+  tileBoss: {fileID: 11400000, guid: 2f9de9d9122810849ab57e8d3470e4de, type: 2}
+  tileStart: {fileID: 11400000, guid: 770f4870adbe75d49b30ff23e215250f, type: 2}
 --- !u!1001 &215313736031739811
 PrefabInstance:
   m_ObjectHideFlags: 0

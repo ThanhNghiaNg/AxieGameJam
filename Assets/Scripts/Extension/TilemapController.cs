@@ -1,20 +1,27 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Newtonsoft.Json;
 
 public class TilemapController : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase tileEmpty;
 
-    void Start()
+    void Awake()
     {
         tilemap = GetComponent<Tilemap>();
-        Vector3Int tilePosition = new Vector3Int(0, 0,0);  // Set the position where you want to paint the tile
-        TileBase tile = tileEmpty;  // Reference to the tile you want to paint
-        tilemap.SetTile(tilePosition, tile);
-        tilemap.SetTile(new Vector3Int(0, 1,0), tile);
-    }
 
+        DrawTilemap();
+    }
+    public void DrawTilemap()
+    {
+        // Vector3Int tilePosition = new Vector3Int(0, 0, 0);  // Set the position where you want to paint the tile
+        // TileBase tile = tileEmpty;  // Reference to the tile you want to paint
+        // tilemap.SetTile(tilePosition, tile);
+        // tilemap.SetTile(new Vector3Int(0, 1, 0), tile);
+        // Debug.Log($"map--: {JsonConvert.SerializeObject(LoadTilemapFromJson.Instance.map)}");
+        Debug.Log($"map--: {LoadTilemapFromJson.Instance.map}");
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
