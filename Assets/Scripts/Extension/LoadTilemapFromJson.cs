@@ -7,20 +7,6 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-// [System.Serializable]
-// public class TileData
-// {
-//     public int x;
-//     public int y;
-//     public string tileName;
-// }
-
-// // [System.Serializable]
-// public class TilemapData
-// {
-//     public List<TileData> tiles;
-// }
-
 public class LoadTilemapFromJson : MonoBehaviour
 {
     private Tilemap tilemap;
@@ -55,12 +41,11 @@ public class LoadTilemapFromJson : MonoBehaviour
                 }
             }
             List<TileData> sortedTiles = tilemapData.tiles.OrderBy(tile => tile.x).ThenBy(tile => tile.y).ToList();
-
+            sortedTiles = FlipHorizotalTilemap(sortedTiles);
             List<List<int>> map = TilemapToMap(sortedTiles);
-            MapToHallways(map);
-
-            Debug.Log("normalizeDistance: " + normalizeDistance.ToString());
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
+            int[] pos = null; //{ 2, 2 };
+            findCurrentHallway(map, pos);           
 
             // Debug.Log("tilemapData: \n"+JsonConvert.SerializeObject(sortedTiles));
             // Debug.Log("tilemapData.tiles: \n"+JsonConvert.SerializeObject(tilemapData.tiles));
@@ -70,14 +55,27 @@ public class LoadTilemapFromJson : MonoBehaviour
             Debug.LogError("JSON file not found.");
         }
     }
-    public List<List<int>> TilemapToMap(List<TileData> sortedTiles)
+    public List<TileData> FlipHorizotalTilemap(List<TileData> tilemap)
+    {
+        int minY = 1000000;
+        for (int i = 0; i < tilemap.Count; i++)
+        {
+            TileData tileData = tilemap[i];
+            if (tileData.y < minY) minY = tileData.y;
+        }
+        for (int i = 0; i < tilemap.Count; i++) {
+            tilemap[i].y -= 2*Math.Abs(tilemap[i].y - minY);
+        };
+        return tilemap;
+    }
+    public List<List<int>> TilemapToMap(List<TileData> tilemap)
     {
 
         int minX = 1000000, minY = 1000000;
         int maxX = -1000000, maxY = -100000;
-        for (int i = 0; i < sortedTiles.Count; i++)
+        for (int i = 0; i < tilemap.Count; i++)
         {
-            TileData tileData = sortedTiles[i];
+            TileData tileData = tilemap[i];
             if (tileData.x > maxX) maxX = tileData.x;
             if (tileData.x < minX) minX = tileData.x;
             if (tileData.y > maxY) maxY = tileData.y;
@@ -87,24 +85,13 @@ public class LoadTilemapFromJson : MonoBehaviour
         normalizeDistance = Math.Min(minX, minY);
         if (normalizeDistance < 0)
         {
-            for (int i = 0; i < sortedTiles.Count; i++) sortedTiles[i].x -= normalizeDistance;
-            for (int i = 0; i < sortedTiles.Count; i++) sortedTiles[i].y -= normalizeDistance;
+            for (int i = 0; i < tilemap.Count; i++) tilemap[i].x -= normalizeDistance;
+            for (int i = 0; i < tilemap.Count; i++) tilemap[i].y -= normalizeDistance;
         }
 
-
-        // find size of map
-        minX = 1000000; minY = 1000000;
-        maxX = -1000000; maxY = -100000;
-        for (int i = 0; i < sortedTiles.Count; i++)
-        {
-            TileData tileData = sortedTiles[i];
-            if (tileData.x > maxX) maxX = tileData.x;
-            if (tileData.x < minX) minX = tileData.x;
-            if (tileData.y > maxY) maxY = tileData.y;
-            if (tileData.y < minY) minY = tileData.y;
-        }
-        int n = maxX - minX + 1;
-        int m = maxY - minY + 1;
+        // map fixed size 10x10
+        int n = 10;
+        int m = 10;
 
         // generate map
         List<List<int>> map = new List<List<int>>();
@@ -113,7 +100,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             List<int> row = new List<int>();
             for (int j = 0; j <= n; j++)
             {
-                TileData result = sortedTiles.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
+                TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
                 if (result != null)
                 {
                     switch (result.tileName)
@@ -149,78 +136,57 @@ public class LoadTilemapFromJson : MonoBehaviour
         }
         return map;
     }
-    public void MapToHallways(List<List<int>> map)
+    public void findCurrentHallway(List<List<int>> map, int[]? startPosition)
     {
         int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
         int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
         int[] startPos = { 0, 0 };
         int m = map.Count;
         int n = map[0].Count;
-        // find start position
-        for (int row = 0; row < m; row++)
+        if (startPosition == null)
         {
-            for (int col = 0; col < n; col++)
+            // find start position
+            for (int row = 0; row < m; row++)
             {
-                if (map[row][col] == 1)
+                for (int col = 0; col < n; col++)
                 {
-                    startPos[0] = row;
-                    startPos[1] = col;
-                    break;
+                    if (map[row][col] == 1)
+                    {
+                        startPos[0] = row;
+                        startPos[1] = col;
+                        break;
+                    }
                 }
             }
+        }
+        else
+        {
+            startPos[0] = startPosition[0];
+            startPos[1] = startPosition[1];
         }
 
         // dfs
         List<List<int[]>> segment = new List<List<int[]>>();
         List<int[]> paths = new List<int[]>();
-        // Debug.Log($"map: {JsonConvert.SerializeObject(map)}");
+
         map[startPos[0]][startPos[1]] = -1;
         paths.Add(startPos);
         List<int[]> pathsResult = new List<int[]>();
-        bool isBFS = false;
+
         while (paths.Count > 0)
         {
             int[] node;
-            if (isBFS)
-            {
-                node = paths[0];
-                paths.RemoveAt(0);
-            }
-            else
-            {
-                node = paths[paths.Count - 1];
-                paths.RemoveAt(paths.Count - 1);
-            }
 
-            // if (map[node[0]][node[1]] == 5)
-            // {
-            //     isBFS = true;
-            // };
-            isBFS = false;
+            node = paths[paths.Count - 1];
+            paths.RemoveAt(paths.Count - 1);
 
             pathsResult.Add(node);
             if (map[node[0]][node[1]] == 4 || map[node[0]][node[1]] == 5)
             {
-                // pathsResult.Add(nextPos);
-                if (paths.Count >= 1) isBFS = true;
-                List<int[]> clonedList = new List<int[]>(pathsResult.Count);
-                foreach (int[] array in pathsResult)
-                {
-                    int[] clonedArray = new int[array.Length];
-                    Array.Copy(array, clonedArray, array.Length);
-                    clonedList.Add(clonedArray);
-                }
-                segment.Add(clonedList);
-                pathsResult.Clear();
+                break;
             };
 
             map[node[0]][node[1]] = -1;
-
-            // if (node[0] == m - 1 && node[1] == n - 1)
-            // {
-            //     return;
-            //     // return node[2]
-            // }
 
             for (int i = 0; i < 4; i++)
             {
@@ -237,20 +203,8 @@ public class LoadTilemapFromJson : MonoBehaviour
                     paths.Add(nextPos);
                 }
             }
-            Debug.Log($"paths: {JsonConvert.SerializeObject(paths)}");
-            Debug.Log("\n");
         }
 
-        // List<int[]> clonedListAfter = new List<int[]>(pathsResult.Count);
-        // foreach (int[] array in pathsResult)
-        // {
-        //     int[] clonedArray = new int[array.Length];
-        //     Array.Copy(array, clonedArray, array.Length);
-        //     clonedListAfter.Add(clonedArray);
-        // }
-        // segment.Add(clonedListAfter);
-
-        Debug.Log($"segment: {JsonConvert.SerializeObject(segment)}");
         Debug.Log($"pathsResult: {JsonConvert.SerializeObject(pathsResult)}");
         Debug.Log("startPos: " + JsonConvert.SerializeObject(startPos));
         return;
