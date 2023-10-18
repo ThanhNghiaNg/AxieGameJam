@@ -18,6 +18,7 @@ TagManager:
   - whoAskCanvas
   - lmaoCanvas
   - canvas
+  - platform
   layers:
   - Default
   - TransparentFX

@@ -1,15 +1,33 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Handle background movement state
     public static GameManager Instance { get; private set; }
+
+    public bool _playerMovable;
     public int playerStep { get; private set; }
     public int stepRangeStart { get; private set; }
     public int stepRangeEnd { get; private set; }
     public bool playerMovable { get; private set; }
-    public bool _playerMovable;
     public bool backgroundHallwayMovable { get; private set; }
+    #endregion
 
+    #region Generate Platform State
+    public List<GameObject> platforms;
+    public GameObject doorPlatform;
+    public GameObject platform;
+    public GameObject platformsParent;
+    public GameObject currentPlatform;
+    public GameObject prePlatform;
+
+    public GameObject nextPlatform;
+
+    public float spacing = 5f;
+    #endregion
     private void Awake()
     {
         stepRangeStart = 0;
@@ -17,7 +35,9 @@ public class GameManager : MonoBehaviour
         if (_playerMovable != null)
         {
             playerMovable = _playerMovable;
-        }else{
+        }
+        else
+        {
             playerMovable = false;
         }
 
@@ -36,6 +56,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         NewGame();
+        GenPlatform(Random.Range(stepRangeStart + 1, stepRangeEnd - 1));
+        Load2();
+    }
+
+    public void SetStateRange(int start, int end)
+    {
+        stepRangeStart = start;
+        stepRangeEnd = end;
     }
 
     private void NewGame()
@@ -55,6 +83,8 @@ public class GameManager : MonoBehaviour
     public void UpdateStep(float step)
     {
         playerStep = (int)step;
+        if (playerStep < stepRangeStart) playerStep = stepRangeStart;
+        if (playerStep > stepRangeEnd) playerStep = stepRangeEnd;
         if (playerStep == stepRangeEnd)
         {
             playerMovable = true;
@@ -70,4 +100,31 @@ public class GameManager : MonoBehaviour
     {
         playerStep--;
     }
+
+
+    void GenPlatform(int door)
+    {
+        for (int i = stepRangeStart; i <= stepRangeEnd+1; i++)
+        {
+            if (i == door || i == stepRangeEnd)
+            {
+                platforms.Add(doorPlatform);
+            }
+            else platforms.Add(platform);
+        }
+    }
+
+    public void Load2()
+    {
+        for (int i = 0; i < platforms.Count; i++)
+        {
+            var gameObj = Instantiate(platforms[i], platformsParent.transform.position + i * spacing * transform.right, Quaternion.identity);
+            gameObj.tag = "platform";
+            gameObj.AddComponent<PlatformVisible>();
+            gameObj.transform.parent = platformsParent.transform;
+
+        }
+    }
+
+
 }
