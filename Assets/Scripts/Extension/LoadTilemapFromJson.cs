@@ -19,11 +19,30 @@ public class LoadTilemapFromJson : MonoBehaviour
     public TileBase tileWall;
     public List<List<int>> map = new List<List<int>>();
     private int normalizeDistance = 0;
+    private int mapCol = 10;
+    private int mapRow = 10;
+    private int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
+    private int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
     void Awake()
     {
         // createTilemap();
         LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + tilemap.name.ToLower() + ".json");
         DrawTilemap();
+        int[] startPos = { 0, 0 };
+        // find start position;
+        for (int row = 0; row < map.Count; row++)
+        {
+            for (int col = 0; col < map[0].Count; col++)
+            {
+                if (map[row][col] == 1)
+                {
+                    startPos[0] = row;
+                    startPos[1] = col;
+                    break;
+                }
+            }
+        }
+        findEndPosition(startPos);
         // LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + "level2" + ".json");
         if (Instance != null)
         {
@@ -34,10 +53,6 @@ public class LoadTilemapFromJson : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
-    public void Justlog()
-    {
-        Debug.Log("Justlog");
     }
     public void createTilemap()
     {
@@ -57,8 +72,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             map = TilemapToMap(sortedTiles);
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
-
-            int[] pos = null; //{ 2, 2 };
+            // int[] pos = null; //{ 2, 2 };
             // findCurrentHallway(map, pos);
         }
         else
@@ -168,10 +182,63 @@ public class LoadTilemapFromJson : MonoBehaviour
 
         return map;
     }
+    public void findEndPosition(int[]? startPosition)
+    {
+        List<List<int>> tempMap = new List<List<int>>();
+        for (int i = 0; i < map.Count; i++)
+        {
+            List<int> row = new List<int>();
+            for (int j = 0; j < map[0].Count; j++)
+            {
+                row.Add(map[i][j]);
+                // tempMap[i][j] = map[i][j];
+            }
+            tempMap.Add(row);
+        }
+        Debug.Log($"tempMap--: {JsonConvert.SerializeObject(tempMap)}");
+
+        List<int[]> listNode = new List<int[]>();
+        int[] firstNode = { startPosition[0], startPosition[1] };
+        int[] endPosition = { 0, 0 };
+        listNode.Add(firstNode);
+        while (listNode.Count > 0)
+        {
+            int[] currentNode = listNode[listNode.Count - 1];
+            listNode.RemoveAt(listNode.Count - 1);
+            Debug.Log($"currentNode: {JsonConvert.SerializeObject(currentNode)}");
+            if (
+                (tempMap[currentNode[0]][currentNode[1]] == 4 || tempMap[currentNode[0]][currentNode[1]] == 5)
+                && (currentNode[0] != startPosition[1] && currentNode[1] != startPosition[0]))
+            {
+                endPosition = currentNode;
+                break;
+            }
+            tempMap[currentNode[0]][currentNode[1]] = -1;
+
+            for (int i = 0; i < 4; i++)
+            {
+                int[] nextPos = { currentNode[0] + dirY[i], currentNode[1] + dirX[i] };
+                Debug.Log($"nextPos: {JsonConvert.SerializeObject(nextPos)}");
+
+                Debug.Log($"{nextPos[0] > mapRow} {nextPos[0] < 0} {nextPos[1] > mapCol} {nextPos[1] < 0}");
+                if (nextPos[0] > mapRow ||
+                    nextPos[0] < 0 ||
+                    nextPos[1] > mapCol ||
+                    nextPos[1] < 0 ||
+                    tempMap[nextPos[0]][nextPos[1]] == -1) continue;
+
+                if (listNode.FirstOrDefault(node => node[0] == nextPos[0] && node[1] == nextPos[1]) == null)
+                {
+                    listNode.Add(nextPos);
+                }
+            }
+
+        }
+        GameManager.Instance.SetInitPositions(startPosition, endPosition);
+    }
     public void findCurrentHallway(int[]? startPosition)
     {
-        int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
-        int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
+
         int[] startPos = { 0, 0 };
         int m = map.Count;
         int n = map[0].Count;

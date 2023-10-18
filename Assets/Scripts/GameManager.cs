@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,6 +63,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Generate();
+    }
+    private void Generate()
+    {
         NewGame();
         GenPlatform(Random.Range(stepRangeStart + 1, stepRangeEnd - 1));
         Load2();
@@ -77,11 +82,14 @@ public class GameManager : MonoBehaviour
     {
         startPosition = start;
         endPosition = end;
+        int distance = Mathf.Abs(startPosition[0] - endPosition[0]) + Mathf.Abs(startPosition[1] - endPosition[1]);
+        SetStateRange(0, distance);
+        Generate();
     }
 
     public void UpdatePosition(int step)
     {
-        
+
     }
 
     private void NewGame()

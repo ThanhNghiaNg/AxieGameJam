@@ -4,13 +4,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] float padding = 2f;
     [SerializeField] float moveSpeed = 5f;
     public float animationTime = 3f;
     private SkeletonAnimation skeletonAnimation;
     private Vector2 position;
     private Vector2 startPosition;
-    private float direction = 1f;
     private float inputAxis;
 
     void Awake()
