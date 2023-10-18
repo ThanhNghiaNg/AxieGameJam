@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     public bool backgroundHallwayMovable { get; private set; }
     #endregion
 
+    #region Handle player movement state
+    public int[] currentPosition;
+    public int[] startPosition;
+    public int[] endPosition;
+
+    #endregion
+
     #region Generate Platform State
     public List<GameObject> platforms;
     public GameObject doorPlatform;
@@ -66,6 +73,17 @@ public class GameManager : MonoBehaviour
         stepRangeEnd = end;
     }
 
+    public void SetInitPositions(int[] start, int[] end)
+    {
+        startPosition = start;
+        endPosition = end;
+    }
+
+    public void UpdatePosition(int step)
+    {
+        
+    }
+
     private void NewGame()
     {
         playerStep = 0;
@@ -104,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     void GenPlatform(int door)
     {
-        for (int i = stepRangeStart; i <= stepRangeEnd+1; i++)
+        for (int i = stepRangeStart; i <= stepRangeEnd + 1; i++)
         {
             if (i == door || i == stepRangeEnd)
             {

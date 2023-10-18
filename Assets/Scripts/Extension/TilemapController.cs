@@ -1,26 +1,23 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TilemapController : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase tileEmpty;
+    private LoadTilemapFromJson tilemapLoader;
 
     void Awake()
     {
-        tilemap = GetComponent<Tilemap>();
+        // tilemap = GetComponent<Tilemap>();
 
-        DrawTilemap();
-    }
-    public void DrawTilemap()
-    {
-        // Vector3Int tilePosition = new Vector3Int(0, 0, 0);  // Set the position where you want to paint the tile
-        // TileBase tile = tileEmpty;  // Reference to the tile you want to paint
-        // tilemap.SetTile(tilePosition, tile);
-        // tilemap.SetTile(new Vector3Int(0, 1, 0), tile);
-        // Debug.Log($"map--: {JsonConvert.SerializeObject(LoadTilemapFromJson.Instance.map)}");
-        Debug.Log($"map--: {LoadTilemapFromJson.Instance.map}");
+        // DrawTilemap();
+        // LoadTilemapFromJson.Instance.Justlog();
+        tilemapLoader = GetComponent<LoadTilemapFromJson>();
+
     }
     void Update()
     {
@@ -30,11 +27,20 @@ public class TilemapController : MonoBehaviour
             Vector3Int gridPosition = tilemap.WorldToCell(mousePosition);
 
             // Check if the clicked position contains the specific tile.
-            if (tilemap.GetTile(gridPosition) == tileEmpty)
+            if (tilemap.GetTile(gridPosition) != tileEmpty)
             {
+                // tilemapLoader.findCurrentHallway()
                 // Perform your action when the specific tile is clicked.
-                Debug.Log("Position of clicked tile: " + gridPosition);
-                Debug.Log("Do something");
+                // Debug.Log($"tilemapLoader: {}");
+                // Debug.Log("Position of clicked tile: " + gridPosition);
+                // Debug.Log("Do something");
+                int[] currentPos = { gridPosition.y, gridPosition.x };
+                if (currentPos[0] >= 0 && currentPos[0] < 10 && currentPos[1] >= 0 && currentPos[1] < 10)
+                {
+                    Debug.Log($"currentPos {JsonConvert.SerializeObject(currentPos)}");
+                    tilemapLoader.findCurrentHallway(currentPos);
+                }
+
             }
         }
     }

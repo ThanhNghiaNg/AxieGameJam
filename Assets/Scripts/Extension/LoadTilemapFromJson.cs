@@ -9,20 +9,35 @@ using System.Linq;
 
 public class LoadTilemapFromJson : MonoBehaviour
 {
-    public static LoadTilemapFromJson Instance { get; set; }
+    public static LoadTilemapFromJson Instance { get; private set; }
     public Tilemap tilemap;
     public Tile[] tilePrefabs;
     public TileBase tileEmpty;
     public TileBase tileRoom;
     public TileBase tileBoss;
     public TileBase tileStart;
+    public TileBase tileWall;
     public List<List<int>> map = new List<List<int>>();
     private int normalizeDistance = 0;
     void Awake()
     {
         // createTilemap();
         LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + tilemap.name.ToLower() + ".json");
+        DrawTilemap();
         // LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + "level2" + ".json");
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    public void Justlog()
+    {
+        Debug.Log("Justlog");
     }
     public void createTilemap()
     {
@@ -41,8 +56,8 @@ public class LoadTilemapFromJson : MonoBehaviour
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             map = TilemapToMap(sortedTiles);
-            DrawTilemap();
             Debug.Log("map: " + JsonConvert.SerializeObject(map));
+
             int[] pos = null; //{ 2, 2 };
             // findCurrentHallway(map, pos);
         }
@@ -54,7 +69,7 @@ public class LoadTilemapFromJson : MonoBehaviour
     public void DrawTilemap()
     {
         Dictionary<int, TileBase> mapToTile = new Dictionary<int, TileBase>();
-        mapToTile[-1] = tileEmpty;
+        mapToTile[-1] = tileWall;
         mapToTile[0] = tileEmpty;
         mapToTile[1] = tileStart;
         mapToTile[4] = tileRoom;
@@ -65,7 +80,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             for (int j = 0; j < 10; j++)
             {
                 Vector3Int tilePosition = new Vector3Int(i, j, 0);
-                TileBase tile = mapToTile[map[i][j]];
+                TileBase tile = mapToTile[map[j][i]];
                 tilemap.SetTile(tilePosition, tile);
             }
         }
@@ -116,7 +131,7 @@ public class LoadTilemapFromJson : MonoBehaviour
             List<int> row = new List<int>();
             for (int j = 0; j < n; j++)
             {
-                TileData result = tilemap.FirstOrDefault(tile => tile.x - minX == j && tile.y - minY == i);
+                TileData result = tilemap.FirstOrDefault(tile => tile.x == j && tile.y == i);
                 if (result != null)
                 {
                     switch (result.tileName)
@@ -153,7 +168,7 @@ public class LoadTilemapFromJson : MonoBehaviour
 
         return map;
     }
-    public void findCurrentHallway(List<List<int>> map, int[]? startPosition)
+    public void findCurrentHallway(int[]? startPosition)
     {
         int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
         int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
@@ -223,7 +238,7 @@ public class LoadTilemapFromJson : MonoBehaviour
         }
 
         Debug.Log($"pathsResult: {JsonConvert.SerializeObject(pathsResult)}");
-        Debug.Log("startPos: " + JsonConvert.SerializeObject(startPos));
+        // Debug.Log("startPos: " + JsonConvert.SerializeObject(startPos));
         return;
     }
 }
