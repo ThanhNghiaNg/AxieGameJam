@@ -15,6 +15,9 @@ TagManager:
   - RoomPos
   - spawn
   - portal
+  - whoAskCanvas
+  - lmaoCanvas
+  - canvas
   - platform
   layers:
   - Default
