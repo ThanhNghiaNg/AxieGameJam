@@ -18,6 +18,7 @@ public class LoadTilemapFromJson : MonoBehaviour
     public TileBase tileStart;
     public TileBase tileWall;
     public List<List<int>> map = new List<List<int>>();
+    public List<int[]> segments;
     private int normalizeDistance = 0;
     private int mapCol = 10;
     private int mapRow = 10;
@@ -63,7 +64,6 @@ public class LoadTilemapFromJson : MonoBehaviour
     {
         if (File.Exists(filePath))
         {
-            Debug.Log(filePath.ToString());
             string json = File.ReadAllText(filePath);
             TilemapData tilemapData = JsonConvert.DeserializeObject<TilemapData>(json);
 
@@ -71,7 +71,6 @@ public class LoadTilemapFromJson : MonoBehaviour
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             map = TilemapToMap(sortedTiles);
-            Debug.Log("map: " + JsonConvert.SerializeObject(map));
             // int[] pos = null; //{ 2, 2 };
             // findCurrentHallway(map, pos);
         }
@@ -185,6 +184,7 @@ public class LoadTilemapFromJson : MonoBehaviour
     public void findEndPosition(int[]? startPosition)
     {
         List<List<int>> tempMap = new List<List<int>>();
+        segments = new List<int[]>();
         for (int i = 0; i < map.Count; i++)
         {
             List<int> row = new List<int>();
@@ -195,7 +195,6 @@ public class LoadTilemapFromJson : MonoBehaviour
             }
             tempMap.Add(row);
         }
-        Debug.Log($"tempMap--: {JsonConvert.SerializeObject(tempMap)}");
 
         List<int[]> listNode = new List<int[]>();
         int[] firstNode = { startPosition[0], startPosition[1] };
@@ -205,7 +204,9 @@ public class LoadTilemapFromJson : MonoBehaviour
         {
             int[] currentNode = listNode[listNode.Count - 1];
             listNode.RemoveAt(listNode.Count - 1);
-            Debug.Log($"currentNode: {JsonConvert.SerializeObject(currentNode)}");
+            
+            segments.Add(currentNode);
+            
             if (
                 (tempMap[currentNode[0]][currentNode[1]] == 4 || tempMap[currentNode[0]][currentNode[1]] == 5)
                 && (currentNode[0] != startPosition[1] && currentNode[1] != startPosition[0]))
@@ -213,14 +214,12 @@ public class LoadTilemapFromJson : MonoBehaviour
                 endPosition = currentNode;
                 break;
             }
+            
             tempMap[currentNode[0]][currentNode[1]] = -1;
 
             for (int i = 0; i < 4; i++)
             {
                 int[] nextPos = { currentNode[0] + dirY[i], currentNode[1] + dirX[i] };
-                Debug.Log($"nextPos: {JsonConvert.SerializeObject(nextPos)}");
-
-                Debug.Log($"{nextPos[0] > mapRow} {nextPos[0] < 0} {nextPos[1] > mapCol} {nextPos[1] < 0}");
                 if (nextPos[0] > mapRow ||
                     nextPos[0] < 0 ||
                     nextPos[1] > mapCol ||
@@ -305,7 +304,6 @@ public class LoadTilemapFromJson : MonoBehaviour
         }
 
         Debug.Log($"pathsResult: {JsonConvert.SerializeObject(pathsResult)}");
-        // Debug.Log("startPos: " + JsonConvert.SerializeObject(startPos));
         return;
     }
 }
