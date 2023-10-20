@@ -14,7 +14,7 @@ TagManager:
   - ClickHandler
   - RoomPos
   - spawn
-  - portal
+  - Position
   layers:
   - Default
   - TransparentFX
