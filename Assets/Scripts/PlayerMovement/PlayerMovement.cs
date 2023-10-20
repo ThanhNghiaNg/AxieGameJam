@@ -4,13 +4,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] float padding = 2f;
     [SerializeField] float moveSpeed = 5f;
-    SkeletonAnimation skeletonAnimation;
     public float animationTime = 3f;
-    public new Vector2 position;
-    public new Vector2 startPosition;
-    private float direction = 1f;
+    private SkeletonAnimation skeletonAnimation;
+    private Vector2 position;
+    private Vector2 startPosition;
     private float inputAxis;
 
     void Awake()
@@ -20,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-  
+
     void Update()
     {
         inputAxis = Input.GetAxis("Horizontal");
@@ -86,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
                 skeletonAnimation.loop = true;
             }
 
-            transform.position = new Vector2(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y);
+            transform.position = new Vector3(transform.position.x + inputAxis * moveSpeed * Time.deltaTime, transform.position.y, transform.position.z);
 
         }
     }

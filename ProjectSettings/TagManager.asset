@@ -14,7 +14,11 @@ TagManager:
   - ClickHandler
   - RoomPos
   - spawn
-  - Position
+  - portal
+  - whoAskCanvas
+  - lmaoCanvas
+  - canvas
+  - platform
   layers:
   - Default
   - TransparentFX

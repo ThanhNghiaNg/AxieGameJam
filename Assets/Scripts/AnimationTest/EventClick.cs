@@ -13,13 +13,13 @@ public class EventClick : MonoBehaviour
     private void Awake()
     {
         portal = GameObject.FindWithTag("portal");
-        portal.transform.localScale = new Vector3(1.8f, 0.8f, 0f);
+        // portal.transform.localScale = new Vector3(1.8f, 0.8f, 0f);
         skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("player"))
         {
             isTouching = true;
         }
@@ -27,7 +27,7 @@ public class EventClick : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("player"))
         {
             isTouching = false;
         }
@@ -37,7 +37,7 @@ public class EventClick : MonoBehaviour
     {
         if (isTouching)
         {
-            GameObject player = GameObject.FindWithTag("Player");
+            GameObject player = GameObject.FindWithTag("player");
             if (gameObject.transform.position.x - player.transform.position.x < 0)
             {
                 player.transform.eulerAngles = Vector3.zero;
@@ -52,7 +52,7 @@ public class EventClick : MonoBehaviour
 
     private IEnumerator ExitArea(Transform player)
     {
-        player.GetComponent<PlayerMovementSimple>().enabled = false;
+        player.GetComponent<PlayerMovement>().enabled = false;
 
         skeletonAnimation.AnimationName = "action/run";
         yield return MoveTo(player, gameObject.transform.position);
@@ -78,14 +78,14 @@ public class EventClick : MonoBehaviour
     private void MoveToRoom(Transform player)
     {
         player.gameObject.SetActive(true);
-        player.GetComponent<PlayerMovementSimple>().enabled = true;
+        player.GetComponent<PlayerMovement>().enabled = true;
 
         GameObject spawnPos = GameObject.FindWithTag("spawn");
         GameObject cameraPos = GameObject.FindWithTag("RoomPos");
         Camera.main.transform.position = cameraPos.transform.position;
         player.transform.position = spawnPos.transform.position;
 
-        StartCoroutine(ScalePortal());
+        // StartCoroutine(ScalePortal());
     }
 
     private IEnumerator ScalePortal()

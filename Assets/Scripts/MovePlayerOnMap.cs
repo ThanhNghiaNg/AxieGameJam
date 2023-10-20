@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MovePlayerOnMap : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    [SerializeField] int framePerStep = 500;
+    [SerializeField] float moveSpeed = 1f;
     private float moveAmount;
-    public float currentMove = 0;
-    public int wholeCurrentMove;
+    private float currentMove = 0;
+    private int wholeCurrentMove;
 
-    public float x;
+    private float x;
     private float firstX;
     // GameManager gameManager;
     void Start()
@@ -24,21 +25,24 @@ public class MovePlayerOnMap : MonoBehaviour
         moveAmount = inputAxis * moveSpeed;
         int direction = inputAxis > 0 ? 1 : -1;
         currentMove += moveAmount;
+        if (currentMove > framePerStep * (GameManager.Instance.stepRangeEnd + 2) - 1) currentMove = framePerStep * (GameManager.Instance.stepRangeEnd + 2) - 1;
         wholeCurrentMove = (int)currentMove;
-        x = wholeCurrentMove / 10;
+        x = wholeCurrentMove / framePerStep;
         if ((GameManager.Instance.playerStep == 0 && inputAxis < 0) || (GameManager.Instance.playerStep == 9 && inputAxis > 0))
         {
-            currentMove -= moveAmount;
+            if (transform.position.x <= firstX)
+            {
+                currentMove -= moveAmount;
+            }
         }
         else
         {
-            transform.position = new Vector2(Mathf.Max(firstX, firstX + x), transform.position.y);
+            transform.position = new Vector2(Mathf.Max(firstX, firstX + GameManager.Instance.playerStep), transform.position.y);
         }
-
-        if (!(x < 0f || x > 9f))
+        
+        if (x >= GameManager.Instance.stepRangeStart && x <= GameManager.Instance.stepRangeEnd)
         {
             GameManager.Instance.UpdateStep(x);
         }
-
     }
 }
