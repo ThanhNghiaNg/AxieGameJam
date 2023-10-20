@@ -15,15 +15,16 @@ public class SkillUI : MonoBehaviour
     public TMP_Text skillDescription;
     public Image skillImg;
     public GameObject description;
-    public List <GameObject> playersPos = new List<GameObject>();
-    public List<GameObject> targetsPos = new List<GameObject>();
+
+
+    PositionInBattle positionInBattle;
 
 
 
 
     private void Awake()
     {
-        
+        positionInBattle = FindObjectOfType<PositionInBattle>();
     }
     public void LoadSkill(Skill _skill)
     {

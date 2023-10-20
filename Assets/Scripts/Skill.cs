@@ -10,6 +10,7 @@ public class Skill : ScriptableObject
     public string skillName;
     public SkillDescription skillDescription;
     public SkillEffectAmount effectAmount;
+    public int lv;
     public bool isUpgrade;
     public List<Buff> buffs = new List<Buff>();
     public enum Type {Buff, Debuff, Attack };
@@ -48,6 +49,8 @@ public struct SkillEffectAmount
     public float upgrade;
 }
 [System.Serializable]
+
+// true false cho nhung vi tri cast dc chieu
 public struct Position
 {
     public List<bool> pos ;

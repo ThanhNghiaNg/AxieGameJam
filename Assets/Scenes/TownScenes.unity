@@ -4309,7 +4309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1222032943369733287, guid: ad979b5fb51f6a047ab8e19d239d45e3, type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2100728211817428674, guid: ad979b5fb51f6a047ab8e19d239d45e3, type: 3}
       propertyPath: m_IsTrigger
