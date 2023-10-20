@@ -37,8 +37,9 @@ public class TilemapController : MonoBehaviour
                 int[] currentPos = { gridPosition.y, gridPosition.x };
                 if (currentPos[0] >= 0 && currentPos[0] < 10 && currentPos[1] >= 0 && currentPos[1] < 10)
                 {
-                    Debug.Log($"currentPos {JsonConvert.SerializeObject(currentPos)}");
-                    tilemapLoader.findCurrentHallway(currentPos);
+                    // Debug.Log($"currentPos {JsonConvert.SerializeObject(currentPos)}, currentPosition: {JsonConvert.SerializeObject(GameManager.Instance.currentPosition)}");
+                    // tilemapLoader.findCurrentHallway(currentPos);
+                    tilemapLoader.findHallway(GameManager.Instance.currentPosition, currentPos);
                 }
 
             }

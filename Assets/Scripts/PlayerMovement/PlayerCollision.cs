@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.tag == "platform")
         {
-            GameManager.Instance.UpdateStep((int)(other.gameObject.transform.localPosition.x / GameManager.Instance.spacing));
+            if(!GameManager.Instance.isInRoom) GameManager.Instance.UpdateStep((int)(other.gameObject.transform.localPosition.x / GameManager.Instance.spacing));
         }
     }
 }

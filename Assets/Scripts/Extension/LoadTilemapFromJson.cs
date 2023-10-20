@@ -7,6 +7,19 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
+class TilemapNode
+{
+    public int[] position;
+    public List<int[]> paths;
+    public int cost;
+
+    public TilemapNode()
+    {
+        position = new int[2];
+        paths = new List<int[]>();
+        cost = 0;
+    }
+}
 public class LoadTilemapFromJson : MonoBehaviour
 {
     public static LoadTilemapFromJson Instance { get; private set; }
@@ -24,6 +37,10 @@ public class LoadTilemapFromJson : MonoBehaviour
     private int mapRow = 10;
     private int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
     private int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
+    public int ManhattanDistance(int[] currentPos, int[] targetPos)
+    {
+        return Mathf.Abs(currentPos[0] - targetPos[0]) + Mathf.Abs(currentPos[1] - targetPos[1]);
+    }
     void Awake()
     {
         // createTilemap();
@@ -69,10 +86,7 @@ public class LoadTilemapFromJson : MonoBehaviour
 
             List<TileData> sortedTiles = tilemapData.tiles.OrderBy(tile => tile.x).ThenBy(tile => tile.y).ToList();
             // sortedTiles = FlipHorizotalTilemap(sortedTiles);
-            // sortedTiles = FlipHorizotalTilemap(sortedTiles);
             map = TilemapToMap(sortedTiles);
-            // int[] pos = null; //{ 2, 2 };
-            // findCurrentHallway(map, pos);
         }
         else
         {
@@ -204,9 +218,9 @@ public class LoadTilemapFromJson : MonoBehaviour
         {
             int[] currentNode = listNode[listNode.Count - 1];
             listNode.RemoveAt(listNode.Count - 1);
-            
+
             segments.Add(currentNode);
-            
+
             if (
                 (tempMap[currentNode[0]][currentNode[1]] == 4 || tempMap[currentNode[0]][currentNode[1]] == 5)
                 && (currentNode[0] != startPosition[1] && currentNode[1] != startPosition[0]))
@@ -214,7 +228,7 @@ public class LoadTilemapFromJson : MonoBehaviour
                 endPosition = currentNode;
                 break;
             }
-            
+
             tempMap[currentNode[0]][currentNode[1]] = -1;
 
             for (int i = 0; i < 4; i++)
@@ -232,6 +246,95 @@ public class LoadTilemapFromJson : MonoBehaviour
                 }
             }
 
+        }
+        GameManager.Instance.SetInitPositions(startPosition, endPosition);
+    }
+    public void findHallway(int[] startPosition, int[] endPosition)
+    {
+        if (!(map[endPosition[0]][endPosition[1]] == 4 || map[endPosition[0]][endPosition[1]] == 5 || map[endPosition[0]][endPosition[1]] == 1))
+        {
+            return;
+        }
+
+        List<List<int>> tempMap = new List<List<int>>();
+        segments = new List<int[]>();
+        for (int i = 0; i < map.Count; i++)
+        {
+            List<int> row = new List<int>();
+            for (int j = 0; j < map[0].Count; j++)
+            {
+                row.Add(map[i][j]);
+            }
+            tempMap.Add(row);
+        }
+
+        List<TilemapNode> listNode = new List<TilemapNode>();
+        TilemapNode firstNode = new TilemapNode();
+        firstNode.position = startPosition;
+        firstNode.paths = new List<int[]>();
+        firstNode.paths.Add(firstNode.position);
+        firstNode.cost = ManhattanDistance(firstNode.position, endPosition);
+
+        listNode.Add(firstNode);
+        while (listNode.Count > 0)
+        {
+            TilemapNode currentNode = listNode[0];
+            listNode.RemoveAt(0);
+            segments.Add(currentNode.position);
+            if (
+                (currentNode.position[0] == endPosition[0] && currentNode.position[1] == endPosition[1]) ||
+                (
+                    (tempMap[currentNode.position[0]][currentNode.position[1]] == 1 ||
+                    tempMap[currentNode.position[0]][currentNode.position[1]] == 4 ||
+                    tempMap[currentNode.position[0]][currentNode.position[1]] == 5) && 
+                    (currentNode.position[0] != startPosition[0] && 
+                    currentNode.position[1] != startPosition[1]))
+                )
+            {
+                // segments.RemoveAt(0);
+                Debug.Log($"segments: {JsonConvert.SerializeObject(segments)}");
+                break;
+            }
+
+            tempMap[currentNode.position[0]][currentNode.position[1]] = -1;
+
+            for (int i = 0; i < 4; i++)
+            {
+                int[] nextPos = { currentNode.position[0] + dirY[i], currentNode.position[1] + dirX[i] };
+                if (nextPos[0] >= mapRow ||
+                    nextPos[0] < 0 ||
+                    nextPos[1] >= mapCol ||
+                    nextPos[1] < 0 ||
+                    tempMap[nextPos[0]][nextPos[1]] == -1) continue;
+
+                if (listNode.FirstOrDefault(node => node.position[0] == nextPos[0] && node.position[1] == nextPos[1]) == null)
+                {
+                    TilemapNode nextNode = new TilemapNode();
+                    nextNode.position = nextPos;
+                    nextNode.paths = currentNode.paths;
+                    nextNode.paths.Add(nextPos);
+                    nextNode.cost = ManhattanDistance(nextNode.position, endPosition);
+                    listNode.Add(nextNode);
+                }
+            }
+            listNode = listNode.OrderBy(node => node.cost).ToList();
+        }
+        if (GameManager.Instance.isInRoom)
+        {
+            GameManager.Instance.SetPlayerInHallway();
+            GameManager.Instance.SetBackgroundHallwayMovable(true);
+            GameObject.FindGameObjectWithTag("player").transform.position = new Vector2(-7.08f, -1);
+            GameManager.Instance.SetPlayerMovable(false);
+            GameManager.Instance.platformsParent.GetComponent<PlatformMovement>().enabled = true;
+            GameObject[] backgroundObjects = GameObject.FindGameObjectsWithTag("Background");
+            foreach (GameObject backgroundObject in backgroundObjects)
+            {
+                backgroundObject.GetComponent<LoopingBackground2D>().enabled = true;
+            }
+        }
+        else
+        {
+            GameManager.Instance.SetPlayerInRoom();
         }
         GameManager.Instance.SetInitPositions(startPosition, endPosition);
     }
