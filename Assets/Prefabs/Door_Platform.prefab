@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 614023999270625847}
   - component: {fileID: 2332651443734570187}
   - component: {fileID: 6912462765749992499}
-  - component: {fileID: 8678800701515061652}
+  - component: {fileID: 2336120053015450975}
   m_Layer: 0
   m_Name: explosion08
   m_TagString: portal
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 5.9}
   m_EdgeRadius: 0
---- !u!114 &8678800701515061652
+--- !u!114 &2336120053015450975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1821753358670917721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c15da073ac39647829ee199fdcf393, type: 3}
+  m_Script: {fileID: 11500000, guid: ca1b514483c311d4bb0889086f9597a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5

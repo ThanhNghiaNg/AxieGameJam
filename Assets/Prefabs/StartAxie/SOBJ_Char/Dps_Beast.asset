@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
+  m_Name: Dps_Beast
+  m_EditorClassIdentifier: 
+  axiePrefab: {fileID: 1366251661115147261, guid: 3073e19ca19209b4b9b764b208f79be0, type: 3}
+  startingSkills:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allSkillsCanLearn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isAxie: 0
+  curPos: 0

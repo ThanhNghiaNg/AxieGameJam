@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,13 @@ public class GameManager : MonoBehaviour
     public bool backgroundHallwayMovable { get; private set; }
     #endregion
 
+    #region Handle player movement state
+    public int[] currentPosition;
+    public int[] startPosition;
+    public int[] endPosition;
+
+    #endregion
+
     #region Generate Platform State
     public List<GameObject> platforms;
     public GameObject doorPlatform;
@@ -23,7 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject platformsParent;
     public GameObject currentPlatform;
     public GameObject prePlatform;
-
+    public bool isInRoom = false;
     public GameObject nextPlatform;
 
     public float spacing = 5f;
@@ -55,15 +63,43 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Generate();
+    }
+
+    public void clearAllPlatforms()
+    {
+        platforms.Clear();
+        foreach (Transform platform in platformsParent.transform)
+        {
+            Destroy(platform.gameObject);
+        }
+    }
+    public void PlatformGenerate()
+    {
+        clearAllPlatforms();
         NewGame();
         GenPlatform(Random.Range(stepRangeStart + 1, stepRangeEnd - 1));
         Load2();
+        platformsParent.transform.position = new Vector2(-6.4f, -2.05f);
     }
 
     public void SetStateRange(int start, int end)
     {
         stepRangeStart = start;
         stepRangeEnd = end;
+    }
+    public void SetInitPositions(int[] start, int[] end)
+    {
+        startPosition = start;
+        endPosition = end;
+        int distance = Mathf.Abs(startPosition[0] - endPosition[0]) + Mathf.Abs(startPosition[1] - endPosition[1]);
+        SetStateRange(0, distance);
+        PlatformGenerate();
+    }
+
+    public void UpdatePosition(int step)
+    {
+
     }
 
     private void NewGame()
@@ -85,6 +121,12 @@ public class GameManager : MonoBehaviour
         playerStep = (int)step;
         if (playerStep < stepRangeStart) playerStep = stepRangeStart;
         if (playerStep > stepRangeEnd) playerStep = stepRangeEnd;
+        Debug.Log($"currentPosition: {JsonConvert.SerializeObject(currentPosition)}");
+        if (LoadTilemapFromJson.Instance.segments != null)
+        {
+            currentPosition = LoadTilemapFromJson.Instance.segments[playerStep];
+        }
+
         if (playerStep == stepRangeEnd)
         {
             playerMovable = true;
@@ -104,9 +146,10 @@ public class GameManager : MonoBehaviour
 
     void GenPlatform(int door)
     {
-        for (int i = stepRangeStart; i <= stepRangeEnd+1; i++)
+        for (int i = stepRangeStart; i <= stepRangeEnd + 1; i++)
         {
-            if (i == door || i == stepRangeEnd)
+            // if (i == door || i == stepRangeEnd)
+            if (i == stepRangeEnd && isInRoom == false)
             {
                 platforms.Add(doorPlatform);
             }
@@ -122,9 +165,13 @@ public class GameManager : MonoBehaviour
             gameObj.tag = "platform";
             gameObj.AddComponent<PlatformVisible>();
             gameObj.transform.parent = platformsParent.transform;
-
         }
     }
 
-
+    public void SetPlayerInRoom(){
+        isInRoom = true;
+    }
+    public void SetPlayerInHallway(){
+        isInRoom = false;
+    }
 }
