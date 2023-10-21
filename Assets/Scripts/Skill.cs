@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +9,13 @@ public class Skill : ScriptableObject
     public SkillDescription skillDescription;
     public SkillEffectAmount effectAmount;
     public int lv;
+    public int coolDown;
     public bool isUpgrade;
     public List<Buff> buffs = new List<Buff>();
-    public enum Type {Buff, Debuff, Attack };
+    public enum Type {Buff, Debuff, Attack, Shield, Heal, Dot, Support, Passive};
+    public enum Range { Single, AOE };
     public Type type;
+    public Range range;
     public Position posToUse;
     public Position posTarget;
 
