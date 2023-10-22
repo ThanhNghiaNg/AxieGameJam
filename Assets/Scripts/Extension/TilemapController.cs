@@ -13,6 +13,7 @@ public class TilemapController : MonoBehaviour
     void Awake()
     {
         tilemapLoader = GetComponent<LoadTilemapFromJson>();
+
     }
     void Update()
     {
@@ -29,7 +30,6 @@ public class TilemapController : MonoBehaviour
                 {
                     tilemapLoader.findHallway(GameManager.Instance.currentPosition, currentPos);
                 }
-
             }
         }
     }

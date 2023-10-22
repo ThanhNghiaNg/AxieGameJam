@@ -205,7 +205,6 @@ public class LoadTilemapFromJson : MonoBehaviour
             for (int j = 0; j < map[0].Count; j++)
             {
                 row.Add(map[i][j]);
-                // tempMap[i][j] = map[i][j];
             }
             tempMap.Add(row);
         }
@@ -245,7 +244,6 @@ public class LoadTilemapFromJson : MonoBehaviour
                     listNode.Add(nextPos);
                 }
             }
-
         }
         GameManager.Instance.SetInitPositions(startPosition, endPosition);
     }

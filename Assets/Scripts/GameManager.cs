@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
     }
 
     private void Start()
@@ -92,7 +93,6 @@ public class GameManager : MonoBehaviour
     {
         startPosition = start;
         endPosition = end;
-        Debug.Log($"startPosition: {JsonConvert.SerializeObject(startPosition)}, endPosition : {JsonConvert.SerializeObject(endPosition)}");        
         int distance = Mathf.Abs(startPosition[0] - endPosition[0]) + Mathf.Abs(startPosition[1] - endPosition[1]);
         SetStateRange(0, distance);
         PlatformGenerate();
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         playerStep = (int)step;
         if (playerStep < stepRangeStart) playerStep = stepRangeStart;
         if (playerStep > stepRangeEnd) playerStep = stepRangeEnd;
-        
+
         if (LoadTilemapFromJson.Instance.segments != null)
         {
             currentPosition = LoadTilemapFromJson.Instance.segments[playerStep];
@@ -147,10 +147,10 @@ public class GameManager : MonoBehaviour
 
     void GenPlatform(int door)
     {
-        for (int i = stepRangeStart; i <= (isInRoom == true ? 3 : stepRangeEnd+1); i++)
+        for (int i = stepRangeStart; i <= (isInRoom == true ? 3 : stepRangeEnd + 1); i++)
         {
             // if (i == door || i == stepRangeEnd)
-            Debug.Log($"i: {i.ToString()}, stepRangeStart: {stepRangeStart}, stepRangeEnd: {stepRangeEnd}");
+
             if (i == stepRangeEnd && isInRoom == false)
             {
                 platforms.Add(doorPlatform);
@@ -170,10 +170,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPlayerInRoom(){
+    public void SetPlayerInRoom()
+    {
         isInRoom = true;
     }
-    public void SetPlayerInHallway(){
+    public void SetPlayerInHallway()
+    {
         isInRoom = false;
     }
 }
