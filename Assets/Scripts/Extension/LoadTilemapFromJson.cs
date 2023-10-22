@@ -31,7 +31,7 @@ public class LoadTilemapFromJson : MonoBehaviour
     public TileBase tileStart;
     public TileBase tileWall;
     public List<List<int>> map = new List<List<int>>();
-    public List<int[]> segments;
+    public List<int[]> segments = new List<int[]>();
     private int normalizeDistance = 0;
     private int mapCol = 10;
     private int mapRow = 10;
@@ -251,13 +251,17 @@ public class LoadTilemapFromJson : MonoBehaviour
     }
     public void findHallway(int[] startPosition, int[] endPosition)
     {
+        if (GameManager.Instance.isInRoom == false) return;
+        // do nothing when click on hallway not room
         if (!(map[endPosition[0]][endPosition[1]] == 4 || map[endPosition[0]][endPosition[1]] == 5 || map[endPosition[0]][endPosition[1]] == 1))
         {
             return;
         }
+        // player already at the clicked point
+        if (startPosition[0] == endPosition[0] && startPosition[1] == endPosition[1]) return;
 
         List<List<int>> tempMap = new List<List<int>>();
-        segments = new List<int[]>();
+        List<int[]> tempSegments = new List<int[]>();
         for (int i = 0; i < map.Count; i++)
         {
             List<int> row = new List<int>();
@@ -267,33 +271,36 @@ public class LoadTilemapFromJson : MonoBehaviour
             }
             tempMap.Add(row);
         }
-
+        // Debug.Log($"startPosition: {JsonConvert.SerializeObject(startPosition)}, endPosition : {JsonConvert.SerializeObject(endPosition)}");        
         List<TilemapNode> listNode = new List<TilemapNode>();
         TilemapNode firstNode = new TilemapNode();
         firstNode.position = startPosition;
         firstNode.paths = new List<int[]>();
         firstNode.paths.Add(firstNode.position);
         firstNode.cost = ManhattanDistance(firstNode.position, endPosition);
+        int[] lastPos = endPosition;
 
         listNode.Add(firstNode);
+        List<List<int[]>> allPaths = new List<List<int[]>>();
         while (listNode.Count > 0)
         {
-            TilemapNode currentNode = listNode[0];
-            listNode.RemoveAt(0);
-            segments.Add(currentNode.position);
+            TilemapNode currentNode = listNode[listNode.Count - 1];
+            listNode.RemoveAt(listNode.Count - 1);
+            tempSegments.Add(currentNode.position);
             if (
                 (currentNode.position[0] == endPosition[0] && currentNode.position[1] == endPosition[1]) ||
                 (
                     (tempMap[currentNode.position[0]][currentNode.position[1]] == 1 ||
                     tempMap[currentNode.position[0]][currentNode.position[1]] == 4 ||
-                    tempMap[currentNode.position[0]][currentNode.position[1]] == 5) && 
-                    (currentNode.position[0] != startPosition[0] && 
+                    tempMap[currentNode.position[0]][currentNode.position[1]] == 5) &&
+                    (currentNode.position[0] != startPosition[0] ||
                     currentNode.position[1] != startPosition[1]))
                 )
             {
-                // segments.RemoveAt(0);
-                Debug.Log($"segments: {JsonConvert.SerializeObject(segments)}");
-                break;
+                allPaths.Add(new List<int[]>(currentNode.paths));
+                tempSegments.Clear();
+                lastPos = currentNode.position;
+                continue;
             }
 
             tempMap[currentNode.position[0]][currentNode.position[1]] = -1;
@@ -307,36 +314,51 @@ public class LoadTilemapFromJson : MonoBehaviour
                     nextPos[1] < 0 ||
                     tempMap[nextPos[0]][nextPos[1]] == -1) continue;
 
-                if (listNode.FirstOrDefault(node => node.position[0] == nextPos[0] && node.position[1] == nextPos[1]) == null)
+                TilemapNode nextNode = new TilemapNode();
+                nextNode.position = nextPos;
+                nextNode.paths = new List<int[]>(currentNode.paths);
+                nextNode.paths.Add(nextPos);
+                nextNode.cost = ManhattanDistance(nextNode.position, endPosition);
+                listNode.Add(nextNode);
+
+            }
+        }
+
+        for (int i = 0; i < allPaths.Count; i++)
+        {
+            int flag = 0;
+            for (int j = 0; j < allPaths[i].Count; j++)
+            {
+                if (allPaths[i][j][0] == endPosition[0] && allPaths[i][j][1] == endPosition[1])
                 {
-                    TilemapNode nextNode = new TilemapNode();
-                    nextNode.position = nextPos;
-                    nextNode.paths = currentNode.paths;
-                    nextNode.paths.Add(nextPos);
-                    nextNode.cost = ManhattanDistance(nextNode.position, endPosition);
-                    listNode.Add(nextNode);
+                    Debug.Log("GO NEXT ROOM");
+
+                    if (GameManager.Instance.isInRoom)
+                    {
+                        GameManager.Instance.SetPlayerInHallway();
+                        GameManager.Instance.SetBackgroundHallwayMovable(true);
+                        GameObject.FindGameObjectWithTag("player").transform.position = new Vector2(-7.08f, -1);
+                        GameManager.Instance.SetPlayerMovable(false);
+                        GameManager.Instance.platformsParent.GetComponent<PlatformMovement>().enabled = true;
+                        GameObject[] backgroundObjects = GameObject.FindGameObjectsWithTag("Background");
+                        foreach (GameObject backgroundObject in backgroundObjects)
+                        {
+                            backgroundObject.GetComponent<LoopingBackground2D>().enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        GameManager.Instance.SetPlayerInRoom();
+                    }
+
+                    segments = allPaths[i];
+                    GameManager.Instance.SetInitPositions(segments[0], segments[segments.Count - 1]);
+                    flag = 1;
+                    break;
                 }
             }
-            listNode = listNode.OrderBy(node => node.cost).ToList();
+            if (flag == 1) break;
         }
-        if (GameManager.Instance.isInRoom)
-        {
-            GameManager.Instance.SetPlayerInHallway();
-            GameManager.Instance.SetBackgroundHallwayMovable(true);
-            GameObject.FindGameObjectWithTag("player").transform.position = new Vector2(-7.08f, -1);
-            GameManager.Instance.SetPlayerMovable(false);
-            GameManager.Instance.platformsParent.GetComponent<PlatformMovement>().enabled = true;
-            GameObject[] backgroundObjects = GameObject.FindGameObjectsWithTag("Background");
-            foreach (GameObject backgroundObject in backgroundObjects)
-            {
-                backgroundObject.GetComponent<LoopingBackground2D>().enabled = true;
-            }
-        }
-        else
-        {
-            GameManager.Instance.SetPlayerInRoom();
-        }
-        GameManager.Instance.SetInitPositions(startPosition, endPosition);
     }
     public void findCurrentHallway(int[]? startPosition)
     {
