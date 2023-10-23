@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b20b667ee6f6af4c85ab59bafc7ccfb, type: 3}
-  m_Name: Trash
+  m_Name: Shiled_Scroll
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0cc451763e8250546a72d6d2921c3ff5, type: 3}
   itemName: Trash
-  itemDescription: When an ally use it, decrease 20hp, Nobody want to eat trash right
-    ?
-  effectAmount: -20
-  type: 1
+  itemDescription: apply 30 shield for an ally
+  effectAmount: 30
+  price: 50
+  type: 2

@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: ATK potion
   itemDescription: Increase 20 ATK for 2 turns
   effectAmount: 20
+  price: 50
   type: 0

@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Def potion
   itemDescription: Increase 20 def for 2 turns
   effectAmount: 20
+  price: 40
   type: 0

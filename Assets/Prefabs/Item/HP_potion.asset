@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: HP potion
   itemDescription: Recover 20 hp for the ally
   effectAmount: 20
+  price: 40
   type: 1
