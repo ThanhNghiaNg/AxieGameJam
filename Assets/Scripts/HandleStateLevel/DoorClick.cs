@@ -46,6 +46,7 @@ public class DoorClick : MonoBehaviour
     private IEnumerator ExitArea(Transform player)
     {
         player.GetComponent<PlayerMovement>().enabled = false;
+        GameManager.Instance.platformsParent.GetComponent<PlatformMovement>().enabled = false;
         GameObject[] backgroundObjects = GameObject.FindGameObjectsWithTag("Background");
         foreach (GameObject backgroundObject in backgroundObjects)
         {

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
+  m_Name: decrease_cd
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  skillName: Time goes fast!
+  skillDescription:
+    nonUpgrade: Decrease a skill cooldown for 2 turns
+    upgrade: 
+  effectAmount:
+    nonUpgrade: 0
+    upgrade: 0
+  lv: 0
+  coolDown: 3
+  isUpgrade: 0
+  type: 6
+  range: 0
+  posToUse:
+    pos: 
+  posTarget:
+    pos: 

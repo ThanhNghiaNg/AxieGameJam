@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         TurnAround();
         handleMovement();
-        position = transform.position;
+        // position = transform.position;
     }
     void TurnAround()
     {
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameManager.Instance.playerMovable)
         {
-            if (transform.position.x < startPosition.x)
+            if (transform.position.x < startPosition.x && !GameManager.Instance.isInRoom)
             {
                 GameManager.Instance.SetBackgroundHallwayMovable(true);
                 GameManager.Instance.SetPlayerMovable(false);

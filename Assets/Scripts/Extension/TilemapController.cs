@@ -12,10 +12,6 @@ public class TilemapController : MonoBehaviour
 
     void Awake()
     {
-        // tilemap = GetComponent<Tilemap>();
-
-        // DrawTilemap();
-        // LoadTilemapFromJson.Instance.Justlog();
         tilemapLoader = GetComponent<LoadTilemapFromJson>();
 
     }
@@ -29,18 +25,11 @@ public class TilemapController : MonoBehaviour
             // Check if the clicked position contains the specific tile.
             if (tilemap.GetTile(gridPosition) != tileEmpty)
             {
-                // tilemapLoader.findCurrentHallway()
-                // Perform your action when the specific tile is clicked.
-                // Debug.Log($"tilemapLoader: {}");
-                // Debug.Log("Position of clicked tile: " + gridPosition);
-                // Debug.Log("Do something");
                 int[] currentPos = { gridPosition.y, gridPosition.x };
                 if (currentPos[0] >= 0 && currentPos[0] < 10 && currentPos[1] >= 0 && currentPos[1] < 10)
                 {
-                    Debug.Log($"currentPos {JsonConvert.SerializeObject(currentPos)}");
-                    tilemapLoader.findCurrentHallway(currentPos);
+                    tilemapLoader.findHallway(GameManager.Instance.currentPosition, currentPos);
                 }
-
             }
         }
     }
