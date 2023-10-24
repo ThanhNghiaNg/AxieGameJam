@@ -1,31 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 { 
 
     [Header("Turn")]
-    public List<GameObject> turnList = new List<GameObject>();
-    public Character currentCharacter;
+    public List<CharacterUI> turnList = new List<CharacterUI>(); //turn 
+    public List<CharacterUI> pendingList = new List<CharacterUI>();
+    public CharacterUI currentCharacter;
     public Skill currentSkill;
+    public CharacterUI selectedCharacter;
 
 
     [Header("InBattle")]    
     public List<Character> axieInGame = new List<Character>(); 
     public List<Character> enemyInGame = new List<Character>();
-    PositionInBattle positionInBattle;
+
+    public List<CharacterUI> axieInGameObjects = new List<CharacterUI>();
+    public List<CharacterUI> enemyInGameObjects = new List<CharacterUI>();
 
 
+    [Header("Skill")]
+    public List<SkillUI> skillUI_InGameObjects = new List<SkillUI>();
+    SkillAction skillAction;
 
 
+    GameManager gameManager;
     private void Awake()
     {
-        positionInBattle = FindObjectOfType<PositionInBattle>();
+        gameManager = FindObjectOfType<GameManager>();
+        skillAction = GetComponent<SkillAction>();
     }
     private void Start()
     {
-        LoadOnStart();
+        BeginBattle();
     }
     public void UseSkill()
     {
@@ -38,18 +49,78 @@ public class BattleManager : MonoBehaviour
        
         return true;
     }
-    public void LoadOnStart()
+    public void BeginBattle()
     {
         for (int i = 0; i < axieInGame.Count; i++)
         {
-            positionInBattle.LoadCharaters(axieInGame[i], i);
+            CharacterUI characterUI = axieInGameObjects[i];
+            turnList.Add(characterUI);
+            characterUI.LoadCharaters(axieInGame[i], i);
         }
         for (int i = 0; i < enemyInGame.Count; i++)
         {
-            positionInBattle.LoadCharaters(enemyInGame[i], i);
+            CharacterUI characterUI = enemyInGameObjects[i];
+            turnList.Add(characterUI);
+            characterUI.LoadCharaters(enemyInGame[i], i);
         }
+        turnList = turnList.OrderBy(x => x.character.speed).ToList();
+    } 
+    public void ChangeTurn()
+    {
+        if (turnList == null) turnList = pendingList;
+        currentCharacter = turnList[0];
+        pendingList.Add(currentCharacter);
+        turnList.Remove(turnList[0]);
+        SkillUpdate();
+        
+    }
+    public void SkillUpdate()
+    {
+        int pos = 0;
+        foreach(Skill skill in currentCharacter.skills) {
+            skillUI_InGameObjects[pos].LoadSkill(skill);
+            pos++;
+        }
+    }
+    
+ 
 
-    }    
+    public void UsingSkill()
+    {
+        skillAction.PerformSkill(currentSkill, selectedCharacter.stat);
+        ChangeTurn();
+
+
+    }
+    public void ChangePosition(ref List<CharacterUI> charactersUI, int curentPos, int desPos)
+    {
+      
+        if (Mathf.Abs(curentPos - desPos) > 1)
+        {
+            charactersUI[curentPos].position = desPos;
+            charactersUI[desPos].position = curentPos;
+        }
+        else
+        {
+            if (curentPos - desPos > 0)
+            {
+                for (int i = desPos; i < curentPos; i++)
+                {
+                    charactersUI[i].position = charactersUI[i + 1].character.curPos;
+                }
+                charactersUI[curentPos].position = desPos;
+            }
+            else
+            {
+                for (int i = desPos; i < curentPos; i++)
+                {
+                    charactersUI[i].position = charactersUI[i - 1].character.curPos;
+                }
+                charactersUI[curentPos].position = desPos;
+            }
+        }
+        charactersUI = charactersUI.OrderBy(x => x.character.curPos).ToList();
+    }
 
 
 }
