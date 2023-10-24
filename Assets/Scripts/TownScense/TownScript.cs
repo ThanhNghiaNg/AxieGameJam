@@ -13,47 +13,51 @@ public class TownScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        UI_Management.Instance.isClicked = true;
+        
         foreach (GameObject item in Title)
         {
             item.SetActive(false);
         }
-
-        switch (blockId)
+        if(UI_Management.Instance.isClicked == true)
         {
-            case 0:
-                {
-                    shopCanvas.GetComponent<Canvas>().enabled = false;
-                    assetCanvas.GetComponent<Canvas>().enabled = false;
-                    teamCanvas.GetComponent<Canvas>().enabled = false;
-                    recruitCanvas.GetComponent<Canvas>().enabled = true;
-                    break;
-                }
-            case 1:
-                {
-                    recruitCanvas.GetComponent<Canvas>().enabled = false;
-                    assetCanvas.GetComponent<Canvas>().enabled = false;
-                    teamCanvas.GetComponent<Canvas>().enabled = false;
-                    shopCanvas.GetComponent<Canvas>().enabled = true;
-                    break;
-                }
-            case 2:
-                {
-                    recruitCanvas.GetComponent<Canvas>().enabled = false;
-                    shopCanvas.GetComponent<Canvas>().enabled = false;
-                    teamCanvas.GetComponent<Canvas>().enabled = false;
-                    assetCanvas.GetComponent<Canvas>().enabled = true;
-                    break;
-                }
-            case 3:
-                {
-                    recruitCanvas.GetComponent<Canvas>().enabled = false;
-                    shopCanvas.GetComponent<Canvas>().enabled = false;
-                    assetCanvas.GetComponent<Canvas>().enabled = false;
-                    teamCanvas.GetComponent<Canvas>().enabled = true;
-                    break;
-                }
+            switch (blockId)
+            {
+                case 0:
+                    {
+                        shopCanvas.GetComponent<Canvas>().enabled = false;
+                        assetCanvas.GetComponent<Canvas>().enabled = false;
+                        teamCanvas.GetComponent<Canvas>().enabled = false;
+                        recruitCanvas.GetComponent<Canvas>().enabled = true;
+                        break;
+                    }
+                case 1:
+                    {
+                        recruitCanvas.GetComponent<Canvas>().enabled = false;
+                        assetCanvas.GetComponent<Canvas>().enabled = false;
+                        teamCanvas.GetComponent<Canvas>().enabled = false;
+                        shopCanvas.GetComponent<Canvas>().enabled = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        recruitCanvas.GetComponent<Canvas>().enabled = false;
+                        shopCanvas.GetComponent<Canvas>().enabled = false;
+                        teamCanvas.GetComponent<Canvas>().enabled = false;
+                        assetCanvas.GetComponent<Canvas>().enabled = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        recruitCanvas.GetComponent<Canvas>().enabled = false;
+                        shopCanvas.GetComponent<Canvas>().enabled = false;
+                        assetCanvas.GetComponent<Canvas>().enabled = false;
+                        teamCanvas.GetComponent<Canvas>().enabled = true;
+                        break;
+                    }
+            }
         }
+
+        UI_Management.Instance.isClicked = true;
     }
 
     private void OnMouseEnter()

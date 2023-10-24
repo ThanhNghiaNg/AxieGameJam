@@ -15,6 +15,5 @@ public class UI_Management : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
     }
 }
