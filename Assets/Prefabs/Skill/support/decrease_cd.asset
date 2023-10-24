@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: decrease_cd
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -388296302578812339, guid: 8b41d1567acd2439890c13d66bf97550, type: 3}
   skillName: Time goes fast!
   skillDescription:
     nonUpgrade: Decrease a skill cooldown for 2 turns
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

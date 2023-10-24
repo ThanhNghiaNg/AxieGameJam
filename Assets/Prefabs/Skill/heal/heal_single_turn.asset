@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: heal_single_turn
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: a2ca04ff944ff4b6ab2bdd36c9754a74, type: 3}
   skillName: Medic alpha!
   skillDescription:
     nonUpgrade: Immediately heal 10 hp for an ally, After the ally take action, heal
@@ -31,3 +31,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

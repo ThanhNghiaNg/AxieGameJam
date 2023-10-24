@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: atk_buff_single
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 7cc06734bc49c4d86a082fed63a14a59, type: 3}
   skillName: More power
   skillDescription:
     nonUpgrade: Increase 20% DMG for an ally
     upgrade: Increase 30% DMG for an ally
   effectAmount:
-    nonUpgrade: 0.2
-    upgrade: 0.3
+    nonUpgrade: 0
+    upgrade: 0
   lv: 0
   coolDown: 0
   isUpgrade: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

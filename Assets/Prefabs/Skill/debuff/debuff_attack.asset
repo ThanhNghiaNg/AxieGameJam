@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: debuff_attack
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: bbf7fc372789f47269d0fe4cf2e27505, type: 3}
   skillName: 
   skillDescription:
     nonUpgrade: 
@@ -21,9 +21,12 @@ MonoBehaviour:
     nonUpgrade: 0
     upgrade: 0
   lv: 0
+  coolDown: 0
   isUpgrade: 0
   type: 0
+  range: 0
   posToUse:
     pos: 
   posTarget:
     pos: 
+  buff: []

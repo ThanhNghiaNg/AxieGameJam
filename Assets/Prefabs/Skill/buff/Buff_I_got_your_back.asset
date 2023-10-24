@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: Buff_I_got_your_back
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: bbf7fc372789f47269d0fe4cf2e27505, type: 3}
   skillName: I got you back!
   skillDescription:
     nonUpgrade: Increase 10 def for an ally for 2 turn
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

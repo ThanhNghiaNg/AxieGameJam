@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: debuff_dots_single
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 9f662093c57636c4784ea8569a6b2e52, type: 3}
   skillName: 
   skillDescription:
     nonUpgrade: When an enemy take action, the enemy will bleed 5 hp
@@ -23,10 +23,10 @@ MonoBehaviour:
   lv: 0
   coolDown: 0
   isUpgrade: 0
-  isActive: 1
   type: 0
   range: 0
   posToUse:
     pos: 
   posTarget:
     pos: 
+  buff: []

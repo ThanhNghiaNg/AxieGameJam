@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: heal_aoe
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: c8a0c294cb5a3460895cb006396940f4, type: 3}
   skillName: Holy Light
   skillDescription:
     nonUpgrade: Heal 15hp for all allies
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []
