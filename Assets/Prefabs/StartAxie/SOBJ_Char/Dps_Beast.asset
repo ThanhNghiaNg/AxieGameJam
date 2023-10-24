@@ -22,5 +22,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isAxie: 0
+  currentHealth: 75
+  maxHealth: 75
+  speed: 5
+  isAxie: 1
   curPos: 0

@@ -15,5 +15,8 @@ MonoBehaviour:
   axiePrefab: {fileID: 5270902455760458095, guid: 864b9ba06812d1241bd47960fef648db, type: 3}
   startingSkills: []
   allSkillsCanLearn: []
-  isAxie: 0
+  currentHealth: 65
+  maxHealth: 65
+  speed: 9
+  isAxie: 1
   curPos: 0
