@@ -36,6 +36,7 @@ public class TownScript : MonoBehaviour
                         assetCanvas.GetComponent<Canvas>().enabled = false;
                         teamCanvas.GetComponent<Canvas>().enabled = false;
                         shopCanvas.GetComponent<Canvas>().enabled = true;
+                        LoadShopItems.Instance.DisplayShopItems(shopCanvas);
                         break;
                     }
                 case 2:
