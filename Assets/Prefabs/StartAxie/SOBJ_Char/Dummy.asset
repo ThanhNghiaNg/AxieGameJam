@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
   m_Name: Dummy
   m_EditorClassIdentifier: 
+  axieId: 2
   axiePrefab: {fileID: 2197325532475467916, guid: 709424963f00dbb4e94a02a139761372, type: 3}
   startingSkills: []
   allSkillsCanLearn: []
-  currentHealth: 99
   maxHealth: 99
   speed: 1
   isAxie: 0

@@ -11,6 +11,14 @@ public class TownScript : MonoBehaviour
 
     public GameObject[] Title;
 
+    private void OnMouseExit()
+    {
+        Title[1].SetActive(false);
+        Title[2].SetActive(false);
+        Title[3].SetActive(false);
+        Title[0].SetActive(false);
+    }
+
     private void OnMouseDown()
     {
         
@@ -18,7 +26,7 @@ public class TownScript : MonoBehaviour
         {
             item.SetActive(false);
         }
-        if(UI_Management.Instance.isClicked == true)
+        if(UI_Management.Instance.isClicked == false)
         {
             switch (blockId)
             {

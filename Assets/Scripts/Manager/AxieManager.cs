@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class AxieManager : MonoBehaviour
 {
-    public static InventoryManager Instance { get; private set; }
+    public static AxieManager Instance { get; private set; }
 
-    public List<Asset> Assets;
+    public List<Character> characters;
 
     private void Awake()
     {

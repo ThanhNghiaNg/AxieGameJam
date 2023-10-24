@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Character : ScriptableObject
 {
+    public string axieId;
     public GameObject axiePrefab;
     public List<Skill> startingSkills;
     public List<Skill> allSkillsCanLearn;
