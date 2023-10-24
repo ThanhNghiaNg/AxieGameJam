@@ -63,23 +63,39 @@ public class BattleManager : MonoBehaviour
             turnList.Add(characterUI);
             characterUI.LoadCharaters(enemyInGame[i], i);
         }
-        turnList = turnList.OrderBy(x => x.character.speed).ToList();
+        turnList = turnList.OrderByDescending(x => x.character.speed).ToList();
+        ChangeTurn();
     } 
     public void ChangeTurn()
     {
-        if (turnList == null) turnList = pendingList;
+        Debug.Log(turnList.Count);
+        if (turnList.Count == 0)
+        {
+            turnList = pendingList.ToList();
+            pendingList.Clear();
+        }
+        selectedCharacter = null;
+        currentSkill = null;
         currentCharacter = turnList[0];
         pendingList.Add(currentCharacter);
         turnList.Remove(turnList[0]);
-        SkillUpdate();
+        if (currentCharacter.character.isAxie)
+        {
+            SkillUpdate();
+        }
+        else
+        {
+            // Xu ly enemy
+        }
+
         
     }
     public void SkillUpdate()
     {
-        int pos = 0;
-        foreach(Skill skill in currentCharacter.skills) {
-            skillUI_InGameObjects[pos].LoadSkill(skill);
-            pos++;
+        for(int i = 0; i < skillUI_InGameObjects.Count; i++)
+        {
+            Debug.Log("Skill " + i);
+            skillUI_InGameObjects[i].LoadSkill(currentCharacter.skills[i]);
         }
     }
     

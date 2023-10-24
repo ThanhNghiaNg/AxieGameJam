@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: normal_attack_protection
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 3708160ebf8a64f6ca9a683b3964e5f6, type: 3}
   skillName: Normal Attack
   skillDescription:
     nonUpgrade: Deal 10 DMG for a enemy
@@ -20,7 +20,7 @@ MonoBehaviour:
   effectAmount:
     nonUpgrade: 10
     upgrade: 20
-  lv: 1
+  lv: 0
   coolDown: 0
   isUpgrade: 0
   type: 2
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

@@ -23,10 +23,10 @@ MonoBehaviour:
   lv: 0
   coolDown: 0
   isUpgrade: 0
-  isActive: 1
   type: 0
   range: 0
   posToUse:
     pos: 
   posTarget:
     pos: 
+  buff: []

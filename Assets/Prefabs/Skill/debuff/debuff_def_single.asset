@@ -21,9 +21,12 @@ MonoBehaviour:
     nonUpgrade: 0
     upgrade: 0
   lv: 0
+  coolDown: 0
   isUpgrade: 0
-  type: 0
+  type: 1
+  range: 0
   posToUse:
     pos: 
   posTarget:
     pos: 
+  buff: []

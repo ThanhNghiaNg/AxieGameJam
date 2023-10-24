@@ -1610,9 +1610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  skillText: {fileID: 4307410916157219296}
+  skillName: {fileID: 4307410916157219296}
   skillType: {fileID: 3315883468780520203}
   skillDescription: {fileID: 410776943311000969}
+  skillTarget: {fileID: 0}
   skillImg: {fileID: 1859626775860637664}
   description: {fileID: 8464158422743265026}
 --- !u!1 &6268773252305044889

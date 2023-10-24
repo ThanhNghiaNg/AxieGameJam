@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Puffy_Aquatic
   m_EditorClassIdentifier: 
   axiePrefab: {fileID: 5270902455760458095, guid: 864b9ba06812d1241bd47960fef648db, type: 3}
-  startingSkills: []
+  startingSkills:
+  - {fileID: 11400000, guid: 78be53fcff3225044a7ea1bd8c7dbdf5, type: 2}
+  - {fileID: 11400000, guid: 78be53fcff3225044a7ea1bd8c7dbdf5, type: 2}
+  - {fileID: 11400000, guid: 7de9bbae11f901b4ba5d6f751b131594, type: 2}
   allSkillsCanLearn: []
-  currentHealth: 65
   maxHealth: 65
   speed: 9
   isAxie: 1

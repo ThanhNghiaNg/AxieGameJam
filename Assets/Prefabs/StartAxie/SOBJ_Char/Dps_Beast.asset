@@ -14,15 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axiePrefab: {fileID: 1366251661115147261, guid: 3073e19ca19209b4b9b764b208f79be0, type: 3}
   startingSkills:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 7d8f76f5a8a7a5c4d9e5d720261d5e8a, type: 2}
+  - {fileID: 11400000, guid: b9cb9b87b7f58bf418ac6c402182ad6f, type: 2}
+  - {fileID: 11400000, guid: e1f21eac16f301e4294e9a7b8fb4342e, type: 2}
   allSkillsCanLearn:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentHealth: 75
   maxHealth: 75
   speed: 5
   isAxie: 1

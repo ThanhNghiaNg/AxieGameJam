@@ -10,14 +10,16 @@ public class SkillUI : MonoBehaviour
     public Skill skill;
 
     [Header("SkillUI")]
-    public TMP_Text skillText;
+    public TMP_Text skillName;
     public TMP_Text skillType;
     public TMP_Text skillDescription;
+    public TMP_Text skillTarget;
     public Image skillImg;
     public GameObject description;
 
 
     CharacterUI positionInBattle;
+    BattleManager battleManager;
 
 
 
@@ -25,13 +27,17 @@ public class SkillUI : MonoBehaviour
     private void Awake()
     {
         positionInBattle = FindObjectOfType<CharacterUI>();
+        battleManager = FindObjectOfType<BattleManager>();
     }
     public void LoadSkill(Skill _skill)
     {
         skill = _skill;
-        skillText.text = skill.GetSkilDescription();
+        skillName.text = skill.skillName;
         skillImg.sprite = skill.sprite;
+        skillDescription.text = skill.GetSkilDescription();
         
+        Debug.Log("Skill Load");
+
     }
     public void HandleHover()
     {
@@ -46,12 +52,13 @@ public class SkillUI : MonoBehaviour
     //Click vao skill 
     public void HandleClick()
     {
-        if (skillType != null)
+        if (skillType == null)
         {
             Debug.Log("Null");
         }
         else
-        Debug.Log(this.skill.GetSkilDescription()); 
+        Debug.Log(this.skill.GetSkilDescription());
+        battleManager.currentSkill = this.skill;
     }
     //Click vao skill khac
     public void HandleDeSelected()
