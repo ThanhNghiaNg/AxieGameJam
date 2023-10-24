@@ -17,14 +17,14 @@ public class SkillUI : MonoBehaviour
     public GameObject description;
 
 
-    PositionInBattle positionInBattle;
+    CharacterUI positionInBattle;
 
 
 
 
     private void Awake()
     {
-        positionInBattle = FindObjectOfType<PositionInBattle>();
+        positionInBattle = FindObjectOfType<CharacterUI>();
     }
     public void LoadSkill(Skill _skill)
     {

@@ -252,6 +252,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3410567745478211713, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6182824298431783533, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_Mesh
       value: 

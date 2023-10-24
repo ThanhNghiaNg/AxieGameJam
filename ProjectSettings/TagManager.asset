@@ -19,6 +19,8 @@ TagManager:
   - lmaoCanvas
   - canvas
   - platform
+  - platforms
+  - Position
   layers:
   - Default
   - TransparentFX

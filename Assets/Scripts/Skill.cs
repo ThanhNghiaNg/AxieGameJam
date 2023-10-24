@@ -11,7 +11,6 @@ public class Skill : ScriptableObject
     public int lv;
     public int coolDown;
     public bool isUpgrade;
-    public List<Buff> buffs = new List<Buff>();
     public enum Type {Buff, Debuff, Attack, Shield, Heal, Dot, Support, Passive};
     public enum Range { Single, AOE };
     public Type type;
@@ -27,11 +26,13 @@ public class Skill : ScriptableObject
         }
         else { return this.skillDescription.upgrade; }
     }
-    public float GetSkillEffectAmount()
+    public int GetSkillEffectAmount()
     {
         if (!isUpgrade) { return this.effectAmount.nonUpgrade; }
         else { return this.effectAmount.upgrade;}
     }
+
+    public List<Buff> buff;
 }
 
 
@@ -46,8 +47,8 @@ public struct SkillDescription
 //Luong dmg gay ra || Heal || Shield neu can
 public struct SkillEffectAmount
 {
-    public float nonUpgrade;
-    public float upgrade;
+    public int nonUpgrade;
+    public int upgrade;
 }
 [System.Serializable]
 
