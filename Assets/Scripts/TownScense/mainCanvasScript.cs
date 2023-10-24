@@ -14,6 +14,7 @@ public class mainCanvasScript : MonoBehaviour
 
     private void TaskOnClick()
     {
+        UI_Management.Instance.isClicked = false;
         mainCanvas.GetComponent<Canvas>().enabled = false;
     }
 }

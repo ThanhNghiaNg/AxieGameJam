@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Alixir
   itemDescription: Remove all ally negative effect, recover max heal for the ally
   effectAmount: 0
+  price: 400
   type: 0

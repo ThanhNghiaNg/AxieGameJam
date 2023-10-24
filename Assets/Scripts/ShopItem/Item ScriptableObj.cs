@@ -8,7 +8,8 @@ public class Item : ScriptableObject
     public string itemName;
     public string itemDescription;
     public float effectAmount;
-    public enum Type { Buff, Heal };
+    public int price;
+    public enum Type { Buff, Heal, Shield };
     public Type type;
     public Position posToUse;
     public Position posTarget;
