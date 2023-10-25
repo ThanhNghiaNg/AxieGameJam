@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class BattleManager : MonoBehaviour
-{ 
+{
 
     [Header("Turn")]
     public List<CharacterUI> turnList = new List<CharacterUI>(); //turn 
@@ -15,8 +16,8 @@ public class BattleManager : MonoBehaviour
     public CharacterUI selectedCharacter;
 
 
-    [Header("InBattle")]    
-    public List<Character> axieInGame = new List<Character>(); 
+    [Header("InBattle")]
+    public List<Character> axieInGame = new List<Character>();
     public List<Character> enemyInGame = new List<Character>();
 
     public List<CharacterUI> axieInGameObjects = new List<CharacterUI>();
@@ -43,10 +44,20 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    bool CheckSkill()
+    bool CheckSkill(int skillOrder)
     {
         if (currentCharacter == null) return false;
-       
+        Debug.Log("--------/Show Player Skill ------");
+        Position posToUse = currentCharacter.skills[skillOrder].posToUse;
+        Position posTarget = currentCharacter.skills[skillOrder].posTarget;
+        Debug.Log($"skillName: {currentCharacter.skills[skillOrder].skillName}");
+        Debug.Log($"posToUse: {JsonConvert.SerializeObject(posToUse)}");
+        Debug.Log($"posTarget: {JsonConvert.SerializeObject(posTarget)}");
+        // for (int i = 0; i < currentCharacter.skills.Count; i++){
+        //     // string skillDescription = currentCharacter.skills
+        //     Debug.Log($"skills: {currentCharacter.skills[i].GetSkilDescription()}"); 
+        // }
+        Debug.Log("--------/EndShow Player Skill ------");
         return true;
     }
     public void BeginBattle()
@@ -65,7 +76,7 @@ public class BattleManager : MonoBehaviour
         }
         turnList = turnList.OrderByDescending(x => x.character.speed).ToList();
         ChangeTurn();
-    } 
+    }
     public void ChangeTurn()
     {
         Debug.Log(turnList.Count);
@@ -88,18 +99,20 @@ public class BattleManager : MonoBehaviour
             // Xu ly enemy
         }
 
-        
+
     }
     public void SkillUpdate()
     {
-        for(int i = 0; i < skillUI_InGameObjects.Count; i++)
+
+        for (int i = 0; i < skillUI_InGameObjects.Count; i++)
         {
             Debug.Log("Skill " + i);
+            CheckSkill(i);
             skillUI_InGameObjects[i].LoadSkill(currentCharacter.skills[i]);
         }
     }
-    
- 
+
+
 
     public void UsingSkill()
     {
@@ -110,7 +123,7 @@ public class BattleManager : MonoBehaviour
     }
     public void ChangePosition(ref List<CharacterUI> charactersUI, int curentPos, int desPos)
     {
-      
+
         if (Mathf.Abs(curentPos - desPos) > 1)
         {
             charactersUI[curentPos].position = desPos;

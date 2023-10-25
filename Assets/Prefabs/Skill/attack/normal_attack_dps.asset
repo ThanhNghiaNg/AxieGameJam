@@ -26,7 +26,7 @@ MonoBehaviour:
   type: 2
   range: 0
   posToUse:
-    pos: 
+    pos: 01010101
   posTarget:
-    pos: 
+    pos: 01000000
   buff: []
