@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
   m_Name: Support_Plan
   m_EditorClassIdentifier: 
-  axieId: 5
+  axieId: 3
   axiePrefab: {fileID: 3762978722178984909, guid: a83d1967180dc1548a0d813a03d730c4, type: 3}
   startingSkills: []
   allSkillsCanLearn: []

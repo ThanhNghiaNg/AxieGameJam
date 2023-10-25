@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TownScript : MonoBehaviour
+public class TownScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string blockName;
     public int blockId;
@@ -11,7 +12,15 @@ public class TownScript : MonoBehaviour
 
     public GameObject[] Title;
 
-    private void OnMouseExit()
+    /*    private void OnMouseExit()
+        {
+            Title[1].SetActive(false);
+            Title[2].SetActive(false);
+            Title[3].SetActive(false);
+            Title[0].SetActive(false);
+        }*/
+
+    public void OnPointerExit(PointerEventData eventData)
     {
         Title[1].SetActive(false);
         Title[2].SetActive(false);
@@ -19,14 +28,13 @@ public class TownScript : MonoBehaviour
         Title[0].SetActive(false);
     }
 
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
         foreach (GameObject item in Title)
         {
             item.SetActive(false);
         }
-        if(UI_Management.Instance.isClicked == false)
+        if (UI_Management.Instance.isClicked == false)
         {
             switch (blockId)
             {
@@ -68,7 +76,7 @@ public class TownScript : MonoBehaviour
         UI_Management.Instance.isClicked = true;
     }
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         if (UI_Management.Instance.isClicked == false)
         {

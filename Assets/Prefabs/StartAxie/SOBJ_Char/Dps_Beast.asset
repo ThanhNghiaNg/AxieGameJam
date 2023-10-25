@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
   m_Name: Dps_Beast
   m_EditorClassIdentifier: 
-  axieId: 1
+  axieId: 0
   axiePrefab: {fileID: 1366251661115147261, guid: 3073e19ca19209b4b9b764b208f79be0, type: 3}
   startingSkills:
   - {fileID: 0}
