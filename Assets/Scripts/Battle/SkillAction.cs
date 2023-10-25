@@ -9,6 +9,7 @@ public class SkillAction : MonoBehaviour
     public CharacterStat target;
     BattleManager battleManager;
 
+
     private void Awake()
     {
         battleManager = FindObjectOfType<BattleManager>();
@@ -23,7 +24,8 @@ public class SkillAction : MonoBehaviour
         switch (skill.name)
         {
 
-            case "a" : 
+            case "shield_single":
+                Debug.Log("Dungskill");
                 return;
             default: break;
         }

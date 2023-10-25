@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: normal_attack_dps
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: aa33320300e6d4ad19e19c50d85c475a, type: 3}
+  sprite: {fileID: 21300000, guid: ae3fc47d3e1214ddfb5cc8fac42665fd, type: 3}
   skillName: Normal Attack
   skillDescription:
     nonUpgrade: Deal 5 DMG for a enemy

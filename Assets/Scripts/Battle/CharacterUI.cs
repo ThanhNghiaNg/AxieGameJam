@@ -21,6 +21,7 @@ public class CharacterUI : MonoBehaviour
     public List<Skill> skills = new List<Skill>();
 
     public CharacterStat stat = new CharacterStat();
+    public Enemy enemy;
 
 
     BattleManager battleManager;
@@ -102,12 +103,28 @@ public class CharacterUI : MonoBehaviour
     }
 
 
-    public void HandleOnClick()
+/*    public void HandleOnClick()
     {
+        Debug.Log("Done");
         if (battleManager.currentSkill!=null)
         {
             battleManager.selectedCharacter = this;
             battleManager.UsingSkill();
+            battleManager.ChangeTurn();
+        }
+    }*/
+    private void OnMouseDown()
+    {
+        Debug.Log("Done");
+        if (battleManager.currentSkill != null)
+        {
+            battleManager.selectedCharacter = this;
+
+        }
+        if(battleManager.selectedCharacter != null)
+        {
+            battleManager.UsingSkill();
+            battleManager.ChangeTurn();
         }
     }
 

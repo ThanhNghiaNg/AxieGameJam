@@ -7,8 +7,8 @@ public class Skill : ScriptableObject
     public Sprite sprite;
     public string skillName;
     public SkillDescription skillDescription;
-    public SkillEffectAmount effectAmount;
-    public int lv;
+    public SkillEffectAmount effectAmount; // Cái này tr? ra dame || Heal || Shield n?u dùng t?i 
+    public int lv; // Không c?n thi?t 
     public int coolDown;
     public bool isUpgrade;
     public enum Type {Buff, Debuff, Attack, Shield, Heal, Dot, Support, Passive};
@@ -17,6 +17,8 @@ public class Skill : ScriptableObject
     public Range range;
     public Position posToUse;
     public Position posTarget;
+
+    public List<Buff> buff; // Cái này là ch?a List nh?ng Buff mà mình c?n Buff cho nhân v?t 
 
     public string GetSkilDescription()
     {
@@ -32,7 +34,7 @@ public class Skill : ScriptableObject
         else { return this.effectAmount.upgrade;}
     }
 
-    public List<Buff> buff;
+    
 }
 
 
