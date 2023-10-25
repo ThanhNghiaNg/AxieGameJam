@@ -59,6 +59,7 @@ public class SkillUI : MonoBehaviour
         else
         Debug.Log(this.skill.GetSkilDescription());
         battleManager.currentSkill = this.skill;
+        //Xu ly target o day
     }
     //Click vao skill khac
     public void HandleDeSelected()

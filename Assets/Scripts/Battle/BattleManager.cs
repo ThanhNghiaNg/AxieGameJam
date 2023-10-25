@@ -86,9 +86,12 @@ public class BattleManager : MonoBehaviour
         else
         {
             // Xu ly enemy
+            HandleEnemyTurn();
         }
+    }
+    public void HandleEnemyTurn()
+    {
 
-        
     }
     public void SkillUpdate()
     {

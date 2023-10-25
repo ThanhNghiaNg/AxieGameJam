@@ -21,6 +21,7 @@ public class CharacterUI : MonoBehaviour
     public List<Skill> skills = new List<Skill>();
 
     public CharacterStat stat = new CharacterStat();
+    public Enemy enemy;
 
 
     BattleManager battleManager;
