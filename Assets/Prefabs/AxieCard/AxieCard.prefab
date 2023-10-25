@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6702524a861dd4c9c7650f16b32126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 2712489474002172682}
+  GameObject: {fileID: 2712489474002172682}
   yourButton: {fileID: 4781580403875429948}
   buttonSlot:
   - {fileID: 0}

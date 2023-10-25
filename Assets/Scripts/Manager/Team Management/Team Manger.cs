@@ -11,6 +11,8 @@ public class TeamManager : MonoBehaviour
 
     public Character currentSelectedAxie;
 
+    public int currentSelectedSlot;
+
     private void Awake()
     {
         if (Instance != null)

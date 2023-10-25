@@ -1,16 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Spine.Unity;
 
 public class CardOnClick : MonoBehaviour
 {
-    public new GameObject gameObject;
+    public GameObject axieSprite;
     private Character character;
     public Button yourButton;
     public Button[] buttonSlot;
+    private SkeletonGraphic skeletonGraphic;
 
     private void Awake()
     {
-        character = gameObject.GetComponent<Axie>().axie;
+        character = axieSprite.GetComponent<Axie>().axie;
+        skeletonGraphic = gameObject.AddComponent<SkeletonGraphic>();
+        skeletonGraphic.skeletonDataAsset = character.axiePrefab.GetComponent<SkeletonAnimation>().skeletonDataAsset;
+        skeletonGraphic.Initialize(true);
     }
 
     private void Start()
@@ -26,19 +31,22 @@ public class CardOnClick : MonoBehaviour
         {
             case "0":
                 {
-                    //buttonSlot[0].GetComponent<Image>().sprite = ???
+                    Instantiate(skeletonGraphic, buttonSlot[0].transform);
                     break;
                 }
             case "1":
                 {
+                    Instantiate(skeletonGraphic, buttonSlot[1].transform);
                     break;
                 }
             case "2":
                 {
+                    Instantiate(skeletonGraphic, buttonSlot[2].transform);
                     break;
                 }
             case "3":
                 {
+                    Instantiate(skeletonGraphic, buttonSlot[3].transform);
                     break;
                 }
         }

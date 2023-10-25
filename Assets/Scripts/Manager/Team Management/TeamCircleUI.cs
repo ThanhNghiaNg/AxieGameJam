@@ -7,6 +7,12 @@ public class TeamCircleUI : MonoBehaviour
     public int position;
 
     public Button yourButton;
+    public Canvas selectAxieCanvas;
+
+    private void Awake()
+    {
+        selectAxieCanvas.gameObject.SetActive(false);
+    }
 
     private void Start()
     {
@@ -17,5 +23,6 @@ public class TeamCircleUI : MonoBehaviour
     private void TaskOnClick()
     {
         TeamManager.Instance.currentSelectedSlot = position;
+        selectAxieCanvas.gameObject.SetActive(true);
     }
 }
