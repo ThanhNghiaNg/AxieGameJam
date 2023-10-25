@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axieId: 1
   axiePrefab: {fileID: 6755256726185936919, guid: 143f9388b1513b44180fa8dd7065f62f, type: 3}
+  skeletonDataAsset: {fileID: 11400000, guid: a4c9aa158a024427288679692b1e4538, type: 2}
   startingSkills: []
   allSkillsCanLearn: []
   maxHealth: 60

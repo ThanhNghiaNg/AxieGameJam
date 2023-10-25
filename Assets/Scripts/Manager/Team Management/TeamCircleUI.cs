@@ -5,7 +5,6 @@ public class TeamCircleUI : MonoBehaviour
 {
     public Character Axie;
     public int position;
-
     public Button yourButton;
     public Canvas selectAxieCanvas;
 
@@ -24,5 +23,6 @@ public class TeamCircleUI : MonoBehaviour
     {
         TeamManager.Instance.currentSelectedSlot = position;
         selectAxieCanvas.gameObject.SetActive(true);
+        selectAxieCanvas.gameObject.GetComponent<Canvas>().enabled = true;
     }
 }

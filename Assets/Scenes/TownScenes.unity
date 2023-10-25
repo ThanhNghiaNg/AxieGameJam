@@ -4779,6 +4779,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1096484349}
     - target: {fileID: 4027786568501496783, guid: 02a6665dade7ad94b90b2a9689a7ba0f, type: 3}
+      propertyPath: selectAxieCanvas
+      value: 
+      objectReference: {fileID: 883254223}
+    - target: {fileID: 4027786568501496783, guid: 02a6665dade7ad94b90b2a9689a7ba0f, type: 3}
       propertyPath: buttonSlot.Array.data[0]
       value: 
       objectReference: {fileID: 1820724327}
@@ -5148,6 +5152,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b3918f1e007e1b44c97b4e751a645ea0, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  buttonSlot:
+  - {fileID: 1820724327}
+  - {fileID: 1253427979}
+  - {fileID: 1867081575}
+  - {fileID: 1234838853}
   currentSelectedAxie: {fileID: 0}
   currentSelectedSlot: 0
 --- !u!4 &882207281
@@ -5183,7 +5192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &883254220
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7204,7 +7213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 363191659127886857, guid: 2c7c23c6c94a28348a316dfbaf386a3b, type: 3}
       propertyPath: position
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 363191659127886857, guid: 2c7c23c6c94a28348a316dfbaf386a3b, type: 3}
       propertyPath: selectAxieCanvas
@@ -11075,7 +11084,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 363191659127886857, guid: 2c7c23c6c94a28348a316dfbaf386a3b, type: 3}
       propertyPath: position
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 363191659127886857, guid: 2c7c23c6c94a28348a316dfbaf386a3b, type: 3}
       propertyPath: selectAxieCanvas
