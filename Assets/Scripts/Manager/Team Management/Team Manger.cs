@@ -9,7 +9,7 @@ public class TeamManager : MonoBehaviour
 
     public List<Character> teamAxie;
 
-    public Character Axie;
+    public Character currentSelectedAxie;
 
     private void Awake()
     {
