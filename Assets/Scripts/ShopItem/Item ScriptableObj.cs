@@ -9,10 +9,12 @@ public class Item : ScriptableObject
     public string itemDescription;
     public float effectAmount;
     public int price;
-    public enum Type { Buff, Heal, Shield };
+    public string id;
+    public enum Type { BuffATK, BuffDef, Heal, Shield, Alixir };
     public Type type;
     public Position posToUse;
     public Position posTarget;
+    public int quatity;
 
     public string GetItemDescription()
     {

@@ -17,4 +17,5 @@ MonoBehaviour:
   itemDescription: Remove all ally negative effect, recover max heal for the ally
   effectAmount: 0
   price: 400
+  id: 0
   type: 0
