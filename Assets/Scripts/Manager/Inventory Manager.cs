@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static InventoryManager Instance { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public List<Asset> Assets;
+
+    private void Awake()
     {
-        
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }

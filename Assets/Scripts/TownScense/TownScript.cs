@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TownScript : MonoBehaviour
+public class TownScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public string blockName;
     public int blockId;
@@ -11,14 +12,29 @@ public class TownScript : MonoBehaviour
 
     public GameObject[] Title;
 
-    private void OnMouseDown()
+    /*    private void OnMouseExit()
+        {
+            Title[1].SetActive(false);
+            Title[2].SetActive(false);
+            Title[3].SetActive(false);
+            Title[0].SetActive(false);
+        }*/
+
+    public void OnPointerExit(PointerEventData eventData)
     {
-        
+        Title[1].SetActive(false);
+        Title[2].SetActive(false);
+        Title[3].SetActive(false);
+        Title[0].SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
         foreach (GameObject item in Title)
         {
             item.SetActive(false);
         }
-        if(UI_Management.Instance.isClicked == true)
+        if (UI_Management.Instance.isClicked == false)
         {
             switch (blockId)
             {
@@ -36,6 +52,7 @@ public class TownScript : MonoBehaviour
                         assetCanvas.GetComponent<Canvas>().enabled = false;
                         teamCanvas.GetComponent<Canvas>().enabled = false;
                         shopCanvas.GetComponent<Canvas>().enabled = true;
+                        LoadShopItems.Instance.DisplayShopItems(shopCanvas);
                         break;
                     }
                 case 2:
@@ -60,7 +77,7 @@ public class TownScript : MonoBehaviour
         UI_Management.Instance.isClicked = true;
     }
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         if (UI_Management.Instance.isClicked == false)
         {
