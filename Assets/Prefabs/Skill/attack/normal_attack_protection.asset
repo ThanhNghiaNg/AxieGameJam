@@ -20,7 +20,7 @@ MonoBehaviour:
   effectAmount:
     nonUpgrade: 10
     upgrade: 20
-  lv: 1
+  lv: 0
   coolDown: 0
   isUpgrade: 0
   type: 2

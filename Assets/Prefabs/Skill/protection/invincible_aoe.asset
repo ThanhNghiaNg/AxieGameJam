@@ -30,4 +30,6 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
-  buff: []
+  buff:
+  - buff: 2
+    buffValue: 1

@@ -31,8 +31,10 @@ public class generateSlot : MonoBehaviour
                 CreateCardButton(InventoryManager.Instance.Inventory[itemIndex].sprite, InventoryManager.Instance.Inventory[itemIndex].quatity, index);
             }
             index++;
+
         }
     }
+
 
     private void CreateCardButton(Sprite itemSprite, int? quatity, int index)
     {

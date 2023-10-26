@@ -80,6 +80,10 @@ public class CardOnClick : MonoBehaviour
                 {
                     if (TeamManager.Instance.teamAxie[0] == null && isExit(character) == false)
                     {
+                        foreach (Transform child in buttonSlot[1].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         Instantiate(skeletonGraphic, buttonSlot[0].transform);
                         TeamManager.Instance.teamAxie[0] = character;
                         selectAxieCanvas.gameObject.SetActive(false);
@@ -87,7 +91,10 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[0] == null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.teamAxie[0] = character;
                         TeamManager.Instance.teamAxie[index] = null;
                         updateTeamPos();
@@ -99,8 +106,14 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[0] != null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[0].transform.DetachChildren();
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[0].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
                         selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
@@ -112,6 +125,10 @@ public class CardOnClick : MonoBehaviour
                 {
                     if (TeamManager.Instance.teamAxie[1] == null && isExit(character) == false)
                     {
+                        foreach (Transform child in buttonSlot[1].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         Instantiate(skeletonGraphic, buttonSlot[1].transform);
                         TeamManager.Instance.teamAxie[1] = character;
                         selectAxieCanvas.gameObject.SetActive(false);
@@ -119,7 +136,10 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[1] == null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.teamAxie[1] = character;
                         TeamManager.Instance.teamAxie[index] = null;
                         updateTeamPos();
@@ -132,8 +152,14 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[1] != null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[1].transform.DetachChildren();
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[1].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
 
 
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
@@ -147,16 +173,21 @@ public class CardOnClick : MonoBehaviour
                 {
                     if (TeamManager.Instance.teamAxie[2] == null && isExit(character) == false)
                     {
-                        buttonSlot[2].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[2].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         Instantiate(skeletonGraphic, buttonSlot[2].transform);
                         TeamManager.Instance.teamAxie[2] = character;
                         selectAxieCanvas.gameObject.SetActive(false);
                     }
                     else if (TeamManager.Instance.teamAxie[2] == null && isExit(character))
                     {
-                        buttonSlot[2].transform.DetachChildren();
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.teamAxie[2] = character;
                         TeamManager.Instance.teamAxie[index] = null;
                         updateTeamPos();
@@ -168,8 +199,14 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[2] != null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[2].transform.DetachChildren();
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[2].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
                         selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
@@ -180,6 +217,10 @@ public class CardOnClick : MonoBehaviour
                 {
                     if (TeamManager.Instance.teamAxie[3] == null && isExit(character) == false)
                     {
+                        foreach (Transform child in buttonSlot[3].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         Instantiate(skeletonGraphic, buttonSlot[3].transform);
                         TeamManager.Instance.teamAxie[3] = character;
                         selectAxieCanvas.gameObject.SetActive(false);
@@ -187,7 +228,10 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[3] == null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.teamAxie[3] = character;
                         TeamManager.Instance.teamAxie[index] = null;
                         updateTeamPos();
@@ -199,8 +243,14 @@ public class CardOnClick : MonoBehaviour
                     else if (isExit(character) && TeamManager.Instance.teamAxie[3] != null)
                     {
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
-                        buttonSlot[3].transform.DetachChildren();
-                        buttonSlot[index].transform.DetachChildren();
+                        foreach (Transform child in buttonSlot[3].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
+                        foreach (Transform child in buttonSlot[index].transform)
+                        {
+                            Destroy(child.gameObject);
+                        }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
                         selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();

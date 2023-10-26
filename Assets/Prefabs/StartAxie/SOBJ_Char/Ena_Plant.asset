@@ -15,7 +15,10 @@ MonoBehaviour:
   axieId: 1
   axiePrefab: {fileID: 6755256726185936919, guid: 143f9388b1513b44180fa8dd7065f62f, type: 3}
   skeletonDataAsset: {fileID: 11400000, guid: a4c9aa158a024427288679692b1e4538, type: 2}
-  startingSkills: []
+  startingSkills:
+  - {fileID: 11400000, guid: 9bcded3427f0f4e46913fb863db2719f, type: 2}
+  - {fileID: 11400000, guid: 7d8f76f5a8a7a5c4d9e5d720261d5e8a, type: 2}
+  - {fileID: 11400000, guid: 7d8f76f5a8a7a5c4d9e5d720261d5e8a, type: 2}
   allSkillsCanLearn: []
   maxHealth: 60
   speed: 11
