@@ -76,8 +76,15 @@ public class InventoryManager : MonoBehaviour
         else
         {
             Inventory.Add(item);
-            int index = Inventory.IndexOf(item);
-            Inventory[index].quatity = 1;
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                if (Inventory[i] == null)
+                {
+                    Inventory[i] = item;
+                    Inventory[i].quatity = 1;
+                    break;
+                }
+            }
         }
     }
 

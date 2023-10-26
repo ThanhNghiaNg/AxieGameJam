@@ -58,6 +58,10 @@ public class CardOnClick : MonoBehaviour
             if (teamAxie != null)
             {
                 int index = TeamManager.Instance.teamAxie.IndexOf(teamAxie);
+                foreach (Transform child in buttonSlot[index].transform)
+                {
+                    Destroy(child.gameObject);
+                }
                 GameObject skeletonObject = new GameObject("SkeletonGraphic");
                 SkeletonGraphic skeletonUI = skeletonObject.AddComponent<SkeletonGraphic>();
                 skeletonUI.rectTransform.localScale = new Vector2(0.5f, 0.5f);
