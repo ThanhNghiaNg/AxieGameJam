@@ -17,4 +17,5 @@ MonoBehaviour:
   itemDescription: Recover 20 hp for the ally
   effectAmount: 20
   price: 40
+  id: 3
   type: 1
