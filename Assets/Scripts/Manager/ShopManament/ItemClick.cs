@@ -19,6 +19,7 @@ public class ItemClick : MonoBehaviour
         if (MoneyManager.Instance.isEnough)
         {
             InventoryManager.Instance.addItem(item);
+            // InventoryManager.Instance.UpdateInventory();
             MoneyManager.Instance.SaveData();
             LoadShopItems.Instance.RenderState();
             Debug.Log($"Remain: {MoneyManager.Instance.TotalMoney}");

@@ -50,17 +50,14 @@ public class LoadShopItems : MonoBehaviour
     }
     public void DisplayShopItems(Canvas canvas)
     {
-        Debug.Log("lmao");
-        Debug.Log(container);
-        Debug.Log(shopItemTemplate);
-        Debug.Log($"count: {items.Count}");
         for (int i = 0; i < items.Count; i++)
         {
             CreateItemButton(items[i], items[i].price, items[i].sprite, items[i].itemName, i);
         }
     }
 
-    public void RenderState(){
+    public void RenderState()
+    {
         Transform totalMoneyText = transform.Find("TotalMoneyText");
         totalMoneyText.GetComponent<TextMeshProUGUI>().SetText(MoneyManager.Instance.TotalMoney.ToString());
     }
