@@ -25,10 +25,15 @@ public class LoadShopItems : MonoBehaviour
         }
         container = GameObject.FindGameObjectWithTag("ContainerShopTemplate").transform;
         shopItemTemplate = container.Find("shopItemTemplate");
+        Transform totalMoneyText = transform.Find("TotalMoneyText");
+        totalMoneyText.GetComponent<TextMeshProUGUI>().SetText(MoneyManager.Instance.TotalMoney.ToString());
     }
     void Start()
     {
 
+    }
+    public void OnShopItemClick(){
+        
     }
     public void CreateItemButton(int itemCost, Sprite itemSprite, string itemName, int positionIndex)
     {
