@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
   m_Name: Ena_Plant
   m_EditorClassIdentifier: 
+  axieId: 1
   axiePrefab: {fileID: 6755256726185936919, guid: 143f9388b1513b44180fa8dd7065f62f, type: 3}
   startingSkills:
   - {fileID: 11400000, guid: 9bcded3427f0f4e46913fb863db2719f, type: 2}

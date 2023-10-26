@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41dc47afeed6981438bd572b93fb060c, type: 3}
   m_Name: Puffy_Aquatic
   m_EditorClassIdentifier: 
+  axieId: 2
   axiePrefab: {fileID: 5270902455760458095, guid: 864b9ba06812d1241bd47960fef648db, type: 3}
   startingSkills:
   - {fileID: 11400000, guid: 78be53fcff3225044a7ea1bd8c7dbdf5, type: 2}

@@ -21,6 +21,7 @@ TagManager:
   - platform
   - platforms
   - Position
+  - ContainerShopTemplate
   layers:
   - Default
   - TransparentFX
