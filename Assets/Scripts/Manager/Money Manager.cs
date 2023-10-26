@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static MoneyManager Instance { get; private set; }
+
+    public int TotalMoney;
+    public bool isEnough;
+
+    private void Awake()
     {
-        
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddMoney(int money)
     {
-        
+        TotalMoney += money;
+    }
+
+    public void MinusMoney(int money)
+    {
+        if(money <= TotalMoney)
+        {
+            isEnough = true;
+            TotalMoney -= money;
+        }
+        else if (money > TotalMoney)
+        {
+            isEnough = false;
+        }
     }
 }
