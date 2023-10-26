@@ -53,4 +53,19 @@ public class InventoryManager : MonoBehaviour
             Inventory[index].quatity = 1;
         }
     }
+
+    public void removeItem(Item item)
+    {
+        if (IsExist(item) && item.quatity > 1)
+        {
+            int index = Inventory.IndexOf(item);
+            Inventory[index].quatity--;
+        }
+        else if (IsExist(item) && item.quatity == 1)
+        {
+            int index = Inventory.IndexOf(item);
+            Inventory[index].quatity = 0;
+            Inventory.Remove(item);
+        }
+    }
 }
