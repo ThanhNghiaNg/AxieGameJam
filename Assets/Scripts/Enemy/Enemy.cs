@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
-    
-    
+
+
+
     [Header("Battle")]
     public int skill;
     public List<CharacterUI> posChar = new List<CharacterUI>();
@@ -27,20 +26,20 @@ public class Enemy : MonoBehaviour
 
     public void TakeTurn()
     {
-        if(isWwolf)
+        if (isWwolf)
         {
             // xu ly sp_Turn Wwolf
             return;
         }
-        if(isBear)
+        if (isBear)
         {
             // xu ly sp_Turn Bear
             return;
         }
-        
-        currentSkill = enemyPatterns.patterns[patternTurn];
+
+        /*currentSkill = enemyPatterns.patterns[patternTurn];*/
         /*switch(currentSkill.)*/
-        
+
 
     }
     private void AttackPlayer(List<int> pos, int value)
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour
     private int RandomInList(List<int> list)
     {
         int num = 0;
-        num = Random.Range(0, list.Count-1);
+        num = Random.Range(0, list.Count - 1);
         return list[num];
     }
 }

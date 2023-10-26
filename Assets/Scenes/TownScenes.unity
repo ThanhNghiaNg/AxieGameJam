@@ -6294,6 +6294,7 @@ MonoBehaviour:
   recruitCanvas: {fileID: 635760784}
   assetCanvas: {fileID: 766011782}
   teamCanvas: {fileID: 601094509}
+  buttonUI: {fileID: 348918169}
   Title:
   - {fileID: 11027664}
   - {fileID: 827885807}
@@ -7222,6 +7223,7 @@ MonoBehaviour:
   recruitCanvas: {fileID: 635760784}
   assetCanvas: {fileID: 766011782}
   teamCanvas: {fileID: 601094509}
+  buttonUI: {fileID: 348918169}
   Title:
   - {fileID: 11027664}
   - {fileID: 827885807}
@@ -8252,6 +8254,7 @@ MonoBehaviour:
   recruitCanvas: {fileID: 635760784}
   assetCanvas: {fileID: 766011782}
   teamCanvas: {fileID: 601094509}
+  buttonUI: {fileID: 348918169}
   Title:
   - {fileID: 11027664}
   - {fileID: 827885807}
@@ -8610,6 +8613,7 @@ MonoBehaviour:
   recruitCanvas: {fileID: 635760784}
   assetCanvas: {fileID: 766011782}
   teamCanvas: {fileID: 601094509}
+  buttonUI: {fileID: 348918169}
   Title:
   - {fileID: 11027664}
   - {fileID: 827885807}
@@ -11335,7 +11339,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: 183}
+  m_AnchoredPosition: {x: 11, y: 183}
   m_SizeDelta: {x: 113.2052, y: 51.1653}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1739513898

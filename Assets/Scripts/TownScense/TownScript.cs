@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TownScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -9,6 +10,7 @@ public class TownScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public Canvas recruitCanvas;
     public Canvas assetCanvas;
     public Canvas teamCanvas;
+    public Button buttonUI;
 
     public GameObject[] Title;
 
@@ -34,6 +36,7 @@ public class TownScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         {
             item.SetActive(false);
         }
+        buttonUI.gameObject.SetActive(false);
         if (UI_Management.Instance.isClicked == false)
         {
             switch (blockId)
