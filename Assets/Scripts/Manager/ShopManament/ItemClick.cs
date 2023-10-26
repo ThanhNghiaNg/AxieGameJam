@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,7 +17,7 @@ public class ItemClick : MonoBehaviour
         if (MoneyManager.Instance.isEnough)
         {
             InventoryManager.Instance.addItem(item);
-            // InventoryManager.Instance.UpdateInventory();
+            InventoryManager.Instance.UpdateInventory();
             MoneyManager.Instance.SaveData();
             LoadShopItems.Instance.RenderState();
             Debug.Log($"Remain: {MoneyManager.Instance.TotalMoney}");

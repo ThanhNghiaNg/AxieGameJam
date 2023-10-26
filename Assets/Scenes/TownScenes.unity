@@ -13342,6 +13342,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  inventoryTF: []
   slotLimit: 10
   container: {fileID: 1170169873}
   ItemCard: {fileID: 1639860759}
