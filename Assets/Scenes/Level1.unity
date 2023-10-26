@@ -252,9 +252,17 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3207150697515206543, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3410567745478211713, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149149507461591644, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6182824298431783533, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_Mesh
@@ -263,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 6850460926486020388, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413175790342704234, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7456906661318576542, guid: bab36b28f0e8cd94b9eee1514e720d87, type: 3}
       propertyPath: m_LocalPosition.x
@@ -631,12 +643,14 @@ MonoBehaviour:
   endPosition: 
   platforms: []
   doorPlatform: {fileID: 2050633024958697369, guid: 4c7ca48f46904d044b792d356c692b4e, type: 3}
+  enemyPlatform: {fileID: 2050633024958697369, guid: 87c4e109152616c4d8cdf5d161d5ad7b, type: 3}
   platform: {fileID: 5415031594069074525, guid: d0509daf60ef21b409dd5d8972b0ddb6, type: 3}
   platformsParent: {fileID: 1992075208}
   currentPlatform: {fileID: 0}
   prePlatform: {fileID: 0}
   isInRoom: 0
   nextPlatform: {fileID: 0}
+  enemyRate: 0.3
   spacing: 5
 --- !u!4 &1133393775
 Transform:

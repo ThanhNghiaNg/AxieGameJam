@@ -27,13 +27,14 @@ public class GameManager : MonoBehaviour
     #region Generate Platform State
     public List<GameObject> platforms;
     public GameObject doorPlatform;
+    public GameObject enemyPlatform;
     public GameObject platform;
     public GameObject platformsParent;
     public GameObject currentPlatform;
     public GameObject prePlatform;
     public bool isInRoom = false;
     public GameObject nextPlatform;
-
+    public float enemyRate = 0.3f;
     public float spacing = 5f;
     #endregion
     private void Awake()
@@ -123,9 +124,10 @@ public class GameManager : MonoBehaviour
         if (playerStep < stepRangeStart) playerStep = stepRangeStart;
         if (playerStep > stepRangeEnd) playerStep = stepRangeEnd;
 
-        if (LoadTilemapFromJson.Instance.segments != null)
+        if (MapManager.Instance.segments != null)
         {
-            currentPosition = LoadTilemapFromJson.Instance.segments[playerStep];
+            currentPosition = MapManager.Instance.segments[playerStep];
+            MapManager.Instance.AddPassedPosition(currentPosition);
         }
 
         if (playerStep == stepRangeEnd)
@@ -150,12 +152,23 @@ public class GameManager : MonoBehaviour
         for (int i = stepRangeStart; i <= (isInRoom == true ? 3 : stepRangeEnd + 1); i++)
         {
             // if (i == door || i == stepRangeEnd)
-
+            float randomFloat = Random.Range(0.0f, 1.0f);
+            Debug.Log($"randomFloat: {randomFloat}");
             if (i == stepRangeEnd && isInRoom == false)
             {
                 platforms.Add(doorPlatform);
             }
-            else platforms.Add(platform);
+            else
+            {
+                if (randomFloat < enemyRate && i > stepRangeStart + 1 && i != stepRangeEnd + 1)
+                {
+                    platforms.Add(enemyPlatform);
+                }
+                else
+                {
+                    platforms.Add(platform);
+                }
+            }
         }
     }
 

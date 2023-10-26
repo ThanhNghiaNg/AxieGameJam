@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         TurnAround();
         handleMovement();
+        Debug.Log($"SkeletonAnimation: {skeletonAnimation.AnimationName}");
         // position = transform.position;
     }
     void TurnAround()

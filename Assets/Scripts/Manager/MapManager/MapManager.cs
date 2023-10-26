@@ -20,9 +20,9 @@ class TilemapNode
         cost = 0;
     }
 }
-public class LoadTilemapFromJson : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
-    public static LoadTilemapFromJson Instance { get; private set; }
+    public static MapManager Instance { get; private set; }
     public Tilemap tilemap;
     public Tile[] tilePrefabs;
     public TileBase tileEmpty;
@@ -31,6 +31,7 @@ public class LoadTilemapFromJson : MonoBehaviour
     public TileBase tileStart;
     public TileBase tileWall;
     public List<List<int>> map = new List<List<int>>();
+    public List<int[]> passedPositions = new List<int[]>();
     public List<int[]> segments = new List<int[]>();
     private int normalizeDistance = 0;
     private int mapCol = 10;
@@ -61,7 +62,6 @@ public class LoadTilemapFromJson : MonoBehaviour
             }
         }
         findEndPosition(startPos);
-        // LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + "level2" + ".json");
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -357,5 +357,13 @@ public class LoadTilemapFromJson : MonoBehaviour
             }
             if (flag == 1) break;
         }
+    }
+
+    public void AddPassedPosition(int[] position)
+    {
+        int index = passedPositions.IndexOf(position);
+        if (index >= 0) return;
+        passedPositions.Add(position);
+        Debug.Log($"Passed position: {JsonConvert.SerializeObject(passedPositions)}");
     }
 }

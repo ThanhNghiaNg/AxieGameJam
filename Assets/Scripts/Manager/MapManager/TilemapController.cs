@@ -8,11 +8,11 @@ public class TilemapController : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase tileEmpty;
-    private LoadTilemapFromJson tilemapLoader;
+    private MapManager tilemapLoader;
 
     void Awake()
     {
-        tilemapLoader = GetComponent<LoadTilemapFromJson>();
+        tilemapLoader = GetComponent<MapManager>();
 
     }
     void Update()
