@@ -1,5 +1,4 @@
 using Spine.Unity;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,17 +31,17 @@ public class TeamManager : MonoBehaviour
     [SerializeField]
     private void Start()
     {
-        for (int i = 0; i < teamAxie.Count; i++)
+        foreach (Character axie in teamAxie)
         {
-            if (teamAxie[i] != null)
+            if (axie != null)
             {
-                int index = teamAxie.IndexOf(teamAxie[i]);
+                int index = teamAxie.IndexOf(axie);
                 GameObject skeletonObject = new GameObject("SkeletonGraphic");
                 SkeletonGraphic skeletonUI = skeletonObject.AddComponent<SkeletonGraphic>();
                 skeletonUI.rectTransform.localScale = new Vector2(0.5f, 0.5f);
                 Vector2 pos = skeletonUI.rectTransform.anchoredPosition;
                 skeletonUI.rectTransform.anchoredPosition = new Vector2(pos.x, pos.y - 30f);
-                skeletonUI.skeletonDataAsset = teamAxie[i].skeletonDataAsset;
+                skeletonUI.skeletonDataAsset = axie.skeletonDataAsset;
                 Instantiate(skeletonUI, buttonSlot[index].transform);
             }
         }

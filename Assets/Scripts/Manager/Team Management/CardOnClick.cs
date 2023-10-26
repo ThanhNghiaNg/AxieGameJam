@@ -1,6 +1,6 @@
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Spine.Unity;
 
 public class CardOnClick : MonoBehaviour
 {
@@ -17,14 +17,14 @@ public class CardOnClick : MonoBehaviour
     private void Awake()
     {
         character = axieSprite.GetComponent<Axie>().axie;
-        if(skeletonGraphic == null)
+        if (skeletonGraphic == null)
         {
             GameObject skeletonObject = new GameObject("SkeletonGraphic");
             skeletonGraphic = skeletonObject.AddComponent<SkeletonGraphic>();
             skeletonGraphic.rectTransform.localScale = new Vector2(0.5f, 0.5f);
             Vector2 pos = skeletonGraphic.rectTransform.anchoredPosition;
             skeletonGraphic.rectTransform.anchoredPosition = new Vector2(pos.x, pos.y - 30f);
-            skeletonGraphic.skeletonDataAsset = character.skeletonDataAsset;    
+            skeletonGraphic.skeletonDataAsset = character.skeletonDataAsset;
         }
     }
 
@@ -39,9 +39,12 @@ public class CardOnClick : MonoBehaviour
     {
         foreach (Character teamAxie in TeamManager.Instance.teamAxie)
         {
-            if(axie.axieId == teamAxie.axieId)
+            if (axie != null)
             {
-                return true;
+                if (axie.axieId == teamAxie.axieId)
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -50,7 +53,7 @@ public class CardOnClick : MonoBehaviour
     [SerializeField]
     private void updateTeamPos()
     {
-        for(int i = 0; i < TeamManager.Instance.teamAxie.Count; i++)
+        for (int i = 0; i < TeamManager.Instance.teamAxie.Count; i++)
         {
             if (TeamManager.Instance.teamAxie[i] != null)
             {
@@ -74,7 +77,8 @@ public class CardOnClick : MonoBehaviour
         {
             case 0:
                 {
-                    if(TeamManager.Instance.teamAxie[0] == null) { 
+                    if (TeamManager.Instance.teamAxie[0] == null)
+                    {
                         Instantiate(skeletonGraphic, buttonSlot[0].transform);
                         TeamManager.Instance.teamAxie[0] = character;
                         selectAxieCanvas.gameObject.SetActive(false);
@@ -91,7 +95,7 @@ public class CardOnClick : MonoBehaviour
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
                         selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
-                        
+
                     }
                     break;
                 }
@@ -113,8 +117,8 @@ public class CardOnClick : MonoBehaviour
                         int index = TeamManager.Instance.teamAxie.IndexOf(character);
                         buttonSlot[1].transform.DetachChildren();
                         buttonSlot[index].transform.DetachChildren();
-                        
-                        
+
+
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
                         selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
