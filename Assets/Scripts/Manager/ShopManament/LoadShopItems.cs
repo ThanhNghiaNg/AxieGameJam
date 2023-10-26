@@ -25,26 +25,28 @@ public class LoadShopItems : MonoBehaviour
         }
         container = GameObject.FindGameObjectWithTag("ContainerShopTemplate").transform;
         shopItemTemplate = container.Find("shopItemTemplate");
-        Transform totalMoneyText = transform.Find("TotalMoneyText");
-        totalMoneyText.GetComponent<TextMeshProUGUI>().SetText(MoneyManager.Instance.TotalMoney.ToString());
+        RenderState();
     }
     void Start()
     {
 
     }
-    public void OnShopItemClick(){
-        
+    public void OnShopItemClick()
+    {
+
     }
-    public void CreateItemButton(int itemCost, Sprite itemSprite, string itemName, int positionIndex)
+    public void CreateItemButton(Item item, int itemCost, Sprite itemSprite, string itemName, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
 
         float shopItemHeight = 68f;
         shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex);
-        shopItemRectTransform.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
-        shopItemRectTransform.Find("ItemCost").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
-        shopItemRectTransform.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
+        Transform buttonItem = shopItemRectTransform.Find("ButtonItem");
+        buttonItem.Find("ItemName").GetComponent<TextMeshProUGUI>().SetText(itemName);
+        buttonItem.Find("ItemCost").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
+        buttonItem.GetComponent<ItemClick>().item = item;
+        buttonItem.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
     }
     public void DisplayShopItems(Canvas canvas)
     {
@@ -54,9 +56,13 @@ public class LoadShopItems : MonoBehaviour
         Debug.Log($"count: {items.Count}");
         for (int i = 0; i < items.Count; i++)
         {
-            CreateItemButton(items[i].price, items[i].sprite, items[i].itemName, i);
+            CreateItemButton(items[i], items[i].price, items[i].sprite, items[i].itemName, i);
         }
+    }
 
+    public void RenderState(){
+        Transform totalMoneyText = transform.Find("TotalMoneyText");
+        totalMoneyText.GetComponent<TextMeshProUGUI>().SetText(MoneyManager.Instance.TotalMoney.ToString());
     }
 
 }
