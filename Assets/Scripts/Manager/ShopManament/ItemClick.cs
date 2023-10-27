@@ -11,6 +11,11 @@ public class ItemClick : MonoBehaviour
         btn.onClick.AddListener(OnItemClick);
     }
 
+    private void HideItem()
+    {
+        Tooltip.HideTooltip_Static();
+    }
+
     private void OnItemClick()
     {
         MoneyManager.Instance.MinusMoney(item.price);
@@ -21,6 +26,15 @@ public class ItemClick : MonoBehaviour
             MoneyManager.Instance.SaveData();
             LoadShopItems.Instance.RenderState();
             Debug.Log($"Remain: {MoneyManager.Instance.TotalMoney}");
+        }
+        else if (MoneyManager.Instance.isEnough == false)
+        {
+            System.Func<string> getTooltipTextFunc = () =>
+            {
+                return "<color=#FF0000>Not enough money</color>";
+            };
+            Tooltip.ShowTooltip_Static(getTooltipTextFunc);
+            Invoke("HideItem", 1.5f);
         }
     }
 }
