@@ -8,11 +8,11 @@ public class TilemapController : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase tileEmpty;
-    private LoadTilemapFromJson tilemapLoader;
+    private MapManager tilemapLoader;
 
     void Awake()
     {
-        tilemapLoader = GetComponent<LoadTilemapFromJson>();
+        tilemapLoader = GetComponent<MapManager>();
 
     }
     void Update()
@@ -28,7 +28,7 @@ public class TilemapController : MonoBehaviour
                 int[] currentPos = { gridPosition.y, gridPosition.x };
                 if (currentPos[0] >= 0 && currentPos[0] < 10 && currentPos[1] >= 0 && currentPos[1] < 10)
                 {
-                    tilemapLoader.findHallway(GameManager.Instance.currentPosition, currentPos);
+                    MapManager.Instance.findHallway(GameManager.Instance.currentPosition, currentPos);
                 }
             }
         }

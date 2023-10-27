@@ -50,7 +50,7 @@ public class PlayerMovementSimple : MonoBehaviour
             animationTime -= 1f;
             return;
         }
-        if (inputAxis == 0)
+        if (inputAxis == 0 && skeletonAnimation != null)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
             {
