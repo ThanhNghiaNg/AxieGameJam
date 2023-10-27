@@ -7,6 +7,7 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
     public List<Item> Inventory;
+    public List<Transform> inventoryTF;
     public int slotLimit = 10;
     public Transform container;
     public Transform ItemCard;
@@ -75,9 +76,15 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            Inventory.Add(item);
-            int index = Inventory.IndexOf(item);
-            Inventory[index].quatity = 1;
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                if (Inventory[i] == null)
+                {
+                    Inventory[i] = item;
+                    Inventory[i].quatity = 1;
+                    break;
+                }
+            }
         }
     }
 
@@ -92,7 +99,7 @@ public class InventoryManager : MonoBehaviour
         {
             int index = Inventory.IndexOf(item);
             Inventory[index].quatity = 0;
-            Inventory.Remove(item);
+            Inventory[index] = null;
         }
     }
 
@@ -120,7 +127,7 @@ public class InventoryManager : MonoBehaviour
         if (itemSprite != null)
         {
             axieCardTransform.Find("Image").GetComponent<Image>().sprite = itemSprite;
-            axieCardTransform.Find("quitity").GetComponent<TextMeshProUGUI>().SetText(quatity.ToString());
+            axieCardTransform.Find("quatity").GetComponent<TextMeshProUGUI>().SetText(quatity.ToString());
         }
         else
         {
@@ -128,26 +135,25 @@ public class InventoryManager : MonoBehaviour
             axieCardTransform.Find("Image").GetComponent<Image>().color = new Color32(255, 255, 255, 0);
             axieCardTransform.Find("quatity").GetComponent<TextMeshProUGUI>().SetText("");
         }
+        inventoryTF.Add(axieCardTransform);
         axieCardTransform.gameObject.SetActive(true);
     }
 
     public void UpdateInventory()
     {
-        foreach (Transform child in container)
-        {
-            Destroy(child.gameObject);
-        }
         int index = 0;
         foreach (Item item in Inventory)
         {
             if (item == null)
             {
-                CreateCardButton(null, null, index);
+                continue;
             }
             else
             {
                 int itemIndex = Inventory.IndexOf(item);
-                CreateCardButton(Inventory[itemIndex].sprite, Inventory[itemIndex].quatity, index);
+                inventoryTF[itemIndex].transform.Find("Image").GetComponent<Image>().sprite = item.sprite;
+                inventoryTF[itemIndex].transform.Find("Image").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                inventoryTF[itemIndex].transform.Find("quatity").GetComponent<TextMeshProUGUI>().SetText(item.quatity.ToString());
             }
             index++;
         }

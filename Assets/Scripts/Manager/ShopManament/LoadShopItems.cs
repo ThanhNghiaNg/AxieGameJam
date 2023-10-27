@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Newtonsoft.Json;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class LoadShopItems : MonoBehaviour
 {
@@ -12,6 +9,7 @@ public class LoadShopItems : MonoBehaviour
     public List<Item> items;
     private Transform container;
     private Transform shopItemTemplate;
+
     void Awake()
     {
         if (Instance != null)
@@ -27,6 +25,7 @@ public class LoadShopItems : MonoBehaviour
         shopItemTemplate = container.Find("shopItemTemplate");
         RenderState();
     }
+
     void Start()
     {
 
@@ -48,6 +47,7 @@ public class LoadShopItems : MonoBehaviour
         buttonItem.GetComponent<ItemClick>().item = item;
         buttonItem.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
     }
+
     public void DisplayShopItems(Canvas canvas)
     {
         for (int i = 0; i < items.Count; i++)
