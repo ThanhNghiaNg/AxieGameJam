@@ -828,6 +828,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1432687307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432687309}
+  - component: {fileID: 1432687308}
+  m_Layer: 0
+  m_Name: MapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1432687308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432687307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4ed6ef7a34a2246b67c747684564d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 2067839462}
+  tilePrefabs: []
+  tileEmpty: {fileID: 11400000, guid: 76c5693c1098cd14db28ee6d1fa63e95, type: 2}
+  tileRoom: {fileID: 11400000, guid: b63d116e8598ebb49a91c538fff0b7e6, type: 2}
+  tileBoss: {fileID: 11400000, guid: 2f9de9d9122810849ab57e8d3470e4de, type: 2}
+  tileStart: {fileID: 11400000, guid: 770f4870adbe75d49b30ff23e215250f, type: 2}
+  tileWall: {fileID: 11400000, guid: 49dc2169f62782f4281349d8f7c793f2, type: 2}
+--- !u!4 &1432687309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432687307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.18613, y: -4.866664, z: 0.2838977}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448352477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,7 +1518,6 @@ GameObject:
   - component: {fileID: 2067839462}
   - component: {fileID: 2067839461}
   - component: {fileID: 2067839460}
-  - component: {fileID: 2067839463}
   m_Layer: 0
   m_Name: level3
   m_TagString: Untagged
@@ -1591,25 +1641,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &2067839463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067839458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4ed6ef7a34a2246b67c747684564d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilemap: {fileID: 2067839462}
-  tilePrefabs: []
-  tileEmpty: {fileID: 11400000, guid: 76c5693c1098cd14db28ee6d1fa63e95, type: 2}
-  tileRoom: {fileID: 11400000, guid: b63d116e8598ebb49a91c538fff0b7e6, type: 2}
-  tileBoss: {fileID: 11400000, guid: 2f9de9d9122810849ab57e8d3470e4de, type: 2}
-  tileStart: {fileID: 11400000, guid: 770f4870adbe75d49b30ff23e215250f, type: 2}
-  tileWall: {fileID: 11400000, guid: 49dc2169f62782f4281349d8f7c793f2, type: 2}
 --- !u!1001 &215313736031739811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1721,3 +1752,4 @@ SceneRoots:
   - {fileID: 1168529403}
   - {fileID: 743632318}
   - {fileID: 548361973}
+  - {fileID: 1432687309}

@@ -36,14 +36,25 @@ public class MapManager : MonoBehaviour
     private int normalizeDistance = 0;
     private int mapCol = 10;
     private int mapRow = 10;
+    public bool isExit = false;
     private int[] dirX = { 0, 0, -1, 1 }; // Down - Up - Left - Right
     private int[] dirY = { -1, 1, 0, 0 }; // Down - Up - Left - Right
     public int ManhattanDistance(int[] currentPos, int[] targetPos)
     {
         return Mathf.Abs(currentPos[0] - targetPos[0]) + Mathf.Abs(currentPos[1] - targetPos[1]);
     }
-    void Awake()
+    private void Awake()
     {
+        segments = new List<int[]>();
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         // createTilemap();
         LoadTilemapFromJsonFile(Application.persistentDataPath + "/" + tilemap.name.ToLower() + ".json");
         DrawTilemap();
@@ -61,16 +72,8 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
+
         findEndPosition(startPos);
-        if (Instance != null)
-        {
-            DestroyImmediate(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
     }
     public void createTilemap()
     {
@@ -361,9 +364,13 @@ public class MapManager : MonoBehaviour
 
     public void AddPassedPosition(int[] position)
     {
-        int index = passedPositions.IndexOf(position);
-        if (index >= 0) return;
+        bool exist = passedPositions.Any(p => p[0] == position[0] && p[1] == position[1]);
+        if (exist) return;
         passedPositions.Add(position);
         Debug.Log($"Passed position: {JsonConvert.SerializeObject(passedPositions)}");
+    }
+
+    public void setIsExit(bool _isExit){
+        isExit = _isExit;
     }
 }

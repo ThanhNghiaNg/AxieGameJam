@@ -3,6 +3,7 @@ using System.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -70,11 +71,11 @@ public class GameManager : MonoBehaviour
 
     public void clearAllPlatforms()
     {
-        platforms.Clear();
         foreach (Transform platform in platformsParent.transform)
         {
             Destroy(platform.gameObject);
         }
+        platforms.Clear();
     }
     public void PlatformGenerate()
     {
@@ -151,23 +152,37 @@ public class GameManager : MonoBehaviour
     {
         for (int i = stepRangeStart; i <= (isInRoom == true ? 3 : stepRangeEnd + 1); i++)
         {
-            // if (i == door || i == stepRangeEnd)
-            float randomFloat = Random.Range(0.0f, 1.0f);
-            Debug.Log($"randomFloat: {randomFloat}");
-            if (i == stepRangeEnd && isInRoom == false)
+            if (isInRoom == false)
             {
-                platforms.Add(doorPlatform);
-            }
-            else
-            {
-                if (randomFloat < enemyRate && i > stepRangeStart + 1 && i != stepRangeEnd + 1)
+                if (i == stepRangeEnd)
                 {
-                    platforms.Add(enemyPlatform);
+                    platforms.Add(doorPlatform);
                 }
                 else
                 {
-                    platforms.Add(platform);
+                    float randomFloat = Random.Range(0.0f, 1.0f);
+                    if (i != stepRangeEnd + 1)
+                    {
+                        int[] position = MapManager.Instance.segments[i];
+                        bool exist = MapManager.Instance.passedPositions.Any(p => p[0] == position[0] && p[1] == position[1]);
+                        if (randomFloat < enemyRate && i > stepRangeStart + 1 && !exist)
+                        {
+                            platforms.Add(enemyPlatform);
+                        }
+                        else
+                        {
+                            platforms.Add(platform);
+                        }
+                    }
+                    else
+                    {
+                        platforms.Add(platform);
+                    }
                 }
+            }
+            else
+            {
+                platforms.Add(platform);
             }
         }
     }

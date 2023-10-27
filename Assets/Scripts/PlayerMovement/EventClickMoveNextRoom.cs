@@ -14,7 +14,9 @@ public class EventClickMoveNextRoom : MonoBehaviour
     {
         // portal = GameObject.FindWithTag("portal");
         // portal.transform.localScale = new Vector3(1.8f, 0.8f, 0f);
-        skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        // skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        GameObject player = GameObject.FindGameObjectWithTag("player");
+        skeletonAnimation = player.transform.Find("player").transform.GetComponent<SkeletonAnimation>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -250,9 +250,9 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 0
-  _animationName: action/idle/random-01
+  _animationName: action/idle/normal
   loop: 1
-  timeScale: 1
+  timeScale: 0.7
 --- !u!58 &625876275661394837
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.030267209, y: 0.45191452}

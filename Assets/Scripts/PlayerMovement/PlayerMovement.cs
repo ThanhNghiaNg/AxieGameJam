@@ -13,8 +13,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        // skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        var player = transform.Find("player").transform;
+        skeletonAnimation = player.GetComponent<SkeletonAnimation>();
         startPosition = transform.position;
+        Debug.Log("skeletonAnimation");
+        Debug.Log(skeletonAnimation);
     }
 
     // Update is called once per frame
@@ -24,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         TurnAround();
         handleMovement();
-        Debug.Log($"SkeletonAnimation: {skeletonAnimation.AnimationName}");
+        // Debug.Log($"SkeletonAnimation: {skeletonAnimation.AnimationName}");
         // position = transform.position;
     }
     void TurnAround()
