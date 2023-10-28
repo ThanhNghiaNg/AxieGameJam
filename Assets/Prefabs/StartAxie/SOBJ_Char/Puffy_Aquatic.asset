@@ -23,4 +23,6 @@ MonoBehaviour:
   maxHealth: 65
   speed: 9
   isAxie: 1
+  axieName: Puffy
+  axieCost: 100
   curPos: 0

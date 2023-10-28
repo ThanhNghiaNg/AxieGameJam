@@ -18,10 +18,10 @@ public class SelectAxie : MonoBehaviour
 
     private void Start()
     {
-        CreateCardButton(AxieManager.Instance.skeletonDataAsset[0], AxieManager.Instance.characters[0], "Aqua");
-        CreateCardButton(AxieManager.Instance.skeletonDataAsset[1], AxieManager.Instance.characters[1], "Bqua");
-        CreateCardButton(AxieManager.Instance.skeletonDataAsset[2], AxieManager.Instance.characters[2], "Kqua");
-        CreateCardButton(AxieManager.Instance.skeletonDataAsset[3], AxieManager.Instance.characters[3], "Hqua");
+        foreach(Character ownedAxie in TeamManager.Instance.ownedAxie)
+        {
+            CreateCardButton(ownedAxie.skeletonDataAsset, ownedAxie, ownedAxie.axieName);
+        }
     }
 
     private void CreateCardButton(SkeletonDataAsset axieSprite, Character newAxie, string axieName)
