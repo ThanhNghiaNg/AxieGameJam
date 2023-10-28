@@ -1,7 +1,11 @@
 using Spine.Unity;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
+using System;
+using System.IO;
+using Newtonsoft.Json;
 
 public class TeamManager : MonoBehaviour
 {
@@ -14,9 +18,15 @@ public class TeamManager : MonoBehaviour
     public Button[] buttonSlot;
     public Character currentSelectedAxie;
     public int currentSelectedSlot;
+    private string dataFolderPath;
+    private string dataFilePath;
 
     private void Awake()
     {
+        dataFolderPath = Path.Combine(Application.dataPath, "Data");
+        string dataFileName = "TeamData.json";
+        dataFilePath = Path.Combine(dataFolderPath, dataFileName);
+
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -25,6 +35,75 @@ public class TeamManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+        
+        LoadData();
+        SaveData();
+    }
+
+    public void SaveData()
+    {
+        if (!Directory.Exists(dataFolderPath))
+        {
+            Directory.CreateDirectory(dataFolderPath);
+        }
+        Dictionary<string, object> data = new Dictionary<string, object>();
+
+        string[] ownedAxieFilePaths = new string[ownedAxie.Count];
+        for (int i = 0; i < ownedAxie.Count; i++)
+        {
+            ownedAxieFilePaths[i] = AssetDatabase.GetAssetPath(ownedAxie[i]);
+        }
+
+        string[] teamAxieFilePaths = new string[teamAxie.Count];
+        for (int i = 0; i < teamAxie.Count; i++)
+        {
+            teamAxieFilePaths[i] = AssetDatabase.GetAssetPath(teamAxie[i]);
+        }
+
+        data.Add("ownedAxie", ownedAxieFilePaths);
+        data.Add("teamAxie", teamAxieFilePaths);
+
+        string json = JsonConvert.SerializeObject(data);
+        File.WriteAllText(dataFilePath, json);
+        Debug.Log("Data saved!");
+    }
+    public void LoadData()
+    {
+        if (File.Exists(dataFilePath))
+        {
+            string json = File.ReadAllText(dataFilePath);
+            Dictionary<string, object> data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+            string[] ownedAxiePaths = ((Newtonsoft.Json.Linq.JArray)data["ownedAxie"]).ToObject<string[]>();
+            for (int i = 0; i < ownedAxiePaths.Length; i++)
+            {
+                if (ownedAxie.Count < i + 1)
+                {
+                    ownedAxie.Add(AssetDatabase.LoadAssetAtPath<Character>(ownedAxiePaths[i]));
+                }
+                else
+                {
+                    ownedAxie[i] = AssetDatabase.LoadAssetAtPath<Character>(ownedAxiePaths[i]);
+                }
+            }
+
+            string[] teamAxiePaths = ((Newtonsoft.Json.Linq.JArray)data["teamAxie"]).ToObject<string[]>();
+            for (int i = 0; i < teamAxiePaths.Length; i++)
+            {
+                if (teamAxie.Count < i + 1)
+                {
+                    teamAxie.Add(AssetDatabase.LoadAssetAtPath<Character>(teamAxiePaths[i]));
+                }
+                else
+                {
+                    teamAxie[i] = AssetDatabase.LoadAssetAtPath<Character>(teamAxiePaths[i]);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("JSON file not found.");
         }
     }
 
@@ -75,6 +154,8 @@ public class TeamManager : MonoBehaviour
                 ownedAxie.Add(newAxie);
             }
         }
+
+        SaveData();
     }
 
     public void RemoveAxie(string id)

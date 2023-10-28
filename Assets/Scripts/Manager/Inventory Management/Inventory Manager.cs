@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
+using System.IO;
+using Newtonsoft.Json;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -13,9 +16,15 @@ public class InventoryManager : MonoBehaviour
     public Transform ItemCard;
     private float startX = -270f;
     private float startY = 55f;
+    private string dataFolderPath;
+    private string dataFilePath;
 
     private void Awake()
     {
+        dataFolderPath = Path.Combine(Application.dataPath, "Data");
+        string dataFileName = "InventoryData.json";
+        dataFilePath = Path.Combine(dataFolderPath, dataFileName);
+
         if (Instance != null)
         {
             DestroyImmediate(gameObject);
@@ -27,6 +36,8 @@ public class InventoryManager : MonoBehaviour
         }
 
         ItemCard.gameObject.SetActive(false);
+        LoadData();
+        SaveData();
     }
 
     private void Start()
@@ -45,6 +56,52 @@ public class InventoryManager : MonoBehaviour
             }
             index++;
 
+        }
+    }
+    public void SaveData()
+    {
+        if (!Directory.Exists(dataFolderPath))
+        {
+            Directory.CreateDirectory(dataFolderPath);
+        }
+        Dictionary<string, object> data = new Dictionary<string, object>();
+
+        string[] itemFilePaths = new string[Inventory.Count];
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            itemFilePaths[i] = AssetDatabase.GetAssetPath(Inventory[i]);
+        }
+
+        data.Add("items", itemFilePaths);
+
+        string json = JsonConvert.SerializeObject(data);
+        File.WriteAllText(dataFilePath, json);
+        Debug.Log("Data saved!");
+    }
+    public void LoadData()
+    {
+        if (File.Exists(dataFilePath))
+        {
+            string json = File.ReadAllText(dataFilePath);
+            Dictionary<string, object> data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+            string[] itemFilePaths = ((Newtonsoft.Json.Linq.JArray)data["items"]).ToObject<string[]>();
+            Debug.Log($"itemFilePaths: {JsonConvert.SerializeObject(itemFilePaths)}");
+            for (int i = 0; i < itemFilePaths.Length; i++)
+            {
+                if (Inventory.Count < i + 1)
+                {
+                    Inventory.Add(AssetDatabase.LoadAssetAtPath<Item>(itemFilePaths[i]));
+                }
+                else
+                {
+                    Inventory[i] = AssetDatabase.LoadAssetAtPath<Item>(itemFilePaths[i]);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("JSON file not found.");
         }
     }
 
@@ -86,6 +143,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        SaveData();
     }
 
     public void removeItem(Item item)
