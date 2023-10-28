@@ -47,12 +47,12 @@ public class TeamManager : MonoBehaviour
         }
     }
 
-    public void AddAxie(string id)
+    public void AddAxie(Character newAxie)
     {
         bool isDuplicate = false;
         foreach (Character axie in ownedAxie)
         {
-            if (axie.isAxie == true && axie.axieId == id)
+            if (axie.isAxie == true && axie.axieId == newAxie.axieId)
             {
                 isDuplicate = true;
             }
@@ -60,15 +60,20 @@ public class TeamManager : MonoBehaviour
 
         if (!isDuplicate)
         {
-            foreach (Character Axie in AxieManager.Instance.characters)
+            bool isEmpty = true;
+            for (int i = 0; i < ownedAxie.Count; i++)
             {
-                if (Axie.isAxie && Axie.axieId == id)
+                if (ownedAxie[i] == null)
                 {
-                    ownedAxie.Add(Axie);
+                    ownedAxie[i] = newAxie;
+                    isEmpty = false;
                     break;
                 }
             }
-
+            if (isEmpty)
+            {
+                ownedAxie.Add(newAxie);
+            }
         }
     }
 

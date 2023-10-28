@@ -90,7 +90,6 @@ public class CardOnClick : MonoBehaviour
                         }
                         Instantiate(skeletonGraphic, buttonSlot[0].transform);
                         TeamManager.Instance.teamAxie[0] = character;
-                        selectAxieCanvas.gameObject.SetActive(false);
                     }
                     else if (isExit(character) && TeamManager.Instance.teamAxie[0] != null)
                     {
@@ -119,7 +118,6 @@ public class CardOnClick : MonoBehaviour
                             Destroy(child.gameObject);
                         }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
-                        selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
                     }
                     //if the axie you select is not on the team but the slot you select
@@ -132,6 +130,7 @@ public class CardOnClick : MonoBehaviour
                         Instantiate(skeletonGraphic, buttonSlot[0].transform);
                         TeamManager.Instance.teamAxie[0] = character;
                     }
+                    selectAxieCanvas.gameObject.SetActive(false);
                     break;
                 }
             case 1:
@@ -144,7 +143,6 @@ public class CardOnClick : MonoBehaviour
                         }
                         Instantiate(skeletonGraphic, buttonSlot[1].transform);
                         TeamManager.Instance.teamAxie[1] = character;
-                        selectAxieCanvas.gameObject.SetActive(false);
                     }
                     else if (isExit(character) && TeamManager.Instance.teamAxie[1] == null)
                     {
@@ -176,7 +174,6 @@ public class CardOnClick : MonoBehaviour
 
 
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
-                        selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
                     }
                     else if (isExit(character) == false && TeamManager.Instance.teamAxie[1] != null)
@@ -188,6 +185,7 @@ public class CardOnClick : MonoBehaviour
                         Instantiate(skeletonGraphic, buttonSlot[1].transform);
                         TeamManager.Instance.teamAxie[1] = character;
                     }
+                    selectAxieCanvas.gameObject.SetActive(false);
                     break;
                 }
             case 2:
@@ -200,7 +198,6 @@ public class CardOnClick : MonoBehaviour
                         }
                         Instantiate(skeletonGraphic, buttonSlot[2].transform);
                         TeamManager.Instance.teamAxie[2] = character;
-                        selectAxieCanvas.gameObject.SetActive(false);
                     }
                     //if the axie is already on team but the pos you select dont have any axie
                     else if (isExit(character) && TeamManager.Instance.teamAxie[2] == null)
@@ -230,7 +227,6 @@ public class CardOnClick : MonoBehaviour
                             Destroy(child.gameObject);
                         }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
-                        selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
                     }
                     else if (isExit(character) == false && TeamManager.Instance.teamAxie[2] != null)
@@ -242,6 +238,7 @@ public class CardOnClick : MonoBehaviour
                         Instantiate(skeletonGraphic, buttonSlot[2].transform);
                         TeamManager.Instance.teamAxie[2] = character;
                     }
+                    selectAxieCanvas.gameObject.SetActive(false);
                     break;
                 }
             case 3:
@@ -254,7 +251,6 @@ public class CardOnClick : MonoBehaviour
                         }
                         Instantiate(skeletonGraphic, buttonSlot[3].transform);
                         TeamManager.Instance.teamAxie[3] = character;
-                        selectAxieCanvas.gameObject.SetActive(false);
                     }
                     //if the axie is already on team but the pos you select dont have any axie
                     else if (isExit(character) && TeamManager.Instance.teamAxie[3] == null)
@@ -285,7 +281,6 @@ public class CardOnClick : MonoBehaviour
                             Destroy(child.gameObject);
                         }
                         TeamManager.Instance.SwapAxiePos(index, TeamManager.Instance.currentSelectedSlot);
-                        selectAxieCanvas.gameObject.SetActive(false);
                         updateTeamPos();
                     }
                     else if (isExit(character) == false && TeamManager.Instance.teamAxie[3] != null)
@@ -297,6 +292,7 @@ public class CardOnClick : MonoBehaviour
                         TeamManager.Instance.teamAxie[3] = character;
                         Instantiate(skeletonGraphic, buttonSlot[3].transform);
                     }
+                    selectAxieCanvas.gameObject.SetActive(false);
                     break;
                 }
         }

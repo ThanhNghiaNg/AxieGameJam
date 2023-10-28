@@ -13,6 +13,8 @@ public class Character : ScriptableObject
     public int maxHealth;
     public int speed;   
     public bool isAxie;
+    public string axieName;
+    public int axieCost;
     //0->3 4->7
     public int curPos;
 }

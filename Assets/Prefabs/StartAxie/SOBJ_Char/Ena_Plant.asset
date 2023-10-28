@@ -23,4 +23,6 @@ MonoBehaviour:
   maxHealth: 60
   speed: 11
   isAxie: 1
+  axieName: Ena
+  axieCost: 100
   curPos: 0

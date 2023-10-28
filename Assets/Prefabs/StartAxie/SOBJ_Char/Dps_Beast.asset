@@ -27,4 +27,6 @@ MonoBehaviour:
   maxHealth: 75
   speed: 5
   isAxie: 1
+  axieName: Beast
+  axieCost: 100
   curPos: 0
