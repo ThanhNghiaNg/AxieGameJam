@@ -43,11 +43,11 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    bool CheckSkill()
+    bool CheckSkill(int skillOrder)
     {
         if (currentCharacter == null) return false;
-       
-        return true;
+        List<bool> pos = currentCharacter.skills[skillOrder].posToUse.pos;
+        return pos[currentCharacter.position] == true;
     }
     public void BeginBattle()
     {
