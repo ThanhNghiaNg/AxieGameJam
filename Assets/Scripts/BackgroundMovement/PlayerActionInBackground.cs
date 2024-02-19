@@ -9,7 +9,8 @@ public class PlayerActionInBackground : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        GameObject player = GameObject.FindGameObjectWithTag("player");
+        skeletonAnimation = player.transform.Find("player").transform.GetComponent<SkeletonAnimation>();
     }
 
     // Update is called once per frame

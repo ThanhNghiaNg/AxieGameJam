@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: heal_aoe_turn
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 65c8cb3e46cc644a5ae2d997df6b1460, type: 3}
   skillName: Holy light alpha!
   skillDescription:
     nonUpgrade: Heal 30hp for all allies
@@ -29,3 +29,4 @@ MonoBehaviour:
     pos: 
   posTarget:
     pos: 
+  buff: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: debuff_frozen
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: fe06a6f5b99b641d5864157dc74d6bc3, type: 3}
+  sprite: {fileID: 21300000, guid: 1ffc8df3181f94ceb95be5ed8637c6c6, type: 3}
   skillName: Cold!
   skillDescription:
     nonUpgrade: Frozen a enemy for 1 turn

@@ -5,6 +5,7 @@ public class mainCanvasScript : MonoBehaviour
 {
     public Button yourButton;
     public Canvas mainCanvas;
+    public Button UIButton;
 
     private void Start()
     {
@@ -14,6 +15,8 @@ public class mainCanvasScript : MonoBehaviour
 
     private void TaskOnClick()
     {
+        UI_Management.Instance.isClicked = false;
         mainCanvas.GetComponent<Canvas>().enabled = false;
+        UIButton.gameObject.SetActive(true);
     }
 }

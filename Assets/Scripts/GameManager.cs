@@ -3,6 +3,7 @@ using System.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,13 +28,14 @@ public class GameManager : MonoBehaviour
     #region Generate Platform State
     public List<GameObject> platforms;
     public GameObject doorPlatform;
+    public GameObject enemyPlatform;
     public GameObject platform;
     public GameObject platformsParent;
     public GameObject currentPlatform;
     public GameObject prePlatform;
     public bool isInRoom = false;
     public GameObject nextPlatform;
-
+    public float enemyRate = 0.3f;
     public float spacing = 5f;
     #endregion
     private void Awake()
@@ -69,11 +71,11 @@ public class GameManager : MonoBehaviour
 
     public void clearAllPlatforms()
     {
-        platforms.Clear();
         foreach (Transform platform in platformsParent.transform)
         {
             Destroy(platform.gameObject);
         }
+        platforms.Clear();
     }
     public void PlatformGenerate()
     {
@@ -123,9 +125,10 @@ public class GameManager : MonoBehaviour
         if (playerStep < stepRangeStart) playerStep = stepRangeStart;
         if (playerStep > stepRangeEnd) playerStep = stepRangeEnd;
 
-        if (LoadTilemapFromJson.Instance.segments != null)
+        if (MapManager.Instance.segments != null)
         {
-            currentPosition = LoadTilemapFromJson.Instance.segments[playerStep];
+            currentPosition = MapManager.Instance.segments[playerStep];
+            MapManager.Instance.AddPassedPosition(currentPosition);
         }
 
         if (playerStep == stepRangeEnd)
@@ -149,13 +152,38 @@ public class GameManager : MonoBehaviour
     {
         for (int i = stepRangeStart; i <= (isInRoom == true ? 3 : stepRangeEnd + 1); i++)
         {
-            // if (i == door || i == stepRangeEnd)
-
-            if (i == stepRangeEnd && isInRoom == false)
+            if (isInRoom == false)
             {
-                platforms.Add(doorPlatform);
+                if (i == stepRangeEnd)
+                {
+                    platforms.Add(doorPlatform);
+                }
+                else
+                {
+                    float randomFloat = Random.Range(0.0f, 1.0f);
+                    if (i != stepRangeEnd + 1)
+                    {
+                        int[] position = MapManager.Instance.segments[i];
+                        bool exist = MapManager.Instance.passedPositions.Any(p => p[0] == position[0] && p[1] == position[1]);
+                        if (randomFloat < enemyRate && i > stepRangeStart + 1 && !exist)
+                        {
+                            platforms.Add(enemyPlatform);
+                        }
+                        else
+                        {
+                            platforms.Add(platform);
+                        }
+                    }
+                    else
+                    {
+                        platforms.Add(platform);
+                    }
+                }
             }
-            else platforms.Add(platform);
+            else
+            {
+                platforms.Add(platform);
+            }
         }
     }
 

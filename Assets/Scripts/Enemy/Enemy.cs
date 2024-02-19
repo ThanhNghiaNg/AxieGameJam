@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    
-    
-    
+
+
+
     [Header("Battle")]
     public int numberskill;
     public List<CharacterUI> posChar = new List<CharacterUI>();
@@ -40,7 +39,7 @@ public class Enemy : MonoBehaviour
 
             return;
         }
-        if(isBear)
+        if (isBear)
         {
             if(enemystat.currentHealth<= enemystat.maxHealth/2 || true)
             {
@@ -52,7 +51,7 @@ public class Enemy : MonoBehaviour
         
         
         /*switch(currentSkill.)*/
-        
+
 
     }
     private void UsingSkill(Skill skill)
@@ -109,7 +108,7 @@ public class Enemy : MonoBehaviour
     private int RandomInList(List<int> list)
     {
         int num = 0;
-        num = Random.Range(0, list.Count-1);
+        num = Random.Range(0, list.Count - 1);
         return list[num];
     }
 }

@@ -11,7 +11,9 @@ public class DoorClick : MonoBehaviour
     public float duration = 1.0f;
     private void Awake()
     {
-        skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
+        GameObject player = GameObject.FindGameObjectWithTag("player");
+        skeletonAnimation = player.transform.Find("player").transform.GetComponent<SkeletonAnimation>();
+        // skeletonAnimation = FindObjectOfType<SkeletonAnimation>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,6 +41,14 @@ public class DoorClick : MonoBehaviour
             else
             {
                 player.transform.eulerAngles = new Vector3(0, 180f, 0);
+            }
+            //Check if the player enter the first door to exit dungeon
+            int[] lastPos = MapManager.Instance.segments[MapManager.Instance.segments.Count - 1];
+            if (MapManager.Instance.map[lastPos[0]][lastPos[1]] == 1)
+            {
+                MapManager.Instance.setIsExit(true);
+                Debug.Log("Exit");
+                return;
             }
             StartCoroutine(ExitArea(player.transform));
         }

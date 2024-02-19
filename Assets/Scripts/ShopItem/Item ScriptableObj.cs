@@ -8,10 +8,13 @@ public class Item : ScriptableObject
     public string itemName;
     public string itemDescription;
     public float effectAmount;
-    public enum Type { Buff, Heal };
+    public int price;
+    public string id;
+    public enum Type { BuffATK, BuffDef, Heal, Shield, Alixir };
     public Type type;
     public Position posToUse;
     public Position posTarget;
+    public int quatity;
 
     public string GetItemDescription()
     {

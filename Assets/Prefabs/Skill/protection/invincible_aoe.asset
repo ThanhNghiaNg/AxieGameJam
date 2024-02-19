@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff695cca3c36f4f43bad8ce8c35ae450, type: 3}
   m_Name: invincible_aoe
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 35ebd96ad097f45c7ba890b18bf81de3, type: 3}
+  sprite: {fileID: 21300000, guid: d872cf4d0c50644b4ac9e4071e823030, type: 3}
   skillName: Will of a Shielder
   skillDescription:
     nonUpgrade: Apply Invincible for all ally, after being hit, remove the effect
