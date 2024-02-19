@@ -20,7 +20,7 @@ public class CharacterUI : MonoBehaviour
 
     public List<Skill> skills = new List<Skill>();
 
-    public CharacterStat stat = new CharacterStat();
+    public CharacterStatManager stat = new CharacterStatManager();
     public Enemy enemy;
 
 
@@ -46,7 +46,7 @@ public class CharacterUI : MonoBehaviour
         character = _character;
         skills = _character.startingSkills;
         position = _pos;
-        Debug.Log(character.maxHealth);
+        /*Debug.Log(character.maxHealth);*/
 
         if (_character.isAxie)
         {
@@ -64,7 +64,7 @@ public class CharacterUI : MonoBehaviour
         }
         //Day stat nhan vat vao trong gameManager r load ra 
 
-        stat.maxHealth = character.maxHealth;
+        /*stat.maxHealth = character.maxHealth;*/
     }
     
     public bool AvailableToAdd(Character _character)

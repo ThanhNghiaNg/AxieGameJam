@@ -2,73 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStat : MonoBehaviour
+public class CharacterStat 
 {
+    public Character currentCharacter;
     public int currentHealth;
     public int maxHealth;
-    public GameObject characterHealthBar;
+    public int attack;
+    public int defend;
+    public int speed;
+    public int pos;
+    public int level;
+    public int experience;
+    public int experienceToLevelUp;
 
-
-
-    [Header("Buffs")]
-    public Buff vunrable;
-    public Buff invincible;
-
-
-
-    GameManager gameManager;
-    BattleManager battleManager;
-
-    private void Awake()
+    public void UpdateStat()
     {
-        battleManager = FindObjectOfType<BattleManager>();
-        gameManager = FindObjectOfType<GameManager>();
-    }
-    void Update()
-    {
-        
-    }
-    public void TakeDamage(int amount)
-    {
-        if(invincible.buffValue != 0)
-        {
-            amount = 0;
-        }    
-        currentHealth -= amount;
-
-        Debug.Log(currentHealth.ToString());
-
-        //UpdateHealthBar
-    }
-    public void UpdateHealUI()
-    {
-
-    }
-
-    public void AddBuff(Buff.buffType type, int amount)
-    {
-        if( type == Buff.buffType.AttackBuff)
-        {
-
-        }
-        else if(type == Buff.buffType.Invincible)
-        {
-            if(invincible.buffValue <=0)
-            {
-                
-            }
-            invincible.buffValue += amount;
-            //DisplayBuff
-        }
-    }
-    public void EvaluateBuff()
-    {
-
-    }
-
-    // Xoa all buff
-    public void ResetBuff()
-    {
+        maxHealth = currentCharacter.ReturnHealthStat(level);
+        attack = currentCharacter.ReturnAttackStat(level);
+        defend = currentCharacter.ReturnDefendStat(level);
+        currentHealth = maxHealth;
+        experience = 0;
+        experienceToLevelUp += currentCharacter.ReturnExperience(level);
 
     }
 }

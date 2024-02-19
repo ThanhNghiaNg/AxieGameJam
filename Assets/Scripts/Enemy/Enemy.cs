@@ -16,13 +16,16 @@ public class Enemy : MonoBehaviour
     [Header("Drop")]
     public int gold;
     public int experience;
-    public bool isBear;
+    
 
     [Header("Wwolf")]
     public bool isWwolf;
     public int countWolf = 0;
     BattleManager battleManager;
     CharacterStat enemystat;
+
+    [Header("Bear")]
+    public bool isBear;
     private void Awake()
     {
         battleManager = FindObjectOfType<BattleManager>();
@@ -88,7 +91,7 @@ public class Enemy : MonoBehaviour
     }
     private void ApplyBuffSelf(Buff.buffType type, int value)
     {
-        enemystat.AddBuff(type, value);
+        /*enemystat.AddBuff(type, value);*/
     }
     private void ApplyBuffEnemyTeam(List<int> pos, Buff.buffType type, int value)
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 public class SkillAction : MonoBehaviour
 {
     Skill skill;
-    public CharacterStat currentCharacter;
-    public CharacterStat target;
+    public CharacterStatManager currentCharacter;
+    public CharacterStatManager target;
     BattleManager battleManager;
 
 
@@ -16,7 +16,7 @@ public class SkillAction : MonoBehaviour
     }
     
 
-    public void PerformSkill(Skill _skill, CharacterStat _target)
+    public void PerformSkill(Skill _skill, CharacterStatManager _target)
     {
         skill = _skill;
         target = _target;

@@ -106,7 +106,7 @@ public class BattleManager : MonoBehaviour
 
     public void UsingSkill()
     {
-        skillAction.PerformSkill(currentSkill, selectedCharacter.stat);
+        /*skillAction.PerformSkill(currentSkill, selectedCharacter.stat);*/
         ChangeTurn();
 
 

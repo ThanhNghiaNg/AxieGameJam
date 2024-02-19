@@ -247,6 +247,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6605111838192903809, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -356,6 +368,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4575940610478402588, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -842,6 +866,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4575940610478402588, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1394,6 +1430,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4575940610478402588, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1585,6 +1633,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4575940610478402588, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2252,6 +2312,7 @@ MonoBehaviour:
   - {fileID: 1014137153}
   skills: []
   stat: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &1694118036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,6 +2437,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6605111838192903809, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2894,6 +2967,18 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4575940610478402588, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3294,6 +3379,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1189538835}
     m_Modifications:
     - target: {fileID: 660706633366374605, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: position
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 660706633366374605, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: axiePosition.Array.data[0]
       value: 
       objectReference: {fileID: 2001526231}
@@ -3325,13 +3414,25 @@ PrefabInstance:
       propertyPath: enemyPosition.Array.data[3]
       value: 
       objectReference: {fileID: 1014137153}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274954468152832298, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6605111838192903809, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6605111838192903809, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.706
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6605111838192903809, guid: 821f6486e1d403f4989103155cca10a1, type: 3}
       propertyPath: m_LocalPosition.z
